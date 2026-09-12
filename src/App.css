@@ -1,4 +1,17 @@
+/* 1. Importamos las fuentes oficiales de AMPREH */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
+
+/* 2. Importamos Tailwind v4 */
 @import "tailwindcss";
+
+/* 3. Inyectamos los colores a las utilidades de Tailwind (bg-primary, text-accent, etc.) */
+@theme inline {
+  --color-primary: #1A237E;
+  --color-secondary: #FF4F00;
+  --color-accent: #D32F2F;
+  --font-sans: "IBM Plex Sans", sans-serif;
+  --font-title: "Plus Jakarta Sans", sans-serif;
+}
 
 @layer base {
   * {
@@ -63,12 +76,16 @@
   }
 }
 
+/* 4. Actualizamos las variables personalizadas para tus botones y fondos */
 :root {
-  --primary: #0b3d91;
-  --primary-dark: #062456;
-  --primary-light: #2b6cdf;
-  --accent: #ff5a5f;
-  --accent-2: #ffb703;
+  /* Colores Corporativos AMPREH */
+  --primary: #1A237E;
+  --primary-dark: #0d1242;
+  --primary-light: #283593;
+  --accent: #D32F2F;
+  --accent-2: #FF4F00;
+  
+  /* Fondos neutros */
   --bg: #ffffff;
   --bg-soft: #f6f8fc;
   --bg-dark: #0a1530;
@@ -76,17 +93,22 @@
   --text-soft: #4b5675;
   --muted: #8a93a8;
   --border: #e6eaf2;
+  
+  /* Sombras y radios ajustados al azul de AMPREH */
   --radius: 14px;
   --radius-lg: 22px;
-  --shadow-sm: 0 2px 8px rgba(11,61,145,0.06);
-  --shadow: 0 10px 30px rgba(11,61,145,0.10);
-  --shadow-lg: 0 20px 60px rgba(11,61,145,0.18);
-  --gradient: linear-gradient(135deg, #0b3d91 0%, #2b6cdf 60%, #4ea1ff 100%);
-  --gradient-warm: linear-gradient(135deg, #ff5a5f 0%, #ffb703 100%);
-  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --shadow-sm: 0 2px 8px rgba(26, 35, 126, 0.06);
+  --shadow: 0 10px 30px rgba(26, 35, 126, 0.10);
+  --shadow-lg: 0 20px 60px rgba(26, 35, 126, 0.18);
+  
+  /* Degradados Oficiales */
+  --gradient: linear-gradient(135deg, #1A237E 0%, #283593 60%, #534bae 100%);
+  --gradient-warm: linear-gradient(135deg, #D32F2F 0%, #FF4F00 100%);
+  
+  /* Tipografía Oficial AMPREH */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
 }
-
 
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
