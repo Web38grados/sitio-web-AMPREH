@@ -2,7 +2,6 @@ import {
   ArrowRight,
   BadgeCheck,
   BookOpenCheck,
-  // HeartPulse,
   PhoneCall,
   ShieldCheck,
 } from 'lucide-react'
@@ -20,9 +19,9 @@ const credentials = [
 
 export function HeroSection() {
   return (
-    <section id="inicio" className="relative bg-white font-sans overflow-hidden">
+    <section id="inicio" className="relative bg-[#F8F9FB] font-sans overflow-hidden">
       
-      {/* 1. Fondo Oscuro B2B (El que te gustó) */}
+      {/* 1. Fondo Oscuro B2B */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImg} 
@@ -34,7 +33,8 @@ export function HeroSection() {
       </div>
 
       {/* 2. Contenido Principal */}
-      <div className="relative z-20 mx-auto flex min-h-[620px] max-w-7xl items-center px-6 pb-32 pt-24 lg:px-8">
+      {/* 🔥 EL CAMBIO ESTÁ AQUÍ: min-h-[calc(100vh-120px)] hace que ocupe TODA la pantalla sobrante 🔥 */}
+      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-120px)] max-w-7xl items-center px-6  pt-16 lg:px-8">
         <div className="max-w-2xl">
           
         {/* Etiqueta superior - Estilo Editorial 0% IA */}
@@ -49,7 +49,7 @@ export function HeroSection() {
           <h1 className="text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl text-white">
             Protegemos el activo más valioso:
             <br />
-            {/* El bloque azul que te encantó */}
+            {/* El bloque azul */}
             <span className="mt-4 inline-block bg-[#0056B3] px-6 py-2 font-black uppercase tracking-tighter text-white shadow-2xl">
               La Vida.
             </span>
@@ -80,8 +80,9 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* 3. Tarjetas Flotantes (Diseño Cuadrado que no parece IA) */}
-      <div className="relative z-30 mx-auto -mt-20 max-w-7xl px-6 lg:px-8 pb-12">
+      {/* 3. Tarjetas Flotantes (Se montan sobre la foto gracias al -mt-24) */}
+      {/* Ajusté el margen negativo para que "muerdan" un poco más el fondo */}
+      <div className="relative z-30 mx-auto -mt-10 max-w-7xl px-6 lg:px-8 pb-12">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {credentials.map((item) => {
             const Icon = item.icon

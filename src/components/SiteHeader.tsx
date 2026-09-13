@@ -51,7 +51,7 @@ return (
 
     {/* Header que aparece/desaparece al hacer scroll */}
     <header
-      className={`sticky top-0 z-50 flex flex-col shadow-sm transition-transform duration-300 ease-in-out ${
+      className={`fixed w-full top-0 z-50 flex flex-col shadow-sm transition-transform duration-300 ease-in-out ${
         showHeader ? 'translate-y-0' : '-translate-y-full'
       }`}
     >

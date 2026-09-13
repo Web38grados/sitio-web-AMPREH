@@ -2,7 +2,7 @@ import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ROUTES } from './constants/routes';
 
-// 🏗️ IMPORTACIONES EXACTAS SEGÚN LOS NOMBRES DE TUS ARCHIVOS
+
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
 import AboutSection from './components/AboutSection';
