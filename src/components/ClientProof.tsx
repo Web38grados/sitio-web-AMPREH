@@ -14,14 +14,16 @@ export function ClientProof() {
 
   return (
     <section
-      className="border-b border-border bg-card py-12"
+      className="relative border-b border-border bg-card py-12 pb-50 "
       aria-label="Clientes corporativos"
     >
+ 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-5 lg:flex-row lg:px-8">
         {/* Texto intro */}
         <p className="w-full text-center text-xs font-bold uppercase tracking-[.18em] text-muted-foreground lg:w-48 lg:text-left lg:shrink-0">
           Clientes que confían en nuestra preparación
         </p>
+        
 
         {/* Grilla de Clientes */}
         <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 lg:justify-end">
@@ -35,6 +37,9 @@ export function ClientProof() {
           ))}
         </div>
       </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-slate-900" />
+      
     </section>
+    
   )
 }

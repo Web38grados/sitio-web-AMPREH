@@ -47,16 +47,16 @@ export function HeroSection() {
           
           {/* Título: BLANCO sobre fondo oscuro = Contraste Máximo */}
           <h1 className="text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl text-white">
-            Protegemos el activo más valioso:
+            Protegemos el activo más valioso
             <br />
             {/* El bloque azul */}
             <span className="mt-4 inline-block bg-[#0056B3] px-6 py-2 font-black uppercase tracking-tighter text-white shadow-2xl">
-              La Vida.
+              La Vida
             </span>
           </h1>
           
           <p className="mt-8 max-w-xl text-lg font-medium leading-relaxed text-slate-300">
-            Servicios de élite en atención médica prehospitalaria, protección civil y capacitación corporativa con estándares que inspiran confianza.
+            Servicios de élite en atención médica prehospitalaria, protección civil y capacitación corporativa con estándares que inspiran confianza
           </p>
           
           {/* Botones cuadrados e industriales */}

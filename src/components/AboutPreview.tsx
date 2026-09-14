@@ -88,13 +88,13 @@ export function AboutPreview() {
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <div className="h-1 w-12 bg-[#D32F2F]" aria-hidden="true" />
-            <h2 className="mt-6 max-w-xl text-4xl font-black leading-[1.05] tracking-tight text-[#1A237E] sm:text-5xl lg:text-6xl">
+            <h2 className="mt-6 max-w-xl text-4xl font-black leading-[1.05] tracking-tight text-brand-blue sm:text-5xl lg:text-6xl">
               Transformamos la cultura de la seguridad y la respuesta ante crisis.
             </h2>
             <p className="mt-7 max-w-xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
               Con más de 20 años de trayectoria (desde 2005), brindamos soluciones integrales en atención médica prehospitalaria, protección civil y reducción de riesgos. Nos rigen los más altos estándares globales para blindar tus operaciones cuando cada segundo cuenta.
             </p>
-            <a href="#contacto" className="mt-10 inline-flex items-center bg-[#1A237E] px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-[#111859]">
+            <a href="#contacto" className="mt-10 inline-flex items-center bg-brand-blue px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-[#111859]">
               Conoce nuestra historia <ArrowRight className="ml-3 h-4 w-4" aria-hidden="true" />
             </a>
           </div>
