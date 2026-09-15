@@ -80,6 +80,11 @@ export function HeroSection() {
         </div>
       </div>
 
+<<<<<<< HEAD
+        <h1 className="mt-6 max-w-4xl text-balance text-5xl font-black text-white tracking-tight sm:text-7xl">
+          Capacitación que protege vidas y blinda tus operaciones.
+        </h1>
+=======
       {/* 3. Tarjetas Flotantes (Se montan sobre la foto gracias al -mt-24) */}
       {/* Ajusté el margen negativo para que "muerdan" un poco más el fondo */}
       <div className="relative z-30 mx-auto -mt-10 max-w-7xl px-6 lg:px-8 pb-12">
@@ -106,6 +111,7 @@ export function HeroSection() {
                 </div>
               </>
             )
+>>>>>>> 4acc51ec65db104a4db7287d5722b0a07b248ca5
 
             if (item.to) {
               return (
