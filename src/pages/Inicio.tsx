@@ -5,6 +5,7 @@ import { ImpactSection } from '../components/ImpactSection';
 import AboutPreview from '../components/AboutPreview';
 import { CertificationsShowcase } from '../components/CertificationsShowcase'
 import { ScrollytellingCertifications } from '../components/ScrollytellingCertifications';
+import { FinalCTA } from '../components/FinalCTA';
 
 export default function Inicio() {
   return (
@@ -14,7 +15,8 @@ export default function Inicio() {
       <ImpactSection></ImpactSection>
       <AboutPreview></AboutPreview>
       <CertificationsShowcase></CertificationsShowcase>
-      <ScrollytellingCertifications></ScrollytellingCertifications>
+      {/* <ScrollytellingCertifications></ScrollytellingCertifications> */}
+      <FinalCTA></FinalCTA>
     </div>
   );
 }

@@ -11,9 +11,6 @@ import img2 from '../assets/certificaciones/img2_osha.jpg'
 import img3 from '../assets/certificaciones/img3_blood.jpg'
 import img4 from '../assets/certificaciones/img4_ecsi.jpg'
 
-const contextImg1 = 'https://images.unsplash.com/photo-1587370560942-124b610c144e?q=80&w=800&auto=format&fit=crop' 
-const contextImg2 = 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop' 
-
 const certifications = [
   { 
     category: 'SEGURIDAD INDUSTRIAL', 
@@ -50,176 +47,174 @@ const certifications = [
 ]
 
 const benefits = [
-  ['Seguridad en el trabajo', 'Normas y buenas prácticas.', FileCheck2],
-  ['Prevención de riesgos', 'Identificación y control.', ShieldCheck],
-  ['Formación continua', 'Estándares internacionales.', Users],
+  ['Seguridad', 'Normas y prácticas.', FileCheck2],
+  ['Prevención', 'Identificación y control.', ShieldCheck],
+  ['Formación', 'Estándares internacionales.', Users],
 ] as const
 
 export function CertificationsShowcase() {
   const [active, setActive] = useState(0)
+  const [displayIndex, setDisplayIndex] = useState(0)
+  const [isFading, setIsFading] = useState(false)
   const [lastInteraction, setLastInteraction] = useState(Date.now())
   
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((current) => (current + 1) % certifications.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [lastInteraction])
-
-  const handleManualChange = (newIndex: number) => {
-    setActive(newIndex)
+  const triggerChange = (newIndex: number) => {
+    if (isFading || newIndex === active) return
+    setIsFading(true)
+    setActive(newIndex) 
     setLastInteraction(Date.now())
+    
+    setTimeout(() => {
+      setDisplayIndex(newIndex)
+      setIsFading(false)
+    }, 300)
   }
 
   const changeSlide = (step: number) => {
     const newIndex = (active + step + certifications.length) % certifications.length
-    handleManualChange(newIndex)
+    triggerChange(newIndex)
   }
 
-  const item = certifications[active]
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const newIndex = (active + 1) % certifications.length
+      triggerChange(newIndex)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [active, isFading, lastInteraction])
+
+  const item = certifications[displayIndex]
 
   return (
-    <section className="bg-white text-[#0A0F3D] py-16 font-sans">
+    <section className="flex flex-col lg:flex-row w-full border-t-8 border-[#F58220] font-sans text-white overflow-hidden">
       
       <style>{`
-        @keyframes fadeSlide {
-          0% { opacity: 0; transform: translateX(20px); }
-          100% { opacity: 1; transform: translateX(0); }
+        .smooth-fade {
+          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
-        @keyframes fadeScale {
-          0% { opacity: 0.5; transform: scale(1.05); }
-          100% { opacity: 1; transform: scale(1); }
+        .fade-out {
+          opacity: 0;
+          transform: translateY(8px);
         }
-        .animate-fade-slide {
-          animation: fadeSlide 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .fade-in {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .animate-fade-scale {
-          animation: fadeScale 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .bg-fade {
+          transition: opacity 0.3s ease-in-out;
         }
       `}</style>
 
-      {/* Contenedor maestro amplio para que el slider ocupe todo el espacio */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* =========================================================
+          MITAD IZQUIERDA: ESTÁTICA Y SÓLIDA
+      ========================================================= */}
+      <div className="w-full lg:w-1/2 flex justify-end relative z-20 self-start">
+        <div className="w-full bg-[#004a99] shadow-2xl h-fit pb-12 lg:pb-16">
+          <div className="w-full max-w-[640px] ml-auto p-8 lg:pt-16 lg:pl-8 lg:pr-12 flex flex-col">
+            
+            
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-4 w-4 bg-[#F58220]"></div> 
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F58220]">
+                  Expediente Institucional
+                </p>
+              </div>
+              
+              <h2 className="text-5xl lg:text-7xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
+                Avales &<br/>
+                <span className="text-[#F58220]">Certificaciones</span>
+              </h2>
+              
+              <p className="text-base leading-relaxed text-blue-200 max-w-sm border-l-2 border-[#F58220] pl-4">
+                Documentación oficial que respalda nuestra capacidad operativa y cumplimiento normativo bajo los más altos estándares globales.
+              </p>
+            </div>
+
         
-
-        <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-end mb-12">
-          <div className="max-w-[500px]">
-            <span className="mb-4 block h-1 w-14 bg-[#D32F2F]" />
-            <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D32F2F]">
-              Nuestra experiencia
-            </p>
-            <h2 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.05] tracking-tight text-brand-blue">
-              Certificaciones y<br />acreditaciones
-            </h2>
-            <p className="mt-5 text-[14px] leading-relaxed text-slate-600">
-              Contamos con certificaciones y acreditaciones que respaldan nuestro compromiso con la calidad, la seguridad y la formación continua de nuestro equipo.
-            </p>
-          </div>
-          
-          <div className="grid gap-5 sm:grid-cols-3 sm:divide-x sm:divide-slate-200">
-            {[
-              [ShieldCheck, 'Profesionales capacitados', 'Formación especializada y certificada.'],
-              [Award, 'Estándares internacionales', 'Normativas reconocidas a nivel global.'],
-              [Target, 'Compromiso con la calidad', 'Mejora continua organizacional.'],
-            ].map(([FeatureIcon, title, text]) => (
-              <div key={title as string} className="sm:px-5 first:sm:pl-0">
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                <FeatureIcon className="mb-3 h-7 w-7 text-[#D32F2F]" />
-                <h3 className="text-[13.5px] font-bold leading-snug text-[#0A0F3D]">{title as string}</h3>
-                <p className="mt-1.5 text-[12px] leading-relaxed text-slate-500">{text as string}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* =========================================================
-            SLIDER PRINCIPAL: Vuelve a ser ancho (ocupa todo el max-w-7xl)
-        ========================================================= */}
-        <div className="relative overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-xl">
-          
-          <div className="grid min-h-[400px] lg:grid-cols-[0.8fr_1fr_1.1fr]">
-            
-            {/* COLUMNA 1: Imagen de Contexto */}
-            <div className="relative min-h-[220px] overflow-hidden lg:min-h-0">
-              <img 
-                key={`bg-${active}`} 
-                src={item.contextImage} 
-                alt="Capacitación" 
-                className="absolute inset-0 h-full w-full object-cover object-center animate-fade-scale" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/90 lg:to-white" />
+            <div className="mt-12 grid grid-cols-3 gap-4 border-t border-blue-400/30 pt-8">
+              {benefits.map(([name, text, BenefitIcon]) => (
+                <div key={name} className="flex flex-col">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  <BenefitIcon className="mb-2 h-6 w-6 text-[#F58220]" />
+                  <p className="text-[11px] font-bold uppercase text-white tracking-wider">{name}</p>
+                  <p className="text-[9px] text-blue-300 mt-1 leading-tight">{text}</p>
+                </div>
+              ))}
             </div>
             
-            {/* COLUMNA 2: El Certificado Flotante */}
-            <div className="flex items-center justify-center bg-[#F8F9FB]/50 p-6 lg:p-8 relative z-10 -ml-10 lg:ml-0">
+            <div className="mt-16 flex items-center gap-6">
+                <div className="flex gap-2">
+                    <button onClick={() => changeSlide(-1)} disabled={isFading} className="p-3 bg-white text-[#0056B3] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
+                        <ArrowLeft className="h-5 w-5" />
+                    </button>
+                    <button onClick={() => changeSlide(1)} disabled={isFading} className="p-3 bg-white text-[#0056B3] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
+                        <ArrowRight className="h-5 w-5" />
+                    </button>
+                </div>
+                <div className="flex gap-2">
+                    {certifications.map((_, index) => (
+                        <button 
+                            key={index} 
+                            onClick={() => triggerChange(index)} 
+                            disabled={isFading}
+                            className={`h-1.5 transition-all duration-300 ${index === active ? 'w-8 bg-[#F58220]' : 'w-4 bg-blue-800'} rounded-none`} 
+                        />
+                    ))}
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================
+          MITAD DERECHA: DINÁMICA (Esta sí conserva la animación)
+      ========================================================= */}
+      <div className="w-full lg:w-1/2 relative bg-slate-900 flex flex-col justify-end min-h-[600px] lg:min-h-[85vh]">
+          
+          <div className="absolute inset-0 h-full w-full z-0 bg-slate-900 overflow-hidden">
+             <img 
+                 src={item.contextImage} 
+                 alt="Contexto operativo" 
+                 className={`h-full w-full object-cover object-center mix-blend-luminosity bg-fade ${isFading ? 'opacity-0' : 'opacity-40'}`} 
+             />
+          </div>
+          
+          <div className="w-full max-w-[640px] mr-auto flex-grow flex items-center justify-start p-8 lg:p-12 lg:pl-10 relative z-10">
               <div 
-                key={`cert-box-${active}`} 
-                className="relative w-full max-w-[340px] bg-white p-2.5 shadow-xl rounded-lg animate-fade-slide"
+                  className={`w-full max-w-xl bg-white p-2 shadow-2xl rotate-[-1deg] smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}
               >
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full object-contain bg-slate-50 p-1.5 border border-slate-100" 
-                />
+                   <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full object-contain border border-slate-200" 
+                  />
               </div>
-            </div>
-            
-            {/* COLUMNA 3: Detalles y Botón */}
-            <div key={`info-${active}`} className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 bg-white animate-fade-slide relative z-10">
-              <p className="mb-3 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-[#D32F2F]">
-                <span className="h-[2px] w-5 bg-[#D32F2F]" />
-                {item.category}
-              </p>
-              <h3 className="text-2xl lg:text-[28px] font-black leading-[1.1] text-[#0A0F3D]">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-[13px] leading-relaxed text-slate-600">
-                {item.description}
-              </p>
-              
-              <div className="mt-6 grid grid-cols-3 divide-x divide-slate-200">
-                {benefits.map(([name, text, BenefitIcon]) => (
-                  <div key={name} className="px-3 first:pl-0">
-                    <BenefitIcon className="mb-2 h-5 w-5 text-[#D32F2F]" />
-                    <p className="text-[10px] font-bold leading-tight text-[#0A0F3D]">{name}</p>
-                  </div>
-                ))}
-              </div>
-              
-              <button className="mt-8 flex w-fit items-center gap-2 bg-[#0A0F3D] px-5 py-3 text-[12px] font-bold text-white rounded-md transition-colors hover:bg-[#D32F2F]">
-                <Download className="h-4 w-4" /> Descargar Certificado
-              </button>
-            </div>
-            
           </div>
 
-          <button 
-            aria-label="Certificación anterior" 
-            onClick={() => changeSlide(-1)} 
-            className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0A0F3D] shadow-md transition-transform hover:scale-110 z-20 border border-slate-100"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          
-          <button 
-            aria-label="Siguiente certificación" 
-            onClick={() => changeSlide(1)} 
-            className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0A0F3D] shadow-md transition-transform hover:scale-110 z-20 border border-slate-100"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
-
-        <div className="mt-8 flex justify-center gap-2.5">
-          {certifications.map((_, index) => (
-            <button 
-              key={index} 
-              aria-label={`Mostrar slide ${index + 1}`} 
-              onClick={() => handleManualChange(index)} 
-              className={`h-2 rounded-full transition-all duration-300 ${index === active ? 'w-6 bg-[#0A0F3D]' : 'w-2 bg-slate-300 hover:bg-slate-400'}`} 
-            />
-          ))}
-        </div>
+          <div className="relative z-20 w-full bg-[#F58220] shadow-[0_-15px_30px_rgba(0,0,0,0.2)] flex justify-start">
+              
+              <div className={`w-full max-w-[640px] mr-auto p-8 lg:p-12 lg:pl-16 flex flex-col xl:flex-row xl:items-end justify-between gap-6 smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}>
+                  <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#0056B3] mb-2 flex items-center gap-2">
+                          <span className="w-2 h-2 bg-[#0056B3] inline-block"></span>
+                          {item.category}
+                      </p>
+                      <h3 className="text-3xl lg:text-4xl font-black leading-tight text-white uppercase tracking-tight">
+                          {item.title}
+                      </h3>
+                      <p className="mt-3 text-sm font-medium text-white/90 max-w-md">
+                          {item.description}
+                      </p>
+                  </div>
+                  
+                  <button className="shrink-0 flex items-center justify-center gap-2 bg-[#0056B3] px-6 py-4 text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#0056B3]/50">
+                      <Download className="h-4 w-4" /> 
+                      Obtener PDF
+                  </button>
+              </div>
+          </div>
 
       </div>
     </section>
