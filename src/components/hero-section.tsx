@@ -15,7 +15,7 @@ export function HeroSection() {
           Seguridad y salud para operaciones reales
         </p>
 
-        <h1 className="mt-6 max-w-4xl text-balance text-5xl font-black tracking-tight sm:text-7xl">
+        <h1 className="mt-6 max-w-4xl text-balance text-5xl font-black text-white tracking-tight sm:text-7xl">
           Capacitación que protege vidas y blinda tus operaciones.
         </h1>
 
