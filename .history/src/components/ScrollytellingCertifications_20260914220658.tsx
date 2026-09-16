@@ -1,4 +1,4 @@
-import { CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 // Importa tus imágenes aquí
 // import heroImg from '../assets/hero-paramedic.jpg';
 // import certOsha from '../assets/osha-certificate.png';

@@ -178,7 +178,7 @@ export function CertificationsShowcase() {
               </p>
               
               <div className="mt-6 grid grid-cols-3 divide-x divide-slate-200">
-                {benefits.map(([name,, BenefitIcon]) => (
+                {benefits.map(([name, BenefitIcon]) => (
                   <div key={name} className="px-3 first:pl-0">
                     <BenefitIcon className="mb-2 h-5 w-5 text-[#D32F2F]" />
                     <p className="text-[10px] font-bold leading-tight text-[#0A0F3D]">{name}</p>

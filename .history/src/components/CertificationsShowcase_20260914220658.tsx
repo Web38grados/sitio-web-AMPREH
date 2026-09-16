@@ -11,8 +11,8 @@ import img2 from '../assets/certificaciones/img2_osha.jpg'
 import img3 from '../assets/certificaciones/img3_blood.jpg'
 import img4 from '../assets/certificaciones/img4_ecsi.jpg'
 
-//const contextImg1 = 'https://images.unsplash.com/photo-1587370560942-124b610c144e?q=80&w=800&auto=format&fit=crop' 
-//const contextImg2 = 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop' 
+const contextImg1 = 'https://images.unsplash.com/photo-1587370560942-124b610c144e?q=80&w=800&auto=format&fit=crop' 
+const contextImg2 = 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop' 
 
 const certifications = [
   { 
@@ -178,7 +178,7 @@ export function CertificationsShowcase() {
               </p>
               
               <div className="mt-6 grid grid-cols-3 divide-x divide-slate-200">
-                {benefits.map(([name,, BenefitIcon]) => (
+                {benefits.map(([name, text, BenefitIcon]) => (
                   <div key={name} className="px-3 first:pl-0">
                     <BenefitIcon className="mb-2 h-5 w-5 text-[#D32F2F]" />
                     <p className="text-[10px] font-bold leading-tight text-[#0A0F3D]">{name}</p>
