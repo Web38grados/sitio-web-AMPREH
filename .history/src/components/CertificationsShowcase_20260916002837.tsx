@@ -68,7 +68,7 @@ export function CertificationsShowcase() {
 
   const handleManualChange = (newIndex: number) => {
     setActive(newIndex)
-    setLastInteraction("fecha")
+    setLastInteraction("manua")
   }
 
   const changeSlide = (step: number) => {
