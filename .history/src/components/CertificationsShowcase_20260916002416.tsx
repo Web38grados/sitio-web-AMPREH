@@ -57,6 +57,7 @@ const benefits = [
 
 export function CertificationsShowcase() {
   const [active, setActive] = useState(0)
+  const date = Date.now();
   const [lastInteraction, setLastInteraction] = useState("")
   
   useEffect(() => {
@@ -68,7 +69,7 @@ export function CertificationsShowcase() {
 
   const handleManualChange = (newIndex: number) => {
     setActive(newIndex)
-    setLastInteraction()
+    setLastInteraction(Date.now())
   }
 
   const changeSlide = (step: number) => {
