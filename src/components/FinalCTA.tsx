@@ -1,6 +1,6 @@
 import { PhoneCall, MessageSquareText, ShieldAlert, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import heroImg from '../assets/inicio/hero.jpg' // O usa otra foto de campo de tu carpeta
+import heroImg from '../assets/inicio/hero.png' // O usa otra foto de campo de tu carpeta
 
 export function FinalCTA() {
   return (
@@ -39,7 +39,7 @@ export function FinalCTA() {
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Link
             to="/contacto"
-            className="flex h-14 items-center justify-center gap-3 bg-[#E46D3C] px-8 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-white hover:text-[#0056B3] shadow-2xl rounded-none"
+            className="flex h-14 items-center justify-center gap-3 bg-[#E46D3C] px-8 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-white hover:text-[#1A237E] shadow-2xl rounded-none"
           >
             Solicitar Cotización a la Medida <ArrowRight className="h-4 w-4" />
           </Link>

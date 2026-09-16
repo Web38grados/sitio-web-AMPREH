@@ -26,7 +26,7 @@ export function ScrollytellingCertifications() {
           <div className="grid grid-cols-2 gap-4 mb-10">
             {/* Lista de beneficios breves */}
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-800">
-              <CheckCircle2 className="w-5 h-5 text-[#0056B3]" /> OSHA Authorized
+              <CheckCircle2 className="w-5 h-5 text-[#1A237E]" /> OSHA Authorized
             </div>
             {/* Agrega más beneficios aquí */}
           </div>
@@ -57,7 +57,7 @@ export function ScrollytellingCertifications() {
           <div className="w-full h-full bg-slate-300" />
           
           {/* Tarjeta Azul Superpuesta */}
-          <div className="absolute bottom-6 left-6 right-6 lg:bottom-10 lg:left-10 bg-[#0056B3] p-6 rounded-2xl text-white shadow-lg">
+          <div className="absolute bottom-6 left-6 right-6 lg:bottom-10 lg:left-10 bg-[#1A237E] p-6 rounded-2xl text-white shadow-lg">
              <h4 className="font-bold text-lg mb-1">Capacitación práctica</h4>
              <p className="text-blue-200 text-sm">en entornos reales</p>
           </div>

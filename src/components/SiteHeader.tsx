@@ -76,11 +76,11 @@ export default function SiteHeader() {
               <img src={logo} alt="AMPREH LLC" className="h-17 w-auto object-contain" loading="lazy" />
             </Link>
             
-            <button type="button" onClick={() => setOpen(!open)} className="rounded-none p-2 text-[#0056B3] transition-colors hover:bg-slate-100 lg:hidden border border-slate-200">
+            <button type="button" onClick={() => setOpen(!open)} className="rounded-none p-2 text-[#1A237E] transition-colors hover:bg-slate-100 lg:hidden border border-slate-200">
               {open ? <X /> : <Menu />}
             </button>
             
-            <nav className={`${open ? 'flex' : 'hidden'} absolute inset-x-0 top-full flex-col border-b-4 border-[#0056B3] bg-white p-5 shadow-2xl lg:static lg:flex lg:flex-row lg:items-center lg:justify-end lg:flex-grow lg:gap-8 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}>
+            <nav className={`${open ? 'flex' : 'hidden'} absolute inset-x-0 top-full flex-col border-b-4 border-[#1A237E] bg-white p-5 shadow-2xl lg:static lg:flex lg:flex-row lg:items-center lg:justify-end lg:flex-grow lg:gap-8 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}>
               <div className="flex flex-col lg:flex-row lg:items-center lg:gap-1">
                 {links.map(([label, path]) => {
                   const isActive = location.pathname === path
@@ -90,7 +90,7 @@ export default function SiteHeader() {
                       to={path}
                       onClick={() => setOpen(false)}
                       className={`group relative px-4 py-3 text-[13px] font-black uppercase tracking-widest transition-colors ${
-                        isActive ? 'text-[#0056B3]' : 'text-slate-600 hover:text-[#0056B3]'
+                        isActive ? 'text-[#1A237E]' : 'text-slate-600 hover:text-[#1A237E]'
                       }`}
                     >
                       {label}
@@ -100,7 +100,7 @@ export default function SiteHeader() {
                 })}
               </div>
               
-              <Link to="/contacto" onClick={() => setOpen(false)} className="mt-4 lg:mt-0 lg:ml-6 flex items-center justify-center gap-2 bg-[#F58220] px-6 py-3.5 text-[11px] font-black uppercase tracking-widest text-white transition-all hover:bg-[#0056B3] shadow-md hover:shadow-lg rounded-none">
+              <Link to="/contacto" onClick={() => setOpen(false)} className="mt-4 lg:mt-0 lg:ml-6 flex items-center justify-center gap-2 bg-[#F58220] px-6 py-3.5 text-[11px] font-black uppercase tracking-widest text-white transition-all hover:bg-[#1A237E] shadow-md hover:shadow-lg rounded-none">
                 Solicitar Asesoría <ArrowRight className="h-4 w-4" />
               </Link>
             </nav>

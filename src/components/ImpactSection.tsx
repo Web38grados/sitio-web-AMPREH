@@ -130,7 +130,7 @@ export function ImpactSection() {
               <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Protegiendo empresas desde 2005</p>
             </div>
 
-            <div className="border-l-4 border-[#0056B3] pl-4">
+            <div className="border-l-4 border-[#1A237E] pl-4">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
                 <AnimatedCounter end={3} isVisible={statsVisible} />
               </div>
@@ -150,7 +150,7 @@ export function ImpactSection() {
             }`}
           >
 
-            <div className="border-r-4 border-[#0056B3] pr-4 text-right ">
+            <div className="border-r-4 border-[#1A237E] pr-4 text-right ">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
                 <AnimatedCounter end={100} isVisible={statsVisible} />%
               </div>

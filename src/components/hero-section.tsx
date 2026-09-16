@@ -1,7 +1,7 @@
 import { ArrowRight, BadgeCheck, BookOpenCheck, PhoneCall, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-import heroImg from '../assets/inicio/hero.jpg'
+import heroImg from '../assets/inicio/hero.png'
 
 const credentials = [
   { title: 'OSHA', label: 'Ver certificación', icon: ShieldCheck, to: '/servicios' },
@@ -38,7 +38,7 @@ export function HeroSection() {
             Protegemos el activo más valioso
             <br />
             {/* Ajusté el padding (px-5 py-1 md:py-2) para que se mantenga proporcional al texto */}
-            <span className="mt-4 md:mt-6 inline-block bg-[#0056B3] px-5 py-1 md:py-2 border-b-4 border-[#F58220] shadow-2xl">
+            <span className="mt-4 md:mt-6 inline-block bg-[#1A237E] px-5 py-1 md:py-2 border-b-4 border-[#F58220] shadow-2xl">
               La Vida
             </span>
           </h1>
@@ -50,7 +50,7 @@ export function HeroSection() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link 
               to="/servicios" 
-              className="flex h-14 items-center justify-center gap-3 bg-[#0056B3] px-8 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[#F58220] shadow-lg rounded-none"
+              className="flex h-14 items-center justify-center gap-3 bg-[#1A237E] px-8 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[#F58220] shadow-lg rounded-none"
             >
               Nuestros servicios <ArrowRight className="h-4 w-4" />
             </Link>
@@ -71,11 +71,11 @@ export function HeroSection() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {credentials.map((item) => {
             const Icon = item.icon
-            const cardClasses = "group flex flex-col justify-between border-t-8 border-[#0056B3] bg-white p-7 shadow-xl transition-all duration-300 hover:border-[#F58220] hover:-translate-y-2 hover:shadow-2xl rounded-none"
+            const cardClasses = "group flex flex-col justify-between border-t-8 border-[#1A237E] bg-white p-7 shadow-xl transition-all duration-300 hover:border-[#F58220] hover:-translate-y-2 hover:shadow-2xl rounded-none"
             const cardContent = (
               <>
                 <div>
-                  <Icon className="mb-6 h-8 w-8 text-[#0056B3] transition-colors duration-300 group-hover:text-[#F58220]" strokeWidth={2} />
+                  <Icon className="mb-6 h-8 w-8 text-[#1A237E] transition-colors duration-300 group-hover:text-[#F58220]" strokeWidth={2} />
                   <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 leading-none">
                     {item.title}
                   </h3>
@@ -83,7 +83,7 @@ export function HeroSection() {
                     {item.label}
                   </p>
                 </div>
-                <div className="mt-8 flex items-center text-[11px] font-black uppercase tracking-widest text-[#0056B3] transition-colors group-hover:text-[#F58220]">
+                <div className="mt-8 flex items-center text-[11px] font-black uppercase tracking-widest text-[#1A237E] transition-colors group-hover:text-[#F58220]">
                   Explorar <ArrowRight className="ml-2 h-4 w-4" />
                 </div>
               </>

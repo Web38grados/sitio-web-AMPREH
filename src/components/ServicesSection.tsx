@@ -54,7 +54,7 @@ export default function ServicesSection() {
             </span>
           </div>
           
-          <h2 className="max-w-3xl text-4xl lg:text-6xl font-black uppercase leading-[0.95] tracking-tighter text-[#0056B3]">
+          <h2 className="max-w-3xl text-4xl lg:text-6xl font-black uppercase leading-[0.95] tracking-tighter text-[#1A237E]">
             Soluciones integrales para <span className="text-[#F58220]">empresas</span>
           </h2>
           
@@ -68,7 +68,7 @@ export default function ServicesSection() {
           {services.map(({ icon: Icon, title, text, image }, index) => (
             <article
               key={title}
-              className="group flex flex-col lg:flex-row bg-white shadow-xl border-t-4 border-[#0056B3] transition-all hover:border-[#F58220] hover:-translate-y-1 rounded-none"
+              className="group flex flex-col lg:flex-row bg-white shadow-xl border-t-4 border-[#1A237E] transition-all hover:border-[#F58220] hover:-translate-y-1 rounded-none"
             >
               {/* Contenedor de Imagen (Alternando lados) */}
               <div className={`w-full lg:w-5/12 overflow-hidden relative bg-slate-900 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
@@ -100,7 +100,7 @@ export default function ServicesSection() {
                   
                   <Link 
                     to="/contacto"
-                    className="inline-flex items-center gap-3 bg-[#0056B3] px-6 py-4 text-[11px] font-black uppercase tracking-widest text-white hover:bg-[#F58220] transition-colors rounded-none shadow-md"
+                    className="inline-flex items-center gap-3 bg-[#1A237E] px-6 py-4 text-[11px] font-black uppercase tracking-widest text-white hover:bg-[#F58220] transition-colors rounded-none shadow-md"
                   >
                     Solicitar solución <ArrowRight className="size-4" />
                   </Link>

@@ -1,7 +1,7 @@
 import { Award, Crosshair, ShieldAlert, ArrowRight } from 'lucide-react'
 
-import indImg from '../assets/inicio/prevencion.jpg'
-import emergImg from '../assets/inicio/emergencia.jpg'
+import indImg from '../assets/inicio/prevencion.png'
+import emergImg from '../assets/inicio/emergencia.png'
 import { useState, useEffect, useRef } from 'react'
 
 const pillars = [
@@ -91,7 +91,7 @@ export function AboutPreview() {
               </p>
             </div>
             
-            <h2 className="mt-6 max-w-xl text-4xl font-black uppercase leading-[0.9] tracking-tighter text-[#0056B3] sm:text-5xl lg:text-6xl">
+            <h2 className="mt-6 max-w-xl text-4xl font-black uppercase leading-[0.9] tracking-tighter text-[#1A237E] sm:text-5xl lg:text-6xl">
               Transformamos la cultura de la seguridad y la respuesta ante <span className="text-[#F58220]">crisis.</span>
             </h2>
             
@@ -99,13 +99,13 @@ export function AboutPreview() {
               Con más de 20 años de trayectoria (desde 2005), brindamos soluciones integrales en atención médica prehospitalaria, protección civil y reducción de riesgos. Nos rigen los más altos estándares globales para blindar tus operaciones cuando cada segundo cuenta.
             </p>
             
-            <a href="#contacto" className="mt-10 inline-flex items-center bg-[#0056B3] px-8 py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-[#F58220] shadow-lg">
+            <a href="#contacto" className="mt-10 inline-flex items-center bg-[#1A237E] px-8 py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-[#F58220] shadow-lg">
               Conoce nuestra historia <ArrowRight className="ml-3 h-4 w-4" aria-hidden="true" />
             </a>
           </div>
 
           {/* BLOQUE DERECHO: Panel de Expediente Institucional */}
-          <div className="self-end bg-slate-50 p-8 lg:p-10 border-t-8 border-[#0056B3] shadow-xl lg:mt-16">
+          <div className="self-end bg-slate-50 p-8 lg:p-10 border-t-8 border-[#1A237E] shadow-xl lg:mt-16">
             <p className="text-[10px] font-black tracking-[0.2em] uppercase text-[#F58220] mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-[#F58220] inline-block"></span>
               AMPREH / EXPEDIENTE INSTITUCIONAL
@@ -120,7 +120,7 @@ export function AboutPreview() {
               {pillars.map(({ icon: Icon, title, text }) => (
                 <div key={title} className="sm:px-4 first:sm:pl-0">
                   <Icon className="size-7 text-[#F58220] mb-3" strokeWidth={2} aria-hidden="true" />
-                  <h3 className="text-[11px] font-black uppercase leading-tight tracking-wider text-[#0056B3]">{title}</h3>
+                  <h3 className="text-[11px] font-black uppercase leading-tight tracking-wider text-[#1A237E]">{title}</h3>
                   <p className="mt-2 text-[12px] leading-relaxed text-slate-600">{text}</p>
                 </div>
               ))}
