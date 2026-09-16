@@ -1,7 +1,7 @@
 import { Award, Crosshair, ShieldAlert, ArrowRight } from 'lucide-react'
 
-import indImg from '../assets/inicio/prevencion.jpg'
-import emergImg from '../assets/inicio/emergencia.jpg'
+import indImg from '../assets/inicio/prevencion.png'
+import emergImg from '../assets/inicio/emergencia.png'
 import { useState, useEffect, useRef } from 'react'
 
 // const trustedCompanies = ['Microsoft México', 'Coca-Cola FEMSA', 'Bank of America', 'GE', 'Owens Corning']

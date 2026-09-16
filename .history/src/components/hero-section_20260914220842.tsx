@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom'
 
 // 🚨 Tu imagen real
-import heroImg from '../assets/inicio/hero.jpg'
+import heroImg from '../assets/inicio/hero.png'
 
 const credentials = [
   { title: 'OSHA', label: 'Ver certificación', icon: ShieldCheck, to: '/servicios' },
