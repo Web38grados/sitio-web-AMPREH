@@ -6,10 +6,10 @@ import imgStopBleed from '../assets/certificaciones/stop-bleed.jpg'
 import imgEcsi from '../assets/certificaciones/ecsi.jpg'
 import imgChso from '../assets/certificaciones/CHSO_page-0001.jpg'
 
-import img1 from '../assets/certificaciones/img1_osha.jpg'
-import img2 from '../assets/certificaciones/img2_osha.jpg'
-import img3 from '../assets/certificaciones/img3_blood.jpg'
-import img4 from '../assets/certificaciones/img4_ecsi.jpg'
+import img1 from '../assets/certificaciones/img1_osha.png'
+import img2 from '../assets/certificaciones/img2_osha.png'
+import img3 from '../assets/certificaciones/img3_blood.png'
+import img4 from '../assets/certificaciones/img4_ecsi.png'
 
 const certifications = [
   { 
