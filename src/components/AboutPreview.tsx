@@ -17,8 +17,14 @@ export function AboutPreview() {
     useEffect(()=>{
         const observador = new IntersectionObserver(
             ([entry])=>{
-                if(entry.isIntersecting)setCardsVisible(true)
-            },{threshold : 0.4},
+                if(entry.isIntersecting) {
+                    setCardsVisible(true);
+                    // 1. SOLUCIÓN AL TIRÓN: Desconectar el observador inmediatamente
+                    if (cardsRef.current) observador.unobserve(cardsRef.current);
+                }
+            },
+            // 2. SOLUCIÓN AL TIRÓN: Bajar el threshold a 0.15 
+            { threshold: 0.15 }
         )
         const currentRef = cardsRef.current
         if(currentRef) observador.observe(currentRef)
@@ -32,12 +38,13 @@ export function AboutPreview() {
     <section id="nosotros" className="relative bg-white text-slate-900 pb-20">
       
         {/* =========================================================
-            TARJETAS DE IMAGEN (Intactas como pediste)
+            TARJETAS DE IMAGEN (Intactas, solo agregué will-change-transform)
         ========================================================= */}
         <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 -mt-10 lg:-mt-10" ref={cardsRef}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           
-          <div className={`group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition-all duration-1000 ease-out ${
+          {/* 3. SOLUCIÓN AL TIRÓN: Agregada la clase will-change-transform */}
+          <div className={`group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition-all duration-1000 ease-out will-change-transform ${
             cardsVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
           }`}>
             <div className="absolute inset-0 z-0">
@@ -55,7 +62,7 @@ export function AboutPreview() {
             </div>
           </div>
 
-          <div className={`group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition-all duration-1000 ease-out ${
+          <div className={`group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition-all duration-1000 ease-out will-change-transform ${
             cardsVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
           }`}>
             <div className="absolute inset-0 z-0">

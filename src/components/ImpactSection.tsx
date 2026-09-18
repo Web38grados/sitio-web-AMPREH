@@ -43,47 +43,26 @@ const AnimatedCounter = ({
 }
 
 export function ImpactSection() {
-  // Mantenemos este estado SOLO para los contadores de números, 
-  // ya que ellos sí necesitan re-renderizar para mostrar el conteo.
-  const [statsVisible, setStatsVisible] = useState(false)
-  const statsRef = useRef<HTMLDivElement>(null)
+  // Un solo estado para controlar TODA la visibilidad de la sección
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Activamos los números
-          setStatsVisible(true)
-
-          // === MODIFICACIÓN DIRECTA DEL DOM PARA LAS ANIMACIONES CSS ===
-          const titleBox = document.getElementById('impact-title');
-          const statsLeft = document.getElementById('impact-stats-left');
-          const statsRight = document.getElementById('impact-stats-right');
-
-          if (titleBox) {
-            titleBox.classList.remove('opacity-0', '-translate-x-24');
-            titleBox.classList.add('opacity-100', 'translate-x-0');
-          }
-          if (statsLeft) {
-            statsLeft.classList.remove('opacity-0', '-translate-x-16');
-            statsLeft.classList.add('opacity-100', 'translate-x-0');
-          }
-          if (statsRight) {
-            statsRight.classList.remove('opacity-0', 'translate-x-16');
-            statsRight.classList.add('opacity-100', 'translate-x-0');
-          }
-
-          if (statsRef.current) observer.unobserve(statsRef.current);
+          setIsVisible(true)
+          // Apagamos el observador de inmediato para evitar cálculos innecesarios en scroll
+          if (sectionRef.current) observer.unobserve(sectionRef.current);
         }
       },
       {
         rootMargin: '0px', 
-  
-        threshold: 0.2,
+        threshold: 0.20, // Se activa un poco antes para que la animación empiece a tiempo
       }
     )
 
-    const currentRef = statsRef.current
+    const currentRef = sectionRef.current
 
     if (currentRef) {
       observer.observe(currentRef)
@@ -97,7 +76,8 @@ export function ImpactSection() {
   }, [])
 
   return (
-    <section className="relative flex min-h-[130vh] w-full flex-col overflow-hidden bg-slate-950 py-24 text-white">
+    // Observamos TODA la sección en lugar de solo los números
+    <section ref={sectionRef} className="relative flex min-h-[130vh] w-full flex-col overflow-hidden bg-slate-950 py-24 text-white">
 
       <div className="absolute inset-0 z-0">
         <img
@@ -109,12 +89,13 @@ export function ImpactSection() {
 
       <div className="relative z-10 mx-auto mt-40 w-full max-w-7xl px-6 lg:px-8">
         <div 
-          id="impact-title"
-          // Clases iniciales: invisibles y movidas (-translate-x-24)
-          className="max-w-2xl transition-all duration-1000 ease-out delay-800 -translate-x-24 opacity-0 will-change-transform"
+          // Reemplazamos getElementById por clases dinámicas condicionales de React
+          className={`max-w-2xl transition-all duration-1000 ease-out delay-1000 will-change-transform ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24'
+          }`}
         >
           <div className="mb-6 h-1.5 w-16 bg-[#D32F2F]" />
-          <h2 className="text-5xl font-black uppercase leading-[1.05] tracking-tight text-white drop-shadow-2xl sm:text-6xl lg:text-7xl">
+          <h2 className="text-5xl font-black uppercase leading-[1.05] tracking-tight  text-white drop-shadow-2xl sm:text-6xl lg:text-7xl">
             Líderes en
             <br />
             <span className="text-white">
@@ -134,20 +115,18 @@ export function ImpactSection() {
 
       <div className="flex-grow"></div>
 
-      <div
-        ref={statsRef}
-        className="relative z-10 mx-auto my-auto w-full max-w-7xl px-6 py-16 lg:px-8"
-      >
+      <div className="relative z-10 mx-auto my-auto w-full max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-3 lg:gap-12">
           
           <div
-            id="impact-stats-left"
-             // Clases iniciales
-            className="flex flex-col gap-10 transition-all duration-1000 ease-out delay-150 -translate-x-16 opacity-0 will-change-transform"
+            // Clases dinámicas para las estadísticas de la izquierda
+            className={`flex flex-col gap-10 transition-all duration-1000 ease-out delay-300 will-change-transform ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'
+            }`}
           >
             <div className="border-l-4 border-[#D32F2F] pl-4">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
-                +<AnimatedCounter end={20} isVisible={statsVisible} />
+                +<AnimatedCounter end={20} isVisible={isVisible} />
               </div>
 
               <p className="mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Años de Experiencia</p>
@@ -156,7 +135,7 @@ export function ImpactSection() {
 
             <div className="border-l-4 border-[#1A237E] pl-4">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
-                <AnimatedCounter end={3} isVisible={statsVisible} />
+                <AnimatedCounter end={3} isVisible={isVisible} />
               </div>
               <p className="mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Estándares Globales</p>
               <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">OSHA, ECSI y Stop the Bleed</p>
@@ -166,26 +145,27 @@ export function ImpactSection() {
           <div className="hidden min-h-[350px] lg:block"></div>
 
           <div
-            id="impact-stats-right"
-             // Clases iniciales
-            className="flex flex-col gap-10 transition-all duration-1000 ease-out delay-300 translate-x-16 opacity-0 will-change-transform"
+            // Clases dinámicas para las estadísticas de la derecha
+            className={`flex flex-col gap-10 transition-all duration-1000 ease-out delay-500 will-change-transform ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-16'
+            }`}
           >
 
             <div className="border-r-4 border-[#1A237E] pr-4 text-right ">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
-                <AnimatedCounter end={100} isVisible={statsVisible} />%
+                <AnimatedCounter end={100} isVisible={isVisible} />%
               </div>
               <div>
                 
               </div>
-               <p className="flex justify-end ml-auto mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white  bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Cumplimiento Legal</p>
+               <p className="flex justify-end ml-auto mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Cumplimiento Legal</p>
                 <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">STPS y Protección Civil</p>
               </div>
 
   
             <div className="border-r-4 border-[#D32F2F] pr-4 text-right ">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
-                +<AnimatedCounter end={500} isVisible={statsVisible} />
+                +<AnimatedCounter end={500} isVisible={isVisible} />
               </div>
               <p className="flex justify-end ml-auto mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Brigadistas</p>
               <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Formados y certificados en campo</p>
@@ -197,5 +177,4 @@ export function ImpactSection() {
 
     </section>
   )
-
 }
