@@ -17,7 +17,7 @@ export function HeroSection() {
       {/* Fondo Oscuro */}
       <div className="absolute inset-0 z-0">
         <img src={heroImg} alt="Equipo AMPREH en acción" className="h-full w-full object-cover object-center mix-blend-luminosity opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071324]/95 via-[#071324]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-transparent" />
       </div>
 
       <div className="relative z-20 mx-auto flex min-h-[calc(100vh-120px)] max-w-7xl items-center px-6 pt-16 lg:px-12 pb-24">

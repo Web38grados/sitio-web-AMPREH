@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ArrowLeft, ArrowRight, Download, ShieldCheck, Award, Target, FileCheck2, Users, HeartPulse } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Download, ShieldCheck,  Target, FileCheck2, Users, HeartPulse } from 'lucide-react'
 
 import imgOsha from '../assets/certificaciones/osha.png'
 import imgStopBleed from '../assets/certificaciones/stop-bleed.jpg'
@@ -86,7 +86,8 @@ export function CertificationsShowcase() {
   const item = certifications[displayIndex]
 
   return (
-    <section className="flex flex-col lg:flex-row w-full border-t-8 border-[#F58220] font-sans text-white overflow-hidden">
+
+    <section className="flex flex-col lg:flex-row w-full bg-[#F58220] border-t-8 border-[#F58220] font-sans text-white overflow-hidden">
       
       <style>{`
         .smooth-fade {
@@ -109,32 +110,33 @@ export function CertificationsShowcase() {
           MITAD IZQUIERDA: ESTÁTICA Y SÓLIDA
       ========================================================= */}
       <div className="w-full lg:w-1/2 flex justify-end relative z-20 self-start">
-        <div className="w-full bg-[#004a99] shadow-2xl h-fit pb-12 lg:pb-16">
-          <div className="w-full max-w-[640px] ml-auto p-8 lg:pt-16 lg:pl-8 lg:pr-12 flex flex-col">
-            
+        {/* Usamos h-full en escritorio para igualar alturas y p-4/p-8 para responsive */}
+        <div className="w-full bg-[#004a99] h-full pb-12 lg:pb-16 flex flex-col justify-between">
+          <div className="w-full max-w-[640px] ml-auto p-6 sm:p-8 lg:pt-16 lg:pl-8 lg:pr-12 flex flex-col">
             
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="h-4 w-4 bg-[#F58220]"></div> 
+                <div className="h-4 w-4 bg-[#F58220] shrink-0"></div> 
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F58220]">
                   Expediente Institucional
                 </p>
               </div>
               
-              <h2 className="text-5xl lg:text-7xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
+              {/* ARREGLO DEL TÍTULO: break-words e hyphens-auto evitan que se salga */}
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-8 break-words hyphens-auto">
                 Avales &<br/>
                 <span className="text-[#F58220]">Certificaciones</span>
               </h2>
               
-              <p className="text-base leading-relaxed text-blue-200 max-w-sm border-l-2 border-[#F58220] pl-4">
+              <p className="text-sm sm:text-base leading-relaxed text-blue-200 max-w-sm border-l-2 border-[#F58220] pl-4">
                 Documentación oficial que respalda nuestra capacidad operativa y cumplimiento normativo bajo los más altos estándares globales.
               </p>
             </div>
 
-        
-            <div className="mt-12 grid grid-cols-3 gap-4 border-t border-blue-400/30 pt-8">
+            {/* Ajuste de grilla para pantallas muy chicas */}
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 border-t border-blue-400/30 pt-8">
               {benefits.map(([name, text, BenefitIcon]) => (
-                <div key={name} className="flex flex-col">
+                <div key={name} className="flex flex-col items-start sm:items-start">
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   <BenefitIcon className="mb-2 h-6 w-6 text-[#F58220]" />
                   <p className="text-[11px] font-bold uppercase text-white tracking-wider">{name}</p>
@@ -143,7 +145,7 @@ export function CertificationsShowcase() {
               ))}
             </div>
             
-            <div className="mt-16 flex items-center gap-6">
+            <div className="mt-12 lg:mt-16 flex flex-col sm:flex-row sm:items-center gap-6">
                 <div className="flex gap-2">
                     <button onClick={() => changeSlide(-1)} disabled={isFading} className="p-3 bg-white text-[#1A237E] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
                         <ArrowLeft className="h-5 w-5" />
@@ -171,9 +173,15 @@ export function CertificationsShowcase() {
       {/* =========================================================
           MITAD DERECHA: DINÁMICA (Esta sí conserva la animación)
       ========================================================= */}
-      <div className="w-full lg:w-1/2 relative bg-slate-900 flex flex-col justify-end min-h-[600px] ">
+      {/* Ajustado min-h para que no baile */}
+{/* =========================================================
+          MITAD DERECHA: DINÁMICA (Esta sí conserva la animación)
+      ========================================================= */}
+      {/* 1. Quitamos el bg-slate-950 de este wrapper padre */}
+      <div className="w-full lg:w-1/2 relative flex flex-col justify-end min-h-[500px] lg:min-h-[85vh]">
           
-          <div className="absolute inset-0 h-full w-full z-0 bg-slate-900 overflow-hidden">
+          {/* 2. El bg-slate-950 se queda ÚNICAMENTE aquí, encerrado con la foto */}
+          <div className="absolute inset-0 h-full w-full z-0 bg-slate-950 overflow-hidden">
              <img 
                  src={item.contextImage} 
                  alt="Contexto operativo" 
@@ -181,40 +189,42 @@ export function CertificationsShowcase() {
              />
           </div>
           
-          <div className="w-full max-w-[640px] mr-auto flex-grow flex items-center justify-start p-8 lg:p-12 lg:pl-10 relative z-10">
+          {/* Ajustado el padding y posición del certificado */}
+          <div className="relative w-full max-w-[340px] sm:max-w-[400px] sm:left-30 sm:bottom-23 md:left-50 lg:left-5 lg:top-20  md:max-w-[500px] md: lg:max-w-[640px] mr-auto flex-grow flex items-center justify-center lg:justify-start p-6 sm:p-8 lg:p-12 lg:pl-10  z-10 pb-48 lg:pb-40">
               <div 
                   className={`w-full max-w-xl bg-white p-2 shadow-2xl rotate-[-1deg] smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}
               >
                    <img 
                       src={item.image} 
                       alt={item.title} 
-                      className="w-full object-contain border border-slate-200" 
+                      className="w-full h-[250px] sm:h-[300px] lg:h-[350px] object-contain border border-slate-200" 
                   />
               </div>
           </div>
 
-          <div className="relative z-20 w-full bg-[#F58220] shadow-[0_-15px_30px_rgba(0,0,0,0.2)] flex justify-start">
-              
-              <div className={`w-full max-w-[640px] mr-auto p-8 lg:p-12 lg:pl-16 flex flex-col xl:flex-row xl:items-end justify-between gap-6 smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}>
-                  <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1A237E] mb-2 flex items-center gap-2">
-                          <span className="w-2 h-2 bg-[#1A237E] inline-block"></span>
-                          {item.category}
-                      </p>
-                      <h3 className="text-3xl lg:text-4xl font-black leading-tight text-white uppercase tracking-tight">
-                          {item.title}
-                      </h3>
-                      <p className="mt-3 text-sm font-medium text-white/90 max-w-md">
-                          {item.description}
-                      </p>
-                  </div>
-                  
-                  <button className="shrink-0 flex items-center justify-center gap-2 bg-[#1A237E] px-6 py-4 text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#1A237E]/50">
-                      <Download className="h-4 w-4" /> 
-                      Obtener PDF
-                  </button>
-              </div>
-          </div>
+
+        <div className="absolute lg:relative bottom-0 left-0 w-full z-20 bg-[#F58220] shadow-[0_-15px_30px_rgba(0,0,0,0.2)]  before:absolute before:inset-y-0 before:-left-[2px] before:w-[4px] before:bg-[#F58220] before:-z-10">
+                      
+            <div className={`w-full max-w-[640px] mr-auto p-6 sm:p-8 lg:p-12 lg:pl-16 flex flex-col sm:flex-row sm:items-center xl:items-end justify-between gap-6 min-h-[220px] sm:min-h-[180px] smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}>
+                <div className="flex-1">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1A237E] mb-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-[#1A237E] inline-block shrink-0"></span>
+                        {item.category}
+                    </p>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black leading-tight text-white uppercase tracking-tight">
+                        {item.title}
+                    </h3>
+                    <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-white/90 max-w-md min-h-[40px]">
+                        {item.description}
+                    </p>
+                </div>
+                
+                <button className="shrink-0 self-start sm:self-auto flex items-center justify-center gap-2 bg-[#1A237E] px-4 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#1A237E]/50">
+                    <Download className="h-4 w-4" /> 
+                    Obtener PDF
+                </button>
+            </div>
+        </div>
 
       </div>
     </section>

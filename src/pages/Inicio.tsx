@@ -4,8 +4,10 @@ import { ClientProof } from '../components/ClientProof';
 import { ImpactSection } from '../components/ImpactSection';
 import AboutPreview from '../components/AboutPreview';
 import { CertificationsShowcase } from '../components/CertificationsShowcase'
-import { ScrollytellingCertifications } from '../components/ScrollytellingCertifications';
-import { FinalCTA } from '../components/FinalCTA';
+// import { ScrollytellingCertifications } from '../components/ScrollytellingCertifications';
+import { CTADefinitivo } from '../components/CTADefinitivo';
+import { PilaresValor } from '../components/PilaresValor';
+import { CursosPreview } from './CursosPreview';
 
 export default function Inicio() {
   return (
@@ -15,8 +17,10 @@ export default function Inicio() {
       <ImpactSection></ImpactSection>
       <AboutPreview></AboutPreview>
       <CertificationsShowcase></CertificationsShowcase>
+      <CursosPreview></CursosPreview>
       {/* <ScrollytellingCertifications></ScrollytellingCertifications> */}
-      <FinalCTA></FinalCTA>
+      {/* <PilaresValor></PilaresValor> */}
+      <CTADefinitivo></CTADefinitivo>
     </div>
   );
 }

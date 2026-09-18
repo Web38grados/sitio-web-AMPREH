@@ -43,6 +43,8 @@ const AnimatedCounter = ({
 }
 
 export function ImpactSection() {
+  // Mantenemos este estado SOLO para los contadores de números, 
+  // ya que ellos sí necesitan re-renderizar para mostrar el conteo.
   const [statsVisible, setStatsVisible] = useState(false)
   const statsRef = useRef<HTMLDivElement>(null)
 
@@ -50,10 +52,33 @@ export function ImpactSection() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Activamos los números
           setStatsVisible(true)
+
+          // === MODIFICACIÓN DIRECTA DEL DOM PARA LAS ANIMACIONES CSS ===
+          const titleBox = document.getElementById('impact-title');
+          const statsLeft = document.getElementById('impact-stats-left');
+          const statsRight = document.getElementById('impact-stats-right');
+
+          if (titleBox) {
+            titleBox.classList.remove('opacity-0', '-translate-x-24');
+            titleBox.classList.add('opacity-100', 'translate-x-0');
+          }
+          if (statsLeft) {
+            statsLeft.classList.remove('opacity-0', '-translate-x-16');
+            statsLeft.classList.add('opacity-100', 'translate-x-0');
+          }
+          if (statsRight) {
+            statsRight.classList.remove('opacity-0', 'translate-x-16');
+            statsRight.classList.add('opacity-100', 'translate-x-0');
+          }
+
+          if (statsRef.current) observer.unobserve(statsRef.current);
         }
       },
       {
+        rootMargin: '0px', 
+  
         threshold: 0.2,
       }
     )
@@ -84,9 +109,9 @@ export function ImpactSection() {
 
       <div className="relative z-10 mx-auto mt-40 w-full max-w-7xl px-6 lg:px-8">
         <div 
-          className={`max-w-2xl transition-all duration-1000 ease-out delay-800 ${
-            statsVisible ? 'translate-x-0 opacity-100' : '-translate-x-24 opacity-0'
-          }`}
+          id="impact-title"
+          // Clases iniciales: invisibles y movidas (-translate-x-24)
+          className="max-w-2xl transition-all duration-1000 ease-out delay-800 -translate-x-24 opacity-0 will-change-transform"
         >
           <div className="mb-6 h-1.5 w-16 bg-[#D32F2F]" />
           <h2 className="text-5xl font-black uppercase leading-[1.05] tracking-tight text-white drop-shadow-2xl sm:text-6xl lg:text-7xl">
@@ -115,11 +140,10 @@ export function ImpactSection() {
       >
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-3 lg:gap-12">
           
-
           <div
-            className={`flex flex-col gap-10 transition-all duration-1000 ease-out delay-150 ${
-              statsVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'
-            }`}
+            id="impact-stats-left"
+             // Clases iniciales
+            className="flex flex-col gap-10 transition-all duration-1000 ease-out delay-150 -translate-x-16 opacity-0 will-change-transform"
           >
             <div className="border-l-4 border-[#D32F2F] pl-4">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
@@ -139,15 +163,12 @@ export function ImpactSection() {
             </div>
           </div>
 
- 
           <div className="hidden min-h-[350px] lg:block"></div>
 
-
-
           <div
-            className={`flex flex-col gap-10 transition-all duration-1000 ease-out delay-300 ${
-              statsVisible ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'
-            }`}
+            id="impact-stats-right"
+             // Clases iniciales
+            className="flex flex-col gap-10 transition-all duration-1000 ease-out delay-300 translate-x-16 opacity-0 will-change-transform"
           >
 
             <div className="border-r-4 border-[#1A237E] pr-4 text-right ">
