@@ -58,10 +58,10 @@ export function CTADefinitivo() {
       `}</style>
 
       {/* A) Capa Naranja de fondo */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[#F58220] [clip-path:polygon(0_4vw,100%_0,100%_100%,0_100%)] z-0"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[#F58220] [clip-path:polygon(0_2.5vw,100%_0,100%_100%,0_100%)] z-0"></div>
       
       {/* B) Capa Oscura Principal */}
-      <div className="relative w-full bg-[#070b14] mt-[6px] [clip-path:polygon(0_4vw,100%_0,100%_100%,0_100%)] z-10 pb-16 lg:pb-20">
+      <div className="relative w-full bg-[#070b14] mt-[6px] [clip-path:polygon(0_2.5vw,100%_0,100%_100%,0_100%)] z-10 pb-16 lg:pb-20">
         
         {/* IMAGEN DE FONDO (Fade-in suave) */}
         <div 
@@ -132,13 +132,10 @@ export function CTADefinitivo() {
 
               {/* Botón Secundario */}
               <a 
-                href="https://wa.me/1234567890" 
+                href="https://wa.me/5214692158327" // ¡Asegúrate de poner el número real con el código de país!
                 target="_blank" 
                 rel="noreferrer"
-                className={`w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent border border-slate-600 text-white px-8 py-4 font-black uppercase tracking-wider text-xs sm:text-sm hover:border-white hover:bg-white/5 transition-all duration-1000 ease-out transform ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: '900ms' }}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-4 font-black uppercase tracking-wider text-xs sm:text-sm hover:bg-[#128C7E] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 duration-300"
               >
                 <MessageCircle className="w-4 h-4" /> WhatsApp Directo
               </a>

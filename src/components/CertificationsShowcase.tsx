@@ -49,7 +49,7 @@ const certifications = [
 const benefits = [
   ['Seguridad', 'Normas y prácticas.', FileCheck2],
   ['Prevención', 'Identificación y control.', ShieldCheck],
-  ['Formación', 'Estándares internacionales.', Users],
+  ['FORMACIÓN', 'Estándares internacionales.', Users],
 ] as const
 
 export function CertificationsShowcase() {
@@ -147,10 +147,10 @@ export function CertificationsShowcase() {
             
             <div className="mt-12 lg:mt-16 flex flex-col sm:flex-row sm:items-center gap-6">
                 <div className="flex gap-2">
-                    <button onClick={() => changeSlide(-1)} disabled={isFading} className="p-3 bg-white text-[#1A237E] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
+                    <button onClick={() => changeSlide(-1)} disabled={isFading} className="p-3 bg-white text-[#004a99] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
                         <ArrowLeft className="h-5 w-5" />
                     </button>
-                    <button onClick={() => changeSlide(1)} disabled={isFading} className="p-3 bg-white text-[#1A237E] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
+                    <button onClick={() => changeSlide(1)} disabled={isFading} className="p-3 bg-white text-[#004a99] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
                         <ArrowRight className="h-5 w-5" />
                     </button>
                 </div>
@@ -207,8 +207,8 @@ export function CertificationsShowcase() {
                       
             <div className={`w-full max-w-[640px] mr-auto p-6 sm:p-8 lg:p-12 lg:pl-16 flex flex-col sm:flex-row sm:items-center xl:items-end justify-between gap-6 min-h-[220px] sm:min-h-[180px] smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}>
                 <div className="flex-1">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1A237E] mb-2 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-[#1A237E] inline-block shrink-0"></span>
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#004a99] mb-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-[#004a99] inline-block shrink-0"></span>
                         {item.category}
                     </p>
                     <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black leading-tight text-white uppercase tracking-tight">
@@ -219,7 +219,7 @@ export function CertificationsShowcase() {
                     </p>
                 </div>
                 
-                <button className="shrink-0 self-start sm:self-auto flex items-center justify-center gap-2 bg-[#1A237E] px-4 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#1A237E]/50">
+                <button className="shrink-0 self-start sm:self-auto flex items-center justify-center gap-2 bg-[#004a99] px-4 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#004a99]/50">
                     <Download className="h-4 w-4" /> 
                     Obtener PDF
                 </button>

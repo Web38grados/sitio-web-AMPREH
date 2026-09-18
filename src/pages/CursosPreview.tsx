@@ -14,7 +14,7 @@ const courses = [
 const benefits = [
   ['Seguridad', 'Normas y prácticas.', ShieldCheck],
   ['Prevención', 'Identificación y control.', ShieldAlert],
-  ['Formación', 'Estándares internacionales.', Users],
+  ['FORMACIÓN', 'Estándares internacionales.', Users],
 ] as const;
 
 export function CursosPreview() {
@@ -80,7 +80,7 @@ export function CursosPreview() {
               <span className="text-[11px] font-black tracking-[0.2em] text-[#FF4F00] uppercase font-['IBM_Plex_Sans']">Cursos Destacados</span>
             </div>
             
-            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[1.05] tracking-tight mb-8 text-[#1A237E]">
+            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[1.05] tracking-tight mb-8 text-[#004a99]">
               Domina la seguridad<br/>
               industrial
             </h3>
@@ -93,7 +93,7 @@ export function CursosPreview() {
               {benefits.map(([name, text, BenefitIcon]) => (
                 <div key={name} className="flex flex-col items-start">
                   <BenefitIcon className="mb-3 h-6 w-6 text-[#FF4F00]" strokeWidth={1.5} />
-                  <p className="text-[12px] font-black uppercase text-[#1A237E] tracking-wider mb-1">{name}</p>
+                  <p className="text-[12px] font-black uppercase text-[#004a99] tracking-wider mb-1">{name}</p>
                   <p className="text-[10px] text-slate-500 leading-tight font-['IBM_Plex_Sans']">{text}</p>
                 </div>
               ))}
@@ -104,14 +104,14 @@ export function CursosPreview() {
                 <button 
                   disabled={!canBack} 
                   onClick={() => setActive((value) => Math.max(0, value - 1))}
-                  className="flex items-center justify-center w-10 h-10 border border-slate-300 text-[#1A237E] hover:border-[#1A237E] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center w-10 h-10 border border-slate-300 text-[#004a99] hover:border-[#004a99] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft size={20} strokeWidth={1.5} />
                 </button>
                 <button 
                   disabled={!canNext} 
                   onClick={() => setActive((value) => Math.min(courses.length - 4, value + 1))}
-                  className="flex items-center justify-center w-10 h-10 border border-slate-300 text-[#1A237E] hover:border-[#1A237E] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center w-10 h-10 border border-slate-300 text-[#004a99] hover:border-[#004a99] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <ChevronRight size={20} strokeWidth={1.5} />
                 </button>
@@ -136,13 +136,13 @@ export function CursosPreview() {
                     <div className="w-8 h-8 rounded-full bg-[#FF4F00]/10 flex items-center justify-center text-[#FF4F00]">
                       <course.icon size={16} strokeWidth={2.5} />
                     </div>
-                    <span className="text-[10px] font-black text-[#1A237E] tracking-widest uppercase">{course.code}</span>
+                    <span className="text-[10px] font-black text-[#004a99] tracking-widest uppercase">{course.code}</span>
                   </div>
-                  <h5 className="font-black text-[#1A237E] text-[18px] uppercase leading-tight mb-2 group-hover:text-[#FF4F00] transition-colors duration-300">{course.title}</h5>
+                  <h5 className="font-black text-[#004a99] text-[18px] uppercase leading-tight mb-2 group-hover:text-[#FF4F00] transition-colors duration-300">{course.title}</h5>
                   <p className="text-[11px] text-slate-500 font-['IBM_Plex_Sans'] leading-relaxed pr-2">{course.detail}</p>
                 </div>
                 <div className="relative z-10 mt-6 pt-4 border-t border-slate-100">
-                  <Link to="/cursos" className="flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-[#1A237E]">
+                  <Link to="/cursos" className="flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-[#004a99]">
                     <span>Ver curso</span>
                     <ArrowRight className="w-4 h-4 text-[#FF4F00] transform group-hover:translate-x-2 transition-transform duration-300" strokeWidth={2.5} />
                   </Link>

@@ -32,8 +32,8 @@ export function PilaresValor() {
               // Las tarjetas tendrán el borde y la sombra para resaltar sobre ambos fondos
               className="bg-white p-8 shadow-2xl border-t-4 border-[#FF4F00] flex flex-col items-start transform transition-transform hover:-translate-y-2"
             >
-              <div className="bg-[#1A237E]/10 p-4 rounded-full mb-6">
-                <pilar.icon className="h-8 w-8 text-[#1A237E]" />
+              <div className="bg-[#004a99]/10 p-4 rounded-full mb-6">
+                <pilar.icon className="h-8 w-8 text-[#004a99]" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3 font-['Plus_Jakarta_Sans']">
                 {pilar.title}

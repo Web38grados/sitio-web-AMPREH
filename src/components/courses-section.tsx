@@ -37,7 +37,7 @@ export default function CoursesSection() {
           Oferta académica y certificaciones
         </p>
         
-        <h2 className="mt-5 max-w-3xl text-4xl font-black tracking-tight text-[#1A237E] sm:text-5xl">
+        <h2 className="mt-5 max-w-3xl text-4xl font-black tracking-tight text-[#004a99] sm:text-5xl">
           Entrenamiento que se queda contigo.
         </h2>
         
@@ -47,11 +47,11 @@ export default function CoursesSection() {
               key={title} 
               className="flex flex-col rounded-2xl border border-gray-200 bg-slate-50 p-7 shadow-sm transition-shadow hover:shadow-md"
             >
-              <div className="flex size-12 items-center justify-center rounded-xl bg-[#1A237E]/10 text-[#1A237E]">
+              <div className="flex size-12 items-center justify-center rounded-xl bg-[#004a99]/10 text-[#004a99]">
                 <Icon className="size-6" />
               </div>
               
-              <h3 className="mt-7 text-2xl font-black text-[#1A237E]">
+              <h3 className="mt-7 text-2xl font-black text-[#004a99]">
                 {title}
               </h3>
               

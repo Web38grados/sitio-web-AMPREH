@@ -4,7 +4,7 @@ const logoUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo_AM
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-[#1A237E] py-12 text-white">
+    <footer className="bg-[#004a99] py-12 text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 lg:flex-row lg:items-end lg:justify-between lg:px-8">
         <div>
           <img

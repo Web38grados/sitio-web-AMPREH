@@ -18,24 +18,24 @@ export default function ContactSection() {
           <p className="text-sm font-bold uppercase tracking-[.2em] text-[#D32F2F]">
             Contacto B2B
           </p>
-          <h2 className="mt-5 text-4xl font-black tracking-tight text-[#1A237E] sm:text-5xl">
+          <h2 className="mt-5 text-4xl font-black tracking-tight text-[#004a99] sm:text-5xl">
             Hablemos de una operación más preparada.
           </h2>
 
           <form onSubmit={submit} className="mt-10 grid gap-5 sm:grid-cols-2">
-            <label className="grid gap-2 text-sm font-bold text-[#1A237E]">
+            <label className="grid gap-2 text-sm font-bold text-[#004a99]">
               Nombre
               <input required name="nombre" className="rounded-lg border border-gray-200 bg-slate-50 px-4 py-3 font-normal outline-none transition-colors focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F]" />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-[#1A237E]">
+            <label className="grid gap-2 text-sm font-bold text-[#004a99]">
               Empresa
               <input required name="empresa" className="rounded-lg border border-gray-200 bg-slate-50 px-4 py-3 font-normal outline-none transition-colors focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F]" />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-[#1A237E]">
+            <label className="grid gap-2 text-sm font-bold text-[#004a99]">
               Correo
               <input required type="email" name="correo" className="rounded-lg border border-gray-200 bg-slate-50 px-4 py-3 font-normal outline-none transition-colors focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F]" />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-[#1A237E]">
+            <label className="grid gap-2 text-sm font-bold text-[#004a99]">
               Tipo de servicio
               <select name="servicio" className="rounded-lg border border-gray-200 bg-slate-50 px-4 py-3 font-normal outline-none transition-colors focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F]">
                 <option>Capacitación y Certificación OSHA</option>
@@ -46,7 +46,7 @@ export default function ContactSection() {
                 <option>Atención Médica Prehospitalaria</option>
               </select>
             </label>
-            <label className="grid gap-2 text-sm font-bold text-[#1A237E] sm:col-span-2">
+            <label className="grid gap-2 text-sm font-bold text-[#004a99] sm:col-span-2">
               Mensaje
               <textarea required name="mensaje" rows={5} className="rounded-lg border border-gray-200 bg-slate-50 px-4 py-3 font-normal outline-none transition-colors focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F]" />
             </label>
@@ -57,7 +57,7 @@ export default function ContactSection() {
         </div>
 
         {/* Lado Derecho: Información de Contacto */}
-        <aside className="rounded-[2rem] bg-[#1A237E] p-8 text-white lg:p-12 shadow-lg">
+        <aside className="rounded-[2rem] bg-[#004a99] p-8 text-white lg:p-12 shadow-lg">
           <p className="text-xl font-black tracking-tight">Conecta con nuestro equipo</p>
           <div className="mt-10 flex flex-col gap-8">
             
