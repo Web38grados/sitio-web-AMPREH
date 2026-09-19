@@ -7,10 +7,10 @@ import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
 import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
-import CoursesSection from './components/courses-section';
 import ContactSection from './components/contact-section';
 
 import Inicio from './pages/Inicio';
+import CoursesCatalog from './pages/cursos_page/CoursesCatalog';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -42,8 +42,9 @@ export default function App() {
           <Route path={ROUTES.INICIO} element={<Inicio />} />
           <Route path={ROUTES.NOSOTROS} element={<AboutSection />} />
           <Route path={ROUTES.SERVICIOS} element={<ServicesSection />} />
-          <Route path={ROUTES.CURSOS} element={<CoursesSection />} />
           <Route path={ROUTES.CONTACTO} element={<ContactSection />} />
+          <Route path={ROUTES.CONTACTO} element={<ContactSection />} />
+          <Route path={ROUTES.CURSOS} element= {<CoursesCatalog/>}/>
         </Route>
       </Routes>
     </>

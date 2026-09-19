@@ -20,9 +20,9 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-transparent" />
       </div>
 
-      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-120px)] max-w-7xl items-center px-6 pt-16 lg:px-12 pb-24">
+      {/* Aumentamos pb-24 a pb-36 para dar más respiro antes de las tarjetas */}
+      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-120px)] max-w-7xl items-center px-6 pt-16 lg:px-12 pb-36">
         
-        {/*  CAMBIO CLAVE 1: Reducimos de max-w-3xl a max-w-2xl para que JAMÁS choque con la ambulancia */}
         <div className="w-full max-w-2xl pt-20">
           
           <div className="mb-6 flex items-center gap-3">
@@ -32,18 +32,22 @@ export function HeroSection() {
             </span>
           </div>
           
-
-
-          <h1 className="font-black uppercase leading-[1.05] tracking-tight text-white text-[clamp(2.5rem,4.5vw,4.5rem)]">
-            Protegemos el activo más valioso
+          {/* Cambiamos a leading-[1.15] para que respire verticalmente */}
+          <h1 className="font-black uppercase leading-[1.15] tracking-tight text-white text-4xl md:text-6xl">
+            Protegemos el
             <br />
-            {/* Ajusté el padding (px-5 py-1 md:py-2) para que se mantenga proporcional al texto */}
-            <span className="mt-4 md:mt-6 inline-block bg-[#004a99] px-5 py-1 md:py-2 border-b-4 border-[#F58220] shadow-2xl">
+            activo
+            <br />
+            más valioso
+            <br />
+            {/* Aumentamos un poco el mt-4 para alejar el recuadro azul del texto superior */}
+            <span className="mt-4 inline-block bg-[#004a99] px-6 py-2 border-b-4 border-[#F58220] shadow-2xl">
               La Vida
             </span>
           </h1>
           
-          <p className="mt-8 max-w-xl text-lg font-medium leading-relaxed text-blue-100 border-l-2 border-[#F58220] pl-4">
+          {/* Bajamos de text-lg a text-base para mayor contraste con el título */}
+          <p className="mt-8 max-w-xl text-base font-medium leading-relaxed text-blue-100 border-l-2 border-[#F58220] pl-4">
             Servicios de élite en atención médica prehospitalaria, protección civil y capacitación corporativa con estándares que inspiran confianza.
           </p>
           

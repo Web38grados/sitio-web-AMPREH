@@ -123,7 +123,7 @@ export function CertificationsShowcase() {
               </div>
               
               {/* ARREGLO DEL TÍTULO: break-words e hyphens-auto evitan que se salga */}
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-8 break-words hyphens-auto">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-black uppercase leading-[0.9] tracking-tighter mb-8 break-words hyphens-auto">
                 Avales &<br/>
                 <span className="text-[#F58220]">Certificaciones</span>
               </h2>
@@ -211,7 +211,7 @@ export function CertificationsShowcase() {
                         <span className="w-2 h-2 bg-[#004a99] inline-block shrink-0"></span>
                         {item.category}
                     </p>
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black leading-tight text-white uppercase tracking-tight">
+                    <h3 className="text-xl sm:text-xl lg:text-2xl xl:text-3xl font-black leading-tight text-white uppercase tracking-tight">
                         {item.title}
                     </h3>
                     <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-white/90 max-w-md min-h-[40px]">

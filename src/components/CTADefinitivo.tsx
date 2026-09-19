@@ -97,7 +97,7 @@ export function CTADefinitivo() {
 
             {/* Título Principal (Delay 400ms) */}
             <h2 
-              className={`text-4xl sm:text-5xl lg:text-[4rem] font-black uppercase leading-[1.05] tracking-tight mb-8 transition-all duration-1000 ease-out transform ${
+              className={`text-3xl sm:text-4xl lg:text-4xl font-black uppercase leading-[1.05] tracking-tight mb-8 transition-all duration-1000 ease-out transform ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
               style={{ transitionDelay: '400ms' }}

@@ -80,7 +80,7 @@ export function CursosPreview() {
               <span className="text-[11px] font-black tracking-[0.2em] text-[#FF4F00] uppercase font-['IBM_Plex_Sans']">Cursos Destacados</span>
             </div>
             
-            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[1.05] tracking-tight mb-8 text-[#004a99]">
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-[1.05] tracking-tight mb-8 text-[#004a99]">
               Domina la seguridad<br/>
               industrial
             </h3>

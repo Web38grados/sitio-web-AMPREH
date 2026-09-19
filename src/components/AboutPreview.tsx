@@ -101,12 +101,12 @@ export function AboutPreview() {
               </p>
             </div>
             
-            <h2 className="mt-6 max-w-xl text-4xl font-black uppercase leading-[0.9] tracking-tighter text-[#004a99] sm:text-5xl lg:text-6xl">
-              Transformamos la cultura de la seguridad y la respuesta ante <span className="text-[#F58220]">crisis.</span>
+            <h2 className="mt-6 max-w-xl text-3xl font-black uppercase leading-[0.9] tracking-tighter text-[#004a99] sm:text-4xl lg:text-5xl">
+              Transformamos la cultura de la seguridad y la respuesta ante <span className="text-[#F58220]">crisis</span>
             </h2>
             
             <p className="mt-7 max-w-xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg border-l-2 border-[#F58220] pl-4">
-              Con más de 20 años de trayectoria (desde 2005), brindamos soluciones integrales en atención médica prehospitalaria, protección civil y reducción de riesgos. Nos rigen los más altos estándares globales para blindar tus operaciones cuando cada segundo cuenta.
+              Con más de 20 años de trayectoria, brindamos soluciones integrales en atención médica prehospitalaria, protección civil y reducción de riesgos. Nos rigen los más altos estándares globales para blindar tus operaciones cuando cada segundo cuenta.
             </p>
             
             <a href="#contacto" className="mt-10 inline-flex items-center bg-[#004a99] px-8 py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-[#F58220] shadow-lg">
@@ -121,7 +121,7 @@ export function AboutPreview() {
               AMPREH / EXPEDIENTE INSTITUCIONAL
             </p>
             
-            <p className="max-w-lg text-2xl font-black uppercase leading-[1.1] tracking-tight text-slate-900 sm:text-3xl">
+            <p className="max-w-lg text-xl font-black uppercase leading-[1.1] tracking-tight text-slate-900 sm:text-2xl">
               Prevención, atención y continuidad para operaciones que no pueden detenerse.
             </p>
             
