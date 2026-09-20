@@ -89,7 +89,7 @@ function PageHero({
             <div className="h-[1px] w-12 bg-slate-700"></div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[1.05] tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-[1.05] tracking-tight mb-6">
             <span className="text-white block">{titleWhite}</span>
             <span className="text-[#F58220] block">{titleOrange}</span>
           </h1>

@@ -1,8 +1,7 @@
 import { Award, Crosshair, ShieldAlert, ArrowRight } from 'lucide-react'
-
 import indImg from '../assets/inicio/prevencion.png'
 import emergImg from '../assets/inicio/emergencia.png'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react' // Adiós useState
 import { Link } from 'react-router-dom'
 
 const pillars = [
@@ -12,44 +11,43 @@ const pillars = [
 ]
 
 export function AboutPreview() {
-    const [cardsVisible, setCardsVisible] = useState(false)
-    const cardsRef = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
     
-    useEffect(()=>{
+    useEffect(() => {
         const observador = new IntersectionObserver(
-            ([entry])=>{
-                if(entry.isIntersecting) {
-                    setCardsVisible(true);
-                    // 1. SOLUCIÓN AL TIRÓN: Desconectar el observador inmediatamente
-                    if (cardsRef.current) observador.unobserve(cardsRef.current);
-                }
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Manipulamos el DOM directo. Cero re-renders de React = Cero tirones.
+                        requestAnimationFrame(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-12');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        });
+                        observador.unobserve(entry.target);
+                    }
+                });
             },
-            // 2. SOLUCIÓN AL TIRÓN: Bajar el threshold a 0.15 
-            { threshold: 0.15 }
+            { threshold: 0.15, rootMargin: '50px' }
         )
-        const currentRef = cardsRef.current
-        if(currentRef) observador.observe(currentRef)
         
-        return()=>{
-            if(currentRef) observador.unobserve(currentRef)
-        }
-    },[])
+        // Buscamos las tarjetas y las observamos una por una
+        const cards = containerRef.current?.querySelectorAll('.scroll-card');
+        cards?.forEach((card) => observador.observe(card));
+        
+        return () => observador.disconnect();
+    }, [])
 
   return (
     <section id="nosotros" className="relative bg-white text-slate-900 pb-20">
       
-        {/* =========================================================
-            TARJETAS DE IMAGEN (Intactas, solo agregué will-change-transform)
-        ========================================================= */}
-        <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 -mt-10 lg:-mt-10" ref={cardsRef}>
+        <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 -mt-10 lg:-mt-10" ref={containerRef}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           
-          {/* 3. SOLUCIÓN AL TIRÓN: Agregada la clase will-change-transform */}
-          <div className={`group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition-all duration-1000 ease-out will-change-transform ${
-            cardsVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
-          }`}>
+          {/* TARJETA 1: Agregamos la clase identificadora 'scroll-card' y dejamos el estado inicial fijo */}
+          <div className="scroll-card group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition duration-1000 ease-out transform-gpu will-change-[transform,opacity] translate-y-12 opacity-0">
             <div className="absolute inset-0 z-0">
-              <img src={indImg} alt="Capacitación Industrial" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50" />
+              {/* Le agregamos fetchPriority para decirle al navegador que esta imagen es importante */}
+              <img src={indImg} alt="Capacitación Industrial" decoding="async" fetchPriority="high" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 transform-gpu" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
             </div>
             <div className="relative z-10 flex h-full flex-col justify-end p-8">
@@ -65,11 +63,10 @@ export function AboutPreview() {
             </div>
           </div>
 
-          <div className={`group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition-all duration-1000 ease-out will-change-transform ${
-            cardsVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
-          }`}>
+          {/* TARJETA 2: Misma lógica, conservamos el delay-150 */}
+          <div className="scroll-card group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition duration-1000 delay-150 ease-out transform-gpu will-change-[transform,opacity] translate-y-12 opacity-0">
             <div className="absolute inset-0 z-0">
-              <img src={emergImg} alt="Atención Prehospitalaria" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50" />
+              <img src={emergImg} alt="Atención Prehospitalaria" decoding="async" fetchPriority="high" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 transform-gpu" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
             </div>
             <div className="relative z-10 flex h-full flex-col justify-end p-8">
@@ -87,12 +84,11 @@ export function AboutPreview() {
          </div>
 
       {/* =========================================================
-          CONTENIDO REDISEÑADO AL ESTILO B2B INDUSTRIAL
+          CONTENIDO INFERIOR (Intacto)
       ========================================================= */}
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           
-          {/* BLOQUE IZQUIERDO: Mensaje Principal */}
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="h-4 w-4 bg-[#F58220]"></div>
@@ -101,7 +97,7 @@ export function AboutPreview() {
               </p>
             </div>
             
-            <h2 className="mt-6 max-w-xl text-3xl font-black uppercase leading-[0.9] tracking-tighter text-[#004a99] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-6 max-w-xl text-3xl font-black uppercase leading-[1.05] tracking-tighter text-[#004a99] sm:text-4xl lg:text-5xl">
               Transformamos la cultura de la seguridad y la respuesta ante <span className="text-[#F58220]">crisis</span>
             </h2>
             
@@ -114,7 +110,6 @@ export function AboutPreview() {
             </a>
           </div>
 
-          {/* BLOQUE DERECHO: Panel de Expediente Institucional */}
           <div className="self-end bg-slate-50 p-8 lg:p-10 border-t-8 border-[#004a99] shadow-xl lg:mt-16">
             <p className="text-[10px] font-black tracking-[0.2em] uppercase text-[#F58220] mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-[#F58220] inline-block"></span>
@@ -125,7 +120,6 @@ export function AboutPreview() {
               Prevención, atención y continuidad para operaciones que no pueden detenerse.
             </p>
             
-            {/* Los pilares ahora parecen especificaciones técnicas en una tabla */}
             <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:divide-x sm:divide-slate-200 border-t border-slate-200 pt-8">
               {pillars.map(({ icon: Icon, title, text }) => (
                 <div key={title} className="sm:px-4 first:sm:pl-0">
