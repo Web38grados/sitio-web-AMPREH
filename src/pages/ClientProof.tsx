@@ -14,7 +14,8 @@ export function ClientProof() {
 
   return (
     <section
-      className="relative border-b border-border bg-card py-12 pb-50 "
+      // Aquí eliminamos el "pb-50" que generaba el espacio en blanco kilométrico
+      className="relative border-b border-border bg-card py-12"
       aria-label="Clientes corporativos"
     >
  
@@ -37,9 +38,9 @@ export function ClientProof() {
           ))}
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-slate-900" />
+      
+      {/* Se eliminó el div del gradiente h-32 bg-gradient-to-b para que haga el corte limpio y profesional */}
       
     </section>
-    
   )
 }
