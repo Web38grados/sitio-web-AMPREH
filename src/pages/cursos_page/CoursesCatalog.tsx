@@ -365,9 +365,8 @@ export default function Page() {
             className="absolute inset-0 w-full h-full object-cover object-center"
             fetchPriority="high" 
           />
-          <div className="absolute inset-0 bg-black/30 z-10" />
-          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/5 via-30% to-transparent z-20" />
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-20" />
+          <div className="absolute inset-0 bg-black/40 z-10" />
+          {/* <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/5 via-5% to-transparent z-20" /> */}
         </div>
 
         <div className="relative z-30 w-full max-w-[1400px] mx-auto px-6 lg:px-8 py-10 lg:py-16 flex items-center lg:min-h-[600px]">
@@ -375,7 +374,7 @@ export default function Page() {
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 mt-2 lg:mt-0">
               <span className="text-[#F58220]">CAPACITACIÓN</span> <span className="text-[#004a99]">INDUSTRIAL</span>
             </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-[#004a99] leading-[1.05] tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black uppercase text-[#004a99] leading-[1.05] tracking-tight mb-6">
               Formación que prepara <br className="hidden sm:block"/>
               a tu equipo para actuar.
             </h1>

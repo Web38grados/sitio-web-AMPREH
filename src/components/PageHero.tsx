@@ -27,20 +27,34 @@ export function PageHero({
   bgImage 
 }: SplitHeroProps) {
   return (
-    <section className="relative w-full bg-[#004a99] flex flex-col lg:flex-row min-h-[60vh] pt-15 overflow-hidden font-['Plus_Jakarta_Sans'] border-b-[12px] border-[#F58220]">
+    <section className="relative w-full bg-[#004a99] flex flex-col lg:block min-h-[55vh] pt-16 lg:pt-20 overflow-hidden font-['Plus_Jakarta_Sans'] border-b-[8px] border-[#F58220]">
       
       {/* =========================================================
-          LADO IZQUIERDO: TEXTO (Azul Marino Oscuro)
+          IMAGEN Y GRADIENTE DE FUSIÓN (Lado Derecho/Fondo)
       ========================================================= */}
-      <div className="w-full lg:w-[55%] flex flex-col justify-center px-6 py-20 lg:pl-16 xl:pl-24 relative z-20 bg-[#004a99]">
-        <div className="max-w-2xl">
+      <div className="relative lg:absolute lg:top-0 lg:right-0 w-full lg:w-[60%] h-[350px] lg:h-full z-0 order-2 lg:order-none">
+        <img 
+          src={bgImage} 
+          alt="Fondo de sección" 
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* El gradiente que crea el difuminado suave idéntico a la página de Nosotros */}
+        <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#004a99] via-[#004a99]/20 lg:via-[#004a99]/30 via-40% to-transparent z-10"></div>
+      </div>
+
+      {/* =========================================================
+          CONTENEDOR DE TEXTOS (Lado Izquierdo)
+      ========================================================= */}
+      <div className="relative z-20 w-full max-w-[1400px] mx-auto flex items-center min-h-[100%] order-1 lg:order-none">
+        <div className="w-full lg:w-[55%] xl:w-[50%] flex flex-col justify-center px-6 py-16 lg:py-24 lg:pl-8 xl:pl-12">
           
           {/* Eyebrow con línea separadora */}
           <div className="flex items-center gap-4 mb-4">
-            <p className="text-[#F58220] text-xs font-black uppercase tracking-[0.2em]">
+            <p className="text-[#F58220] text-[11px] font-black uppercase tracking-[0.2em]">
               {eyebrow}
             </p>
-            <div className="h-[1px] w-12 bg-slate-700"></div>
+            <div className="h-[2px] w-8 bg-[#F58220]/50"></div>
           </div>
 
           {/* Título Principal */}
@@ -50,19 +64,19 @@ export function PageHero({
           </h1>
 
           {/* Descripción */}
-          <p className="text-slate-300 font-['IBM_Plex_Sans'] text-base md:text-lg leading-relaxed max-w-xl mb-12">
+          <p className="text-blue-50 font-['IBM_Plex_Sans'] text-sm md:text-base leading-relaxed max-w-lg mb-10">
             {description}
           </p>
 
           {/* Bloque de Características */}
           {features && (
-            <div className="flex flex-wrap items-center gap-6 lg:gap-10 border-t border-slate-800 pt-8">
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 lg:gap-10 border-t border-white/10 pt-8 mt-2">
               {features.map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 border border-[#F58220] rounded-full text-[#F58220]">
+                  <div className="flex items-center justify-center w-10 h-10 border border-[#F58220] rounded-full text-[#F58220] bg-white/5 backdrop-blur-sm shrink-0">
                     <feature.icon size={18} strokeWidth={2} />
                   </div>
-                  <span className="text-white text-xs font-bold uppercase tracking-wider leading-tight max-w-[120px]">
+                  <span className="text-white text-[10px] font-bold uppercase tracking-widest leading-tight max-w-[140px]">
                     {feature.text}
                   </span>
                 </div>
@@ -71,27 +85,6 @@ export function PageHero({
           )}
 
         </div>
-      </div>
-
-      {/* =========================================================
-          LADO DERECHO: IMAGEN 
-      ========================================================= */}
-      <div className="hidden lg:block w-full lg:w-[45%] relative min-h-[400px] lg:min-h-full lg:absolute lg:right-0 lg:top-0 lg:bottom-0 z-10">
-        
-        <div className="absolute inset-0 hidden lg:block bg-gradient-to-l from-transparent to-[#004a99]/20 z-20 [clip-path:polygon(15%_0,100%_0,100%_100%,0%_100%,15%_50%)]"></div>
-        
-        <div className="absolute inset-0 lg:[clip-path:polygon(0%_0,100%_0,100%_100%,0%_100%,15%_50%)]">
-          {/* Usamos un tag <img> real con fetchPriority="high" en lugar de backgroundImage */}
-          <img 
-            src={bgImage} 
-            alt="Fondo de sección" 
-            fetchPriority="high"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-        </div>
-
-        {/* <div className="hidden lg:block absolute top-0 left-[14.8%] w-[2px] h-[50%] bg-[#F58220] z-30 transform -rotate-[30deg] origin-bottom-left opacity-80"></div> */}
-
       </div>
       
     </section>

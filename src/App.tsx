@@ -11,6 +11,7 @@ import ContactSection from './pages/contact-section';
 import Inicio from './pages/Inicio';
 import CoursesCatalog from './pages/cursos_page/CoursesCatalog';
 import Nosotros from './pages/Nosotros/Nosotros';
+import ChatWidget from './pages/ChatWidget';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -47,6 +48,7 @@ export default function App() {
           <Route path={ROUTES.CURSOS} element= {<CoursesCatalog/>}/>
         </Route>
       </Routes>
+      <ChatWidget />
     </>
   );
 }

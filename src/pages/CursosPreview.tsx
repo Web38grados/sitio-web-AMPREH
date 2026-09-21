@@ -15,7 +15,7 @@ const courses = [
   { icon: ShieldCheck, code: 'OSHA 10', title: 'OSHA 10', detail: 'Seguridad industrial básica en el trabajo.', img: imgOsha },
   { icon: Droplet, code: 'STOP THE BLEED', title: 'STOP THE BLEED', detail: 'Control de hemorragias y primeros auxilios.', img: imgBleed },
   { icon: HeartPulse, code: 'ECSI', title: 'ECSI FIRST AID', detail: 'Primeros auxilios y atención médica básica.', img: imgEcsi },
-  { icon: AlertTriangle, code: 'ATPI 191', title: 'ATP 191', detail: 'Respuesta a emergencias y manejo de crisis.', img: imgAtpi },
+  // { icon: AlertTriangle, code: 'ATPI 191', title: 'ATP 191', detail: 'Respuesta a emergencias y manejo de crisis.', img: imgAtpi },
 ];
 
 const benefits = [
@@ -79,7 +79,7 @@ export function CursosPreview() {
             </div>
 
             {/* Controles del Carrusel */}
-            <div className="flex items-center gap-6 mb-12 lg:mb-0">
+            {/* <div className="flex items-center gap-6 mb-12 lg:mb-0">
               <div className="flex gap-2">
                 <button className="flex items-center justify-center w-10 h-10 border border-slate-200 text-[#004a99] hover:border-[#004a99] bg-white transition-colors">
                   <ChevronLeft size={20} strokeWidth={1.5} />
@@ -93,7 +93,7 @@ export function CursosPreview() {
                 <div className="w-4 h-1 bg-slate-200"></div>
                 <div className="w-4 h-1 bg-slate-200"></div>
               </div>
-            </div>
+            </div> */}
 
           </div>
         </Reveal>
@@ -101,33 +101,66 @@ export function CursosPreview() {
         {/* =========================================================
             CARTAS DE CURSOS (Diseño con foto a la derecha)
         ========================================================= */}
-        <Reveal delay={200}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 relative z-30 lg:-mt-10 mb-10">
+<Reveal delay={200}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-30 lg:-mt-12 mb-16">
             {courses.map((course) => (
-              <div key={course.code} className="relative bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-l-[3px] border-[#FF4F00] h-[240px] group overflow-hidden hover:shadow-[0_20px_40px_rgba(0,74,153,0.15)] transition-shadow duration-300">
+              <div 
+                key={course.code} 
+                className="group flex flex-col bg-white rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,74,153,0.12)] transition-all duration-500 hover:-translate-y-2 overflow-hidden h-full"
+              >
                 
-                {/* Lado Derecho: Imagen con corte diagonal */}
-                <div className="absolute top-0 right-0 w-[45%] h-full [clip-path:polygon(20%_0,100%_0,100%_100%,0_100%)] z-0">
-                  <img src={course.img} alt={course.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-[#004a99]/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                {/* =======================================
+                    MITAD SUPERIOR: IMAGEN
+                ======================================= */}
+                <div className="relative w-full h-[180px] overflow-hidden bg-[#040b16] shrink-0">
+                  <img 
+                    src={course.img} 
+                    alt={course.title} 
+                    loading="lazy" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100" 
+                  />
+                  {/* Overlay sutil para oscurecer un poco la foto y que no compita con el texto */}
+                  <div className="absolute inset-0 bg-[#004a99]/10 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500"></div>
                 </div>
 
-                {/* Lado Izquierdo: Contenido */}
-                <div className="relative z-10 w-[65%] h-full p-5 flex flex-col justify-between bg-white [clip-path:polygon(0_0,100%_0,85%_100%,0_100%)]">
-                  <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <course.icon size={16} className="text-[#FF4F00]" strokeWidth={2} />
-                      <span className="text-[9px] font-black text-[#004a99] tracking-widest uppercase">{course.code}</span>
-                    </div>
-                    <h5 className="font-black text-[#004a99] text-[16px] xl:text-[18px] uppercase leading-tight mb-2 pr-2">{course.title}</h5>
-                    <p className="text-[10px] text-slate-500 leading-relaxed pr-4">{course.detail}</p>
-                  </div>
+                {/* =======================================
+                    MITAD INFERIOR: CONTENIDO Y BADGE
+                ======================================= */}
+                <div className="flex flex-col flex-grow p-6 relative bg-[#004a99]">
                   
-                  <div>
-                    <Link to="/cursos" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-[#004a99] hover:text-[#FF4F00] transition-colors">
-                      VER CURSO <ArrowRight className="w-3 h-3 text-[#FF4F00] transform group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+                  {/* Badge flotante (Efecto 3D en la intersección) */}
+                  <div className="absolute -top-5 left-6 bg-[#ff7414] px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 transform group-hover:-translate-y-1 transition-transform duration-300 z-10">
+                    <course.icon size={14} className="text-white" strokeWidth={2.5} />
+                    <span className="text-[10px] font-black text-white tracking-[0.15em] uppercase">
+                      {course.code}
+                    </span>
+                  </div>
+
+                  {/* Textos (Con margen superior para hacerle espacio al badge) */}
+                  <h5 className="font-black text-white text-[16px] xl:text-[18px] uppercase leading-[1.2] mb-3 mt-4 group-hover:text-[#ff7414] transition-colors duration-300">
+                    {course.title}
+                  </h5>
+                  
+                  {/* Cambié text-white a text-blue-100 para que la descripción no compita tanto con el título */}
+                  <p className="text-[12px] text-blue-100 leading-relaxed mb-8 line-clamp-3">
+                    {course.detail}
+                  </p>
+                  
+                  {/* Footer de la tarjeta con línea separadora suave adaptada al fondo azul */}
+                  <div className="mt-auto pt-5 border-t border-white/20">
+                    <Link 
+                      to="/cursos" 
+                      className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.15em] text-white group-hover:text-[#ff7414] transition-colors w-full"
+                    >
+                      <span>Ver detalles del curso</span>
+                      
+                      {/* Círculo adaptado al fondo azul (blanco transparente) */}
+                      <div className="w-6 h-6 rounded-full bg-white/10 group-hover:bg-[#ff7414]/20 flex items-center justify-center transition-colors">
+                        <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
+                      </div>
                     </Link>
                   </div>
+                  
                 </div>
 
               </div>

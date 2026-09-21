@@ -36,7 +36,7 @@ export default function Nosotros() {
         {/* TEXTOS HERO */}
         <div className="relative z-30 w-full max-w-[1400px] mx-auto px-6 lg:px-8 order-1 lg:order-none mb-10 lg:mb-0 lg:min-h-[400px] flex items-center">
           <div className="w-full lg:w-[55%] xl:w-[50%]">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-blue-200 flex items-center gap-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-[#ff7414] flex items-center gap-4">
               SOBRE NOSOTROS
               <span className="block w-8 h-px bg-[#ff7414]" />
             </p>
@@ -78,7 +78,7 @@ export default function Nosotros() {
             </p>
             <h2 className="text-2xl lg:text-3xl font-black uppercase text-white leading-tight mb-4">
               Detrás de cada respuesta, hay un <br className="hidden lg:block"/>
-              <span className="text-[#ff7414]">equipo preparado.</span>
+              <span className="text-[#ff7414]">equipo preparado</span>
             </h2>
             <p className="text-blue-100 text-sm leading-relaxed">
               Nuestro equipo está conformado por profesionales comprometidos con la vida, la seguridad y el bienestar de las personas. Juntos, trabajamos para construir una cultura de prevención y respuesta ante emergencias.
