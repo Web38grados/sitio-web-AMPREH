@@ -1,17 +1,8 @@
 import { Award, Crosshair, ShieldAlert, ArrowRight } from 'lucide-react'
-<<<<<<< HEAD
-
-import indImg from '../assets/inicio/prevencion.png'
-import emergImg from '../assets/inicio/emergencia.png'
-import { useState, useEffect, useRef } from 'react'
-
-// const trustedCompanies = ['Microsoft México', 'Coca-Cola FEMSA', 'Bank of America', 'GE', 'Owens Corning']
-=======
 import indImg from '../assets/inicio/prevencion.png'
 import emergImg from '../assets/inicio/emergencia.png'
 import { Link } from 'react-router-dom'
 import { Reveal } from './Reveal'
->>>>>>> feature/chat
 
 const pillars = [
   { icon: Crosshair, title: 'EXCELENCIA OPERATIVA', text: 'Procesos medibles y consistentes en campo.' },

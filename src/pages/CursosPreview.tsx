@@ -14,7 +14,7 @@ import { Reveal } from '../components/Reveal';
 const courses = [
   { icon: ShieldCheck, code: 'OSHA 10', title: 'OSHA 10', detail: 'Seguridad industrial básica en el trabajo.', img: imgOsha },
   { icon: Droplet, code: 'STOP THE BLEED', title: 'STOP THE BLEED', detail: 'Control de hemorragias y primeros auxilios.', img: imgBleed },
-  { icon: HeartPulse, code: 'ECSI', title: 'ECSI FIRST AID', detail: 'Primeros auxilios y atención médica básica.', img: imgEcsi },
+  { icon: HeartPulse, code: 'ECSI', title: 'ECSI FIRST AID', detail: 'Primeros auxilios y atención médica básica.', img: imgEcsi }, 
   // { icon: AlertTriangle, code: 'ATPI 191', title: 'ATP 191', detail: 'Respuesta a emergencias y manejo de crisis.', img: imgAtpi },
 ];
 

@@ -1,17 +1,12 @@
 import { ArrowRight, PhoneCall } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-<<<<<<< HEAD
-// 🚨 Tu imagen real
-import heroImg from '../assets/inicio/hero.png'
-=======
 import heroImg from '../assets/inicio/hero.png'
 
 // IMPORTA TUS IMÁGENES REALES AQUÍ
 import oshaLogo from '../assets/inicio/OSHA_LOGO.png'
 import ecsiLogo from '../assets/inicio/ECSI_LOGO.png'
 import stbLogo from '../assets/inicio/STOPBLEED_LOGO.png'
->>>>>>> feature/chat
 
 const credentials = [
   { 
