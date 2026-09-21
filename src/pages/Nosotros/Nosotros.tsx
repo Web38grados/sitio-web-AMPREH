@@ -10,7 +10,6 @@ import img1 from '../../assets/nosotros/img1.png'
 import img2 from '../../assets/nosotros/img2.png'
 import img3 from '../../assets/nosotros/img3.png'
 
-
 export default function Nosotros() {
   return (
     <main className="w-full bg-white font-['Plus_Jakarta_Sans'] text-slate-900 pb-20">
@@ -280,15 +279,7 @@ export default function Nosotros() {
       {/* =========================================================
           7. CTA FINAL (Reutilizamos el componente)
       ========================================================= */}
-      <CtaSection
-        badge="ÚNETE AL EQUIPO"
-        titlePart1="Forma parte de un"
-        highlightText="equipo preparado"
-        description="La seguridad no es un accidente, es una decisión. Capacítate con AMPREH y marca la diferencia en tu organización."
-        imageUrl="/images/rescate-cta.jpg"
-        primaryButtonText="VER NUESTROS CURSOS"
-        secondaryButtonText="HABLAR CON UN ASESOR"
-      />
+
 
     </main>
   );

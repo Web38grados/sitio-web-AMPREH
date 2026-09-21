@@ -4,9 +4,17 @@ import React, { useMemo, useState } from 'react'
 import { ArrowRight, Award,  Clock3, FileText, Search, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft } from 'lucide-react'
 import imgHero from '../../assets/cursos/hero.png'
 import CtaSection from '../../components/CtaSection'
+import recordkeep from '../../assets/cursos/RecordkeepingRuleSeminar.png'
+import osha521 from '../../assets/cursos/OSHA-521-osha.international.jpg'
+import osha3015 from '../../assets/cursos/3015.jpg'
+import atp191update from '../../assets/cursos/UpdateforSafety.jpg'
+import csho1t from '../../assets/cursos/salud-2-construccion.jpg'
+import sindustrial from '../../assets/cursos/seguridad-industria.jpg'
+
 
 // =========================================================
 // DATOS
+
 // =========================================================
 type Course = { 
   id: string; 
@@ -19,6 +27,7 @@ type Course = {
   image: string;
   topics?: string[]; 
 }
+import img4 from '../../assets/nosotros/rescate-cta.png'
 const courses: Course[] = [
   // ==========================================
   // OSHA, CSHO, SSH Y NORMATIVA
@@ -28,42 +37,42 @@ const courses: Course[] = [
     title: 'Recordkeeping Rule Seminar', 
     category: 'OSHA y seguridad', 
     description: 'Seminario oficial sobre reglas de mantenimiento de registros e informes de incidentes.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'OSHA #7845', image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800' 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'OSHA #7845', image: recordkeep
   },
   { 
     id: 'osha-521', 
     title: 'OSHA Guide to Industrial Hygiene', 
     category: 'OSHA y seguridad', 
     description: 'Guía oficial de OSHA para prácticas de higiene industrial y evaluación de riesgos en el trabajo.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'OSHA #521', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800' 
+    hours: '16 horas', level: 'Nivel Avanzado', badge: 'OSHA #521', image: osha521
   },
   { 
     id: 'osha-3015', 
     title: 'Excavation, Trenching and Soil Mechanics', 
     category: 'OSHA y seguridad', 
     description: 'Normativa para trabajos de excavación, zanjas y análisis de mecánica de suelos.', 
-    hours: '24 horas', level: 'Nivel Avanzado', badge: 'OSHA #3015', image: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800' 
+    hours: '24 horas', level: 'Nivel Avanzado', badge: 'OSHA #3015', image: osha3015
   },
   { 
     id: 'atp-190', 
     title: 'Update for Safety and Health Authorized Trainers', 
     category: 'OSHA y seguridad', 
     description: 'Actualización oficial para entrenadores autorizados en seguridad y salud.', 
-    hours: '16 horas', level: 'Instructor', badge: 'ATP 190', image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800' 
+    hours: '16 horas', level: 'Instructor', badge: 'ATP 190', image: atp191update
   },
   { 
     id: 'csho-const', 
     title: 'Certified Safety & Health Official (Construction)', 
     category: 'OSHA y seguridad', 
     description: 'Certificación oficial de seguridad y salud enfocada en la industria de la construcción.', 
-    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800' 
+    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: csho1t 
   },
   { 
     id: 'csho-gen', 
     title: 'Certified Safety & Health Official (General Industry)', 
     category: 'OSHA y seguridad', 
     description: 'Certificación oficial de seguridad y salud para la industria general.', 
-    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?auto=format&fit=crop&q=80&w=800' 
+    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: sindustrial 
   },
   { 
     id: 'ssh-fire', 
@@ -279,19 +288,40 @@ const courses: Course[] = [
   },
 ]
 
-function CourseCard({ course, featured = false }: { course: Course; featured?: boolean }) {
-  // Define si el badge es naranja o azul oscuro
+function CourseCard({ course, featured }: { course: typeof courses[0], featured?: boolean }) {
   const isOrange = !course.badge.includes('OSHA');
 
   return (
-    <article className={`group relative cursor-pointer overflow-hidden rounded-[4px] border border-[#d9e2e8] bg-white/75 shadow-[0_7px_17px_rgba(25,52,69,.04)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(25,52,69,.1)] ${featured ? 'min-h-[405px] border-0 bg-[#071522] text-white' : ''}`}>
-      <div className={`relative h-[84px] bg-cover bg-center ${featured ? 'h-full min-h-[405px] bg-[position:43%_center]' : ''}`} style={{ backgroundImage: `url(${course.image})` }}>
-        <span className={`absolute left-2.5 top-2.5 rounded-[3px] px-2 py-1 text-[8px] font-bold text-white ${isOrange ? 'bg-[#ff7414]' : 'bg-[#0c3856]'}`}>
+    <article 
+      className={`group relative cursor-pointer overflow-hidden rounded-[4px] border border-[#d9e2e8] bg-white/75 shadow-[0_7px_17px_rgba(25,52,69,.04)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(25,52,69,.1)] ${
+        featured ? 'min-h-[405px] border-0 bg-[#071522] text-white' : ''
+      }`}
+    >
+      {/* Contenedor de la Imagen */}
+      <div 
+        className={`relative h-[84px] bg-cover bg-center ${
+          featured ? 'h-full min-h-[405px] bg-[position:43%_center]' : ''
+        }`} 
+        style={{ backgroundImage: `url(${course.image})` }}
+      >
+        {/* Badge (Etiqueta superior izquierda) */}
+        <span 
+          className={`absolute left-2.5 top-2.5 z-20 rounded-[3px] px-2 py-1 text-[8px] font-bold text-white ${
+            isOrange ? 'bg-[#ff7414]' : 'bg-[#0c3856]'
+          }`}
+        >
           {course.badge}
         </span>
-        {featured && <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-[#05121d]/95" />}
+        
+        {/* ======================================================
+            GRADIENTE PARA LA TARJETA DESTACADA (Más oscuro abajo)
+        ====================================================== */}
+        {featured && (
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#05121d] via-[#05121d]/80 to-transparent" />
+        )}
       </div>
       
+      {/* Contenido Tarjeta Normal */}
       {!featured && (
         <div className="p-[11px_10px_10px]">
           <p className="text-[9px] tracking-[.2px] text-[#60778a]">{course.category}</p>
@@ -305,17 +335,20 @@ function CourseCard({ course, featured = false }: { course: Course; featured?: b
         </div>
       )}
       
+      {/* Contenido Tarjeta Destacada (Flotando sobre el gradiente oscuro) */}
       {featured && (
-        <div className="absolute bottom-[22px] left-[23px] right-[23px]">
+        <div className="absolute bottom-[22px] left-[23px] right-[23px] z-20">
           <p className="text-[9px] text-[#eaf0f3]">{course.category}</p>
           <h2 className="my-[9px] max-w-[250px] text-[23px] font-bold leading-[.98] text-white">{course.title}</h2>
-          <p className="mb-4 max-w-[290px] text-[10px] leading-[1.4] text-[#e0e8eb]">{course.description}</p>
+          <p className="mb-4 max-w-[290px] text-[10px] leading-[1.4] text-[#e0e8eb] line-clamp-2">{course.description}</p>
           <div className="flex gap-3 border-t border-white/20 py-3 text-[8px] text-[#e6ebed]">
             <span className="flex items-center gap-1"><Clock3 size={14} className="text-[#ff7414]" />{course.hours}</span>
             <span className="flex items-center gap-1"><BookOpen size={14} className="text-[#ff7414]" />{course.level.replace('Nivel ', '')}</span>
             <span className="flex items-center gap-1"><Award size={14} className="text-[#ff7414]" />Certificación incluida</span>
           </div>
-          <button className="flex items-center gap-3 rounded-[4px] border-0 bg-[#ff7414] px-3.5 py-[9px] text-[9px] font-bold text-white">VER DETALLES <ArrowRight size={15} /></button>
+          <button className="flex items-center gap-3 rounded-[4px] border-0 bg-[#ff7414] hover:bg-[#e66a0c] transition-colors px-3.5 py-[9px] text-[9px] font-bold text-white">
+            VER DETALLES <ArrowRight size={15} />
+          </button>
         </div>
       )}
     </article>
@@ -376,7 +409,7 @@ export default function Page() {
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black uppercase text-[#004a99] leading-[1.05] tracking-tight mb-6">
               Formación que prepara <br className="hidden sm:block"/>
-              a tu equipo para actuar.
+              a tu equipo para actuar
             </h1>
             <p className="text-slate-600 font-['IBM_Plex_Sans'] text-sm lg:text-base leading-relaxed mb-8 lg:mb-10 max-w-lg">
               Cursos especializados en seguridad industrial, protección civil y atención prehospitalaria, diseñados para fortalecer la prevención, reducir riesgos y salvar vidas en el entorno laboral.
@@ -588,7 +621,15 @@ export default function Page() {
         </div>
       </section>
 
-     <CtaSection/>
+      <CtaSection
+        badge="ÚNETE AL EQUIPO"
+        titlePart1="Forma parte de un"
+        highlightText="equipo preparado"
+        description="La seguridad no es un accidente, es una decisión. Capacítate con AMPREH y marca la diferencia en tu organización."
+        imageUrl={img4}
+        primaryButtonText="VER NUESTROS CURSOS"
+        secondaryButtonText="HABLAR CON UN ASESOR"
+      />
       
     </main>
   )
