@@ -5,12 +5,12 @@ import { ROUTES } from './constants/routes';
 
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
-import AboutSection from './components/AboutSection';
-import ServicesSection from './components/ServicesSection';
-import ContactSection from './components/contact-section';
+import ServicesSection from './pages/servicios_page/ServicesSection';
+import ContactSection from './pages/contact-section';
 
 import Inicio from './pages/Inicio';
 import CoursesCatalog from './pages/cursos_page/CoursesCatalog';
+import Nosotros from './pages/Nosotros/Nosotros';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -40,7 +40,7 @@ export default function App() {
       <Routes>
         <Route element={<LayoutPrincipal />}>
           <Route path={ROUTES.INICIO} element={<Inicio />} />
-          <Route path={ROUTES.NOSOTROS} element={<AboutSection />} />
+          <Route path={ROUTES.NOSOTROS} element={<Nosotros />} />
           <Route path={ROUTES.SERVICIOS} element={<ServicesSection />} />
           <Route path={ROUTES.CONTACTO} element={<ContactSection />} />
           <Route path={ROUTES.CONTACTO} element={<ContactSection />} />

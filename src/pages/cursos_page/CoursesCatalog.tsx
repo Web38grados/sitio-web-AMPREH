@@ -280,7 +280,7 @@ const courses: Course[] = [
 ]
 
 function CourseCard({ course, featured = false }: { course: Course; featured?: boolean }) {
-  // Define si el badge es naranja o azul oscuro (estilo v0.dev)
+  // Define si el badge es naranja o azul oscuro
   const isOrange = !course.badge.includes('OSHA');
 
   return (
@@ -322,24 +322,20 @@ function CourseCard({ course, featured = false }: { course: Course; featured?: b
   )
 }
 
-
-
-
 const categories = ['Todos', 'OSHA y seguridad', 'Seguridad industrial', 'Emergencias', 'Rescate y alturas', 'Médico']
-export default function Page() {
 
+export default function Page() {
   
-// 1. Estados básicos
+  // 1. Estados básicos
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [searchQuery, setSearchQuery] = useState('');
   
   // 2. Estado para el curso seleccionado (Tarjeta Gigante)
-  // Iniciamos con el primer curso de tu lista
   const [selected, setSelected] = useState<typeof courses[0]>(courses[0]); 
   
   // 3. Estados para la Paginación
   const [page, setPage] = useState(1);
-  const pageSize = 6; // Máximo 6 tarjetas en la grilla derecha
+  const pageSize = 6;
 
   // 4. Lógica de Filtrado (por categoría y texto)
   const filteredCourses = useMemo(() => {
@@ -354,51 +350,38 @@ export default function Page() {
   const pageCount = Math.max(1, Math.ceil(filteredCourses.length / pageSize));
   const visibleCourses = filteredCourses.slice((page - 1) * pageSize, page * pageSize);
 
-  
-
   return (
-    <main className="w-full bg-white font-['Plus_Jakarta_Sans'] text-slate-900 pb-20">
+    // ¡FIX VITAL! El overflow-x-hidden en el main previene absolutamente cualquier scroll horizontal
+    <main className="w-full bg-white font-['Plus_Jakarta_Sans'] text-slate-900 pb-20 overflow-x-hidden">
       
-{/* =========================================================
-          1. HERO SECTION (Apilado en Móvil, Lado a Lado en Desktop)
+      {/* =========================================================
+          1. HERO SECTION 
       ========================================================= */}
       <section className="relative w-full bg-white flex flex-col lg:block mt-20">
-        
-        {/* FONDO DE IMAGEN */}
-{/* FONDO DE IMAGEN (Optimizado para evitar el lag) */}
         <div className="relative lg:absolute lg:top-0 lg:right-0 w-full lg:w-[58%] h-[300px] sm:h-[400px] lg:h-full z-0 shrink-0">
-<img 
+          <img 
             src={imgHero} 
             alt="Capacitación Industrial" 
             className="absolute inset-0 w-full h-full object-cover object-center"
             fetchPriority="high" 
           />
           <div className="absolute inset-0 bg-black/30 z-10" />
-          
-          {/* Gradientes SOLO visibles en Desktop */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/5 via-30% to-transparent z-20" />
           <div className="hidden lg:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-20" />
         </div>
 
-        {/* CONTENEDOR DE TEXTOS */}
         <div className="relative z-30 w-full max-w-[1400px] mx-auto px-6 lg:px-8 py-10 lg:py-16 flex items-center lg:min-h-[600px]">
           <div className="w-full lg:w-[50%] xl:w-[45%]">
-            
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 mt-2 lg:mt-0">
               <span className="text-[#F58220]">CAPACITACIÓN</span> <span className="text-[#004a99]">INDUSTRIAL</span>
             </p>
-            
-            {/* TÍTULO ACTUALIZADO CON FONT-BLACK, UPPERCASE Y COLOR AZUL */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-[#004a99] leading-[1.05] tracking-tight mb-6">
               Formación que prepara <br className="hidden sm:block"/>
               a tu equipo para actuar.
             </h1>
-            
             <p className="text-slate-600 font-['IBM_Plex_Sans'] text-sm lg:text-base leading-relaxed mb-8 lg:mb-10 max-w-lg">
               Cursos especializados en seguridad industrial, protección civil y atención prehospitalaria, diseñados para fortalecer la prevención, reducir riesgos y salvar vidas en el entorno laboral.
             </p>
-            
-            {/* Botones */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10 lg:mb-12">
               <button className="bg-[#F58220] hover:bg-[#e67515] text-white px-6 py-4 lg:py-3.5 rounded text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#F58220]/20">
                 VER NUESTROS CURSOS <ArrowRight size={16} />
@@ -408,7 +391,6 @@ export default function Page() {
               </button>
             </div>
             
-            {/* Mini Estadísticas */}
             <div className="grid grid-cols-2 lg:flex lg:flex-wrap items-start lg:items-center gap-6 lg:gap-12">
               <div>
                 <p className="font-bold text-[#004a99] text-lg flex items-center gap-2">
@@ -429,7 +411,6 @@ export default function Page() {
                 <p className="text-[11px] text-slate-500 mt-1">satisfacción de clientes</p>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -457,12 +438,12 @@ export default function Page() {
       </div>
 
        {/* =========================================================
-          3. CATÁLOGO MASTER-DETAIL (Header v0.dev + Paginación)
+          3. CATÁLOGO MASTER-DETAIL
       ========================================================= */}
       <section className="max-w-[1400px] mx-auto px-6 lg:px-8 py-20" id="cursos">
         
-        {/* Cabecera del Catálogo y Buscador (Estilo Exacto v0.dev) */}
-        <header className="mb-10 grid grid-cols-[370px_1fr] items-end gap-6 max-[900px]:grid-cols-1 max-[900px]:gap-[22px]">
+        {/* ¡FIX 1! Cambiamos 1fr a minmax(0,1fr) para que el lado derecho no desborde la pantalla */}
+        <header className="mb-10 grid grid-cols-1 lg:grid-cols-[370px_minmax(0,1fr)] items-end gap-6 max-[900px]:grid-cols-1 max-[900px]:gap-[22px]">
           <div>
             <p className="text-[10px] font-bold tracking-[4px] text-[#ff7414]">
               <span className="mr-2.5 inline-block h-[11px] w-[3px] translate-y-0.5 bg-[#ff7414]" />
@@ -477,8 +458,10 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="flex items-center justify-between gap-[18px] max-[900px]:flex-col-reverse max-[900px]:items-stretch">
-            <nav className="flex flex-1 items-center gap-[3px] overflow-x-auto border-b border-[#dce3e5]">
+          {/* ¡FIX 2! min-w-0 aquí es OBLIGATORIO para que el Flex no rompa el Grid */}
+          <div className="flex items-center justify-between gap-[18px] max-[900px]:flex-col-reverse max-[900px]:items-stretch min-w-0">
+            {/* ¡FIX 3! min-w-0 a la etiqueta <nav> para permitir el scroll horizontal seguro */}
+            <nav className="flex flex-1 items-center gap-[3px] overflow-x-auto border-b border-[#dce3e5] min-w-0 pb-1">
               {categories.map((category) => (
                 <button 
                   key={category} 
@@ -489,20 +472,20 @@ export default function Page() {
                   }`} 
                   onClick={() => { 
                     setActiveCategory(category); 
-                    setPage(1); // Reinicia la página al filtrar
+                    setPage(1);
                   }}
                 >
                   {category}
                 </button>
               ))}
             </nav>
-            <label className="flex h-[36px] w-[242px] items-center gap-2 rounded-[6px] border border-[#d6e0e5] bg-[#fafbfb] px-[11px] text-[#5d778d] max-[900px]:w-full focus-within:border-[#ff7414] transition-colors">
+            <label className="flex h-[36px] w-[242px] items-center gap-2 rounded-[6px] border border-[#d6e0e5] bg-[#fafbfb] px-[11px] text-[#5d778d] max-[900px]:w-full focus-within:border-[#ff7414] transition-colors shrink-0">
               <Search size={15} />
               <input 
                 value={searchQuery} 
                 onChange={(event) => {
                   setSearchQuery(event.target.value);
-                  setPage(1); // Reinicia la página al buscar
+                  setPage(1); 
                 }} 
                 placeholder="Buscar por nombre o palabra..." 
                 aria-label="Buscar cursos" 
@@ -512,10 +495,9 @@ export default function Page() {
           </div>
         </header>
 
-        {/* Estructura Master-Detail */}
-        <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] xl:grid-cols-[500px_1fr] gap-[23px]">
+        {/* ¡FIX 4! Nuevamente, minmax(0,1fr) evita que las tarjetas rompan su contenedor */}
+        <div className="grid grid-cols-1 lg:grid-cols-[400px_minmax(0,1fr)] xl:grid-cols-[500px_minmax(0,1fr)] gap-[23px] items-start">
           
-          {/* LADO IZQUIERDO (Destacado) - Forzamos altura extra para igualar 2 filas */}
           <div 
             className="min-w-0 rounded-[4px] outline-none focus-visible:shadow-[0_0_0_3px_rgba(255,126,24,.45)] cursor-pointer h-full min-h-[580px] [&>article]:h-full" 
             role="button" 
@@ -525,7 +507,6 @@ export default function Page() {
             <CourseCard course={selected} featured={true} />
           </div>
 
-          {/* LADO DERECHO (Grilla 3 columnas de v0.dev) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-[18px]">
             {visibleCourses.map((course) => (
               <div key={course.id} onClick={() => setSelected(course)}>
@@ -536,7 +517,6 @@ export default function Page() {
 
         </div>
 
-        {/* Paginación */}
         {pageCount > 1 && (
           <nav aria-label="Paginación de cursos" className="mt-8 flex items-center justify-end gap-2">
             <button 
@@ -590,7 +570,8 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* ¡FIX 5! En 1200px (lg), 4 columnas se veían muy apretadas. Ahora es lg:grid-cols-2 y xl:grid-cols-4 para que respire */}
+          <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
             {[
               { icon: ShieldCheck, title: 'Prevención de riesgos', desc: 'Identifica, evalúa y controla los riesgos antes de que se conviertan en incidentes.' },
               { icon: Stethoscope, title: 'Respuesta ante emergencias', desc: 'Entrenamiento práctico para actuar con rapidez y seguridad en situaciones críticas.' },
@@ -610,7 +591,6 @@ export default function Page() {
 
      <CtaSection/>
       
-
     </main>
   )
 }

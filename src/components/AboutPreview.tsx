@@ -1,8 +1,8 @@
 import { Award, Crosshair, ShieldAlert, ArrowRight } from 'lucide-react'
 import indImg from '../assets/inicio/prevencion.png'
 import emergImg from '../assets/inicio/emergencia.png'
-import { useEffect, useRef } from 'react' // Adiós useState
 import { Link } from 'react-router-dom'
+import { Reveal } from './Reveal'
 
 const pillars = [
   { icon: Crosshair, title: 'EXCELENCIA OPERATIVA', text: 'Procesos medibles y consistentes en campo.' },
@@ -11,80 +11,59 @@ const pillars = [
 ]
 
 export function AboutPreview() {
-    const containerRef = useRef<HTMLDivElement>(null)
-    
-    useEffect(() => {
-        const observador = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        // Manipulamos el DOM directo. Cero re-renders de React = Cero tirones.
-                        requestAnimationFrame(() => {
-                            entry.target.classList.remove('opacity-0', 'translate-y-12');
-                            entry.target.classList.add('opacity-100', 'translate-y-0');
-                        });
-                        observador.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.15, rootMargin: '50px' }
-        )
-        
-        // Buscamos las tarjetas y las observamos una por una
-        const cards = containerRef.current?.querySelectorAll('.scroll-card');
-        cards?.forEach((card) => observador.observe(card));
-        
-        return () => observador.disconnect();
-    }, [])
+  // ¡Mira qué limpio! Cero useEffect, cero useRef, cero IntersectionObserver aquí.
+  // Toda la magia pesada la hace el componente <Reveal> por detrás.
 
   return (
     <section id="nosotros" className="relative bg-white text-slate-900 pb-20">
-      
-        <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 -mt-10 lg:-mt-10" ref={containerRef}>
+        
+        <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8 -mt-10 lg:-mt-10">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           
-          {/* TARJETA 1: Agregamos la clase identificadora 'scroll-card' y dejamos el estado inicial fijo */}
-          <div className="scroll-card group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition duration-1000 ease-out transform-gpu will-change-[transform,opacity] translate-y-12 opacity-0">
-            <div className="absolute inset-0 z-0">
-              {/* Le agregamos fetchPriority para decirle al navegador que esta imagen es importante */}
-              <img src={indImg} alt="Capacitación Industrial" decoding="async" fetchPriority="high" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 transform-gpu" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
-            </div>
-            <div className="relative z-10 flex h-full flex-col justify-end p-8">
-              <h3 className="text-2xl font-black uppercase text-white">Capacitación y<br/>Normatividad</h3>
-              <p className="mt-3 text-sm font-medium text-slate-300">
-                Programas autorizados por UTA OSHA y STPS para blindar a tu personal
-              </p>
-              <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
-                <Link to="/programas" className="group flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220] transition-colors hover:text-[#e67515]">
-                  VER PROGRAMAS <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-2" />
-                </Link>
+          {/* TARJETA 1 */}
+          <Reveal>
+            <div className="group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl">
+              <div className="absolute inset-0 z-0">
+                {/* Cambiamos fetchPriority a loading="lazy" porque esta sección no está hasta arriba de la página, esto mejora el lag inicial */}
+                <img src={indImg} alt="Capacitación Industrial" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
+              </div>
+              <div className="relative z-10 flex h-full flex-col justify-end p-8">
+                <h3 className="text-2xl font-black uppercase text-white">Capacitación y<br/>Normatividad</h3>
+                <p className="mt-3 text-sm font-medium text-slate-300">Programas autorizados por UTA OSHA y STPS para blindar a tu personal</p>
+                <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
+                  <Link to="/programas" className="group flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220] transition-colors hover:text-[#e67515]">
+                    VER PROGRAMAS <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-2" />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          {/* TARJETA 2: Misma lógica, conservamos el delay-150 */}
-          <div className="scroll-card group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl transition duration-1000 delay-150 ease-out transform-gpu will-change-[transform,opacity] translate-y-12 opacity-0">
-            <div className="absolute inset-0 z-0">
-              <img src={emergImg} alt="Atención Prehospitalaria" decoding="async" fetchPriority="high" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 transform-gpu" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
-            </div>
-            <div className="relative z-10 flex h-full flex-col justify-end p-8">
-              <h3 className="text-2xl font-black uppercase text-white">Atención<br/>Prehospitalaria</h3>
-              <p className="mt-3 text-sm font-medium text-slate-300">
-                Cobertura especializada con paramédicos y unidades en sitio para tu planta.
-              </p>
-              <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
-                Ver servicios <ArrowRight className="ml-2 h-4 w-4" />
+          {/* TARJETA 2 */}
+          <Reveal delay={200}>
+            <div className="group relative h-80 w-full overflow-hidden bg-slate-900 shadow-2xl">
+              <div className="absolute inset-0 z-0">
+                <img src={emergImg} alt="Atención Prehospitalaria" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
               </div>
-            </div>
-           </div>
+              <div className="relative z-10 flex h-full flex-col justify-end p-8">
+                <h3 className="text-2xl font-black uppercase text-white">Atención<br/>Prehospitalaria</h3>
+                <p className="mt-3 text-sm font-medium text-slate-300">Cobertura especializada con paramédicos y unidades en sitio para tu planta.</p>
+                <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
+                  <span className="group flex items-center cursor-pointer transition-colors hover:text-[#e67515]">
+                    Ver servicios <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-2" />
+                  </span>
+                </div>
+              </div>
+             </div>
+          </Reveal>
 
           </div>
          </div>
 
       {/* =========================================================
-          CONTENIDO INFERIOR (Intacto)
+          CONTENIDO INFERIOR
       ========================================================= */}
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">

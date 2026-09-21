@@ -124,7 +124,7 @@ export function CertificationsShowcase() {
               
               {/* ARREGLO DEL TÍTULO: break-words e hyphens-auto evitan que se salga */}
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-black uppercase leading-[0.9] tracking-tighter mb-8 break-words hyphens-auto">
-                Avales &<br/>
+                Nuestras<br/>
                 <span className="text-[#F58220]">Certificaciones</span>
               </h2>
               
@@ -192,7 +192,7 @@ export function CertificationsShowcase() {
           {/* Ajustado el padding y posición del certificado */}
           <div className="relative w-full max-w-[340px] sm:max-w-[400px] sm:left-30 sm:bottom-23 md:left-50 lg:left-5 lg:top-20  md:max-w-[500px] md: lg:max-w-[640px] mr-auto flex-grow flex items-center justify-center lg:justify-start p-6 sm:p-8 lg:p-12 lg:pl-10  z-10 pb-48 lg:pb-40">
               <div 
-                  className={`w-full max-w-xl bg-white p-2 shadow-2xl rotate-[-1deg] smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}
+                  className={`w-full max-w-xl bg-white p-2 shadow-2xl smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}
               >
                    <img 
                       src={item.image} 
@@ -219,10 +219,10 @@ export function CertificationsShowcase() {
                     </p>
                 </div>
                 
-                <button className="shrink-0 self-start sm:self-auto flex items-center justify-center gap-2 bg-[#004a99] px-4 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#004a99]/50">
+                {/* <button className="shrink-0 self-start sm:self-auto flex items-center justify-center gap-2 bg-[#004a99] px-4 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#004a99]/50">
                     <Download className="h-4 w-4" /> 
                     Obtener PDF
-                </button>
+                </button> */}
             </div>
         </div>
 

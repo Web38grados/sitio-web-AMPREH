@@ -49,7 +49,7 @@ export default function SiteHeader() {
           <div className="mx-auto flex max-w-7xl items-center justify-center md:justify-between">
             
             {/* Esto se oculta en celular para no amontonar, se ve en tablet/PC */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* <div className="hidden md:flex items-center gap-8">
               <a href="mailto:edgar_diazcovarrubias@ampreh.com.mx" className="flex items-center gap-2.5 transition-colors hover:text-[#F58220]">
                 <Mail className="size-3.5" />
                 edgar_diazcovarrubias@ampreh.com.mx
@@ -58,13 +58,13 @@ export default function SiteHeader() {
                 <MapPin className="size-3.5" />
                 Cobertura Nacional
               </span>
-            </div>
+            </div> */}
 
             {/* El teléfono SIEMPRE se ve. En celular queda centrado, en PC queda a la derecha */}
-            <a href="tel:+14692158327" className="flex items-center gap-2.5 text-[#F58220] transition-colors hover:text-white">
+            {/* <a href="tel:+14692158327" className="flex items-center gap-2.5 text-[#F58220] transition-colors hover:text-white">
               <Phone className="size-3.5" />
               Línea Directa: +1 469 215 8327
-            </a>
+            </a> */}
           </div>
         </div>
 

@@ -1,9 +1,9 @@
 
 import { HeroSection } from '../components/hero-section';
-import { ClientProof } from '../components/ClientProof';
-import { ImpactSection } from '../components/ImpactSection';
+import { ClientProof } from './ClientProof';
+import { ImpactSection } from './ImpactSection';
 import AboutPreview from '../components/AboutPreview';
-import { CertificationsShowcase } from '../components/CertificationsShowcase'
+import { CertificationsShowcase } from './CertificationsShowcase'
 // import { ScrollytellingCertifications } from '../components/ScrollytellingCertifications';
 // import { CTADefinitivo } from '../components/CTADefinitivo';
 // import { PilaresValor } from '../components/PilaresValor';
@@ -31,7 +31,7 @@ export default function Inicio() {
           primaryButtonText="SOLICITAR COTIZACIÓN"
           secondaryButtonText="WHATSAPP DIRECTO"
           secondaryButtonClassName="bg-[#25D366] border border-[#25D366] hover:bg-[#128C7E] hover:border-[#128C7E] text-white px-8 py-3.5 rounded text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-lg"
-          onSecondaryClick={() => window.open('https://wa.me/5214692158327', '_blank')}
+          onSecondaryClick={() => window.open('https://wa.me/14692158327', '_blank')}
           features={[
             { 
               icon: ShieldCheck, 

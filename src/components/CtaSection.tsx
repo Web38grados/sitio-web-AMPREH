@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowRight, Award, BookOpen, ShieldCheck, LucideIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 // 1. Definimos las propiedades (props) para que sea 100% reutilizable
 export interface Feature {
@@ -16,8 +17,9 @@ export interface CtaSectionProps {
   description?: string;
   imageUrl?: string;
   primaryButtonText?: string;
+  primaryButtonLink?: string; // Nueva prop para controlar hacia dónde va el botón
   secondaryButtonText?: string;
-  secondaryButtonClassName?: string; // Para inyectar colores custom (como el verde de WhatsApp)
+  secondaryButtonClassName?: string;
   features?: Feature[];
   onPrimaryClick?: () => void;
   onSecondaryClick?: () => void;
@@ -28,8 +30,9 @@ export default function CtaSection({
   titlePart1 = "Prepara a tu equipo antes de que ocurra",
   highlightText = "una emergencia",
   description = "Capacitación práctica para responder con seguridad, criterio y preparación. Porque la mejor respuesta empieza con una buena formación.",
-  imageUrl = "/images/rescate-cta.jpg", // Tu imagen por defecto
-  primaryButtonText = "VER CAPACITACIONES",
+  imageUrl = "/images/rescate-cta.jpg",
+  primaryButtonText = "SOLICITAR COTIZACIÓN",
+  primaryButtonLink = "/contacto", // Por defecto lleva a contacto
   secondaryButtonText = "HABLAR CON UN ASESOR",
   secondaryButtonClassName = "bg-transparent border border-white/30 hover:border-white hover:bg-white/5 text-white px-8 py-3.5 rounded text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-3",
   features = [
@@ -41,7 +44,7 @@ export default function CtaSection({
   onSecondaryClick
 }: CtaSectionProps) {
   return (
-    <section className="relative w-full bg-[#04111d] flex flex-col lg:block mt-10">
+    <section className="relative w-full bg-[#04111d] flex flex-col lg:block">
       
       {/* =======================================
           FONDO DE IMAGEN
@@ -56,7 +59,7 @@ export default function CtaSection({
         <div className="absolute inset-0 bg-black/40 mix-blend-multiply z-10" />
         
         {/* Gradientes para fusionar la foto con el fondo azul oscuro (Solo Desktop) */}
-        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#04111d] via-[#04111d]/60 via-30% to-transparent z-20" />
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#04111d]/80 via-[#04111d]/30 via-20% to-transparent z-20" />
         <div className="hidden lg:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-[#04111d] to-transparent z-20" />
       </div>
 
@@ -73,7 +76,7 @@ export default function CtaSection({
           </p>
           
           {/* Título Principal */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-[1.1] tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl text-white lg:text-5xl font-black uppercase leading-[1.1] tracking-tight mb-6">
             {titlePart1} <br className="hidden sm:block"/>
             <span className="text-[#3b82f6]">{highlightText}</span>
           </h2>
@@ -101,12 +104,15 @@ export default function CtaSection({
 
           {/* Botones dinámicos */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button 
+            {/* AQUÍ ESTÁ EL CAMBIO: Ahora es un Link real a /contacto */}
+            <Link 
+              to={primaryButtonLink}
               onClick={onPrimaryClick}
               className="bg-[#ff7414] hover:bg-[#e66a0c] text-white px-8 py-3.5 rounded text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-3 shadow-lg shadow-[#ff7414]/20"
             >
               {primaryButtonText} <ArrowRight size={14} />
-            </button>
+            </Link>
+            
             <button 
               onClick={onSecondaryClick}
               className={secondaryButtonClassName}
