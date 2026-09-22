@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import { Ambulance, ArrowRight, Flame, GraduationCap, Plus, Shield, ShieldCheck, Users, LucideIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Ambulance, ArrowRight, Flame, GraduationCap, Plus, Shield, ShieldCheck, Users} from 'lucide-react'
 import service1 from '../../assets//servicios/service1.jpg'
 import service2 from '../../assets//servicios/service2.png'
 import service3 from '../../assets//servicios/service3.png'
@@ -11,7 +11,6 @@ import { PageHero } from '../../components/PageHero'
 // =========================================================
 // DATOS Y CONFIGURACIÓN
 // =========================================================
-const heroImage = 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?auto=format&fit=crop&q=80&w=1200'
 
 const services = [
   {
@@ -52,30 +51,14 @@ const services = [
   },
 ]
 
-// =========================================================
-// COMPONENTE: PAGE HERO (Reutilizable y Split Layout)
-// =========================================================
-interface Feature {
-  icon: LucideIcon;
-  text: string;
-}
 
-interface SplitHeroProps {
-  breadcrumbs: string;
-  eyebrow: string;
-  titleWhite: string;
-  titleOrange: string;
-  description: string;
-  features?: Feature[];
-  bgImage: string;
-}
 
 
 
 // =========================================================
 // SUB-COMPONENTE: Fila de Servicio (Animación Desenfunde)
 // =========================================================
-function ServiceRow({ service, index }: { service: any, index: number }) {
+function ServiceRow({ service}: { service: any, index: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const isLeft = service.side === 'left';

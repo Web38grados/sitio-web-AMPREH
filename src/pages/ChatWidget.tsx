@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { X, Send, Paperclip, GraduationCap, Shield, UserCircle, MessageCircle, Bot } from 'lucide-react'
 
 // Reemplaza estas rutas con las imágenes reales de tu proyecto
