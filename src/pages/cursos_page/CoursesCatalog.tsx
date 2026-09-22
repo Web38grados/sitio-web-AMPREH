@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ArrowRight, Award,  Clock3, FileText, Search, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft } from 'lucide-react'
 import imgHero from '../../assets/cursos/hero.png'
 import CtaSection from '../../components/CtaSection'

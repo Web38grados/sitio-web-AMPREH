@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { LucideIcon } from 'lucide-react'
 
 // Interfaz para que puedas pasarle diferentes íconos y textos según la página
@@ -19,8 +19,8 @@ interface SplitHeroProps {
 
 export function PageHero({ 
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  breadcrumbs, 
+
+
   eyebrow, 
   titleWhite, 
   titleOrange, 
