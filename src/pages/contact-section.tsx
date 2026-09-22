@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Map } from 'lucide-react';
+import { Mail, Map } from 'lucide-react';
 
 export default function ContactSection() {
   return (

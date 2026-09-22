@@ -1,11 +1,11 @@
 import { 
   Calendar, Users, Target, Eye, ShieldCheck, 
-  UserCheck, Wrench, Mail, 
-  Globe,
+  UserCheck, Wrench, 
+  
   UsersRound,
   HardHat
 } from 'lucide-react';
-import CtaSection from '../../components/CtaSection';
+// import CtaSection from '../../components/CtaSection';
 import img1 from '../../assets/nosotros/img1.png'
 import img2 from '../../assets/nosotros/img2.png'
 import img3 from '../../assets/nosotros/img3.png'

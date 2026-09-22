@@ -144,7 +144,7 @@ export function HeroSection() {
                 </p>
                 
                 {/* Link Inferior */}
-                <Link to={item.to} className="flex items-center gap-2 group mt-auto">
+                <Link to={item.to!} className="flex items-center gap-2 group mt-auto">
                   <div className="w-4 h-[2px] bg-[#ff7414] transition-all group-hover:w-6"></div>
                   <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-400 group-hover:text-white transition-colors">
                     {item.linkText}

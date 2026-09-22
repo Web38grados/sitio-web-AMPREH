@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronLeft, ChevronRight, ShieldCheck, ShieldAlert, Users, Droplet, HeartPulse, AlertTriangle } from 'lucide-react';
+import { ArrowRight, ShieldCheck, ShieldAlert, Users, Droplet, HeartPulse } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // IMAGEN PRINCIPAL DE FONDO
@@ -8,7 +8,7 @@ import bgBombero from '../assets/cursebg1.png';
 import imgOsha from '../assets/cursos/hero.png';
 import imgBleed from '../assets/cursos/hero.png';
 import imgEcsi from '../assets/cursos/hero.png';
-import imgAtpi from '../assets/cursos/hero.png';
+// import imgAtpi from '../assets/cursos/hero.png';
 import { Reveal } from '../components/Reveal';
 
 const courses = [
