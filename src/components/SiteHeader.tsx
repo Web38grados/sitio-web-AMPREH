@@ -1,10 +1,10 @@
-import { Menu, X, Phone, Mail, MapPin, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/LOGO.jpg'
 
-const logoUrl =
-  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo_AMPREH-removebg-preview-LutM7LdEdV3sWpEhReq90XgogHwHIr.png'
+// const logoUrl =
+//   'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo_AMPREH-removebg-preview-LutM7LdEdV3sWpEhReq90XgogHwHIr.png'
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false)

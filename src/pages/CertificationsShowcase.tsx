@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ArrowLeft, ArrowRight, Download, ShieldCheck,  Target, FileCheck2, Users, HeartPulse } from 'lucide-react'
+import { ArrowLeft, ArrowRight,  ShieldCheck,  Target, FileCheck2, Users, HeartPulse } from 'lucide-react'
 
 import imgOsha from '../assets/certificaciones/osha.png'
 import imgStopBleed from '../assets/certificaciones/stop-bleed.jpg'
@@ -56,6 +56,8 @@ export function CertificationsShowcase() {
   const [active, setActive] = useState(0)
   const [displayIndex, setDisplayIndex] = useState(0)
   const [isFading, setIsFading] = useState(false)
+  
+  // eslint-disable-next-line react-hooks/purity
   const [lastInteraction, setLastInteraction] = useState(Date.now())
   
   const triggerChange = (newIndex: number) => {

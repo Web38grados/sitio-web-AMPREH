@@ -8,7 +8,7 @@ interface Feature {
 }
 
 interface SplitHeroProps {
-  breadcrumbs: string;
+  breadcrumbs?: string;
   eyebrow: string;
   titleWhite: string;
   titleOrange: string;
@@ -18,6 +18,8 @@ interface SplitHeroProps {
 }
 
 export function PageHero({ 
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   breadcrumbs, 
   eyebrow, 
   titleWhite, 
