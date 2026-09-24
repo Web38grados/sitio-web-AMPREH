@@ -2,15 +2,16 @@ import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ROUTES } from './constants/routes';
 
-// 🏗️ IMPORTACIONES EXACTAS SEGÚN LOS NOMBRES DE TUS ARCHIVOS
+
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
-import AboutSection from './components/AboutSection';
-import ServicesSection from './components/ServicesSection';
-import CoursesSection from './components/courses-section';
-import ContactSection from './components/contact-section';
+import ServicesSection from './pages/servicios_page/ServicesSection';
+import ContactSection from './pages/contact-section';
 
 import Inicio from './pages/Inicio';
+import CoursesCatalog from './pages/cursos_page/CoursesCatalog';
+import Nosotros from './pages/Nosotros/Nosotros';
+import ChatWidget from './pages/ChatWidget';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -40,12 +41,14 @@ export default function App() {
       <Routes>
         <Route element={<LayoutPrincipal />}>
           <Route path={ROUTES.INICIO} element={<Inicio />} />
-          <Route path={ROUTES.NOSOTROS} element={<AboutSection />} />
+          <Route path={ROUTES.NOSOTROS} element={<Nosotros />} />
           <Route path={ROUTES.SERVICIOS} element={<ServicesSection />} />
-          <Route path={ROUTES.CURSOS} element={<CoursesSection />} />
           <Route path={ROUTES.CONTACTO} element={<ContactSection />} />
+          <Route path={ROUTES.CONTACTO} element={<ContactSection />} />
+          <Route path={ROUTES.CURSOS} element= {<CoursesCatalog/>}/>
         </Route>
       </Routes>
+      <ChatWidget />
     </>
   );
 }

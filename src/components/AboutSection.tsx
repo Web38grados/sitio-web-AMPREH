@@ -5,14 +5,15 @@ import {
   Target,
 } from 'lucide-react'
 
+// Los valores corporativos de AMPREH
 const values = [
   'Excelencia Operativa',
-  'Rigor Normativo',
-  'Integridad',
+  'Rigor Normativo y Técnico',
+  'Integridad y Ética',
   'Vocación de Servicio',
+  'Innovación y Mejora Continua',
 ]
 
-// 🚨 CORREGIDO: Se agregó "default"
 export default function AboutSection() {
   return (
     <section id="nosotros" className="border-b border-border bg-background">
@@ -26,19 +27,22 @@ export default function AboutSection() {
           </h2>
           <div className="mt-6 flex flex-col gap-5 text-lg leading-8 text-muted-foreground">
             <p>
-              AMPREH, LLC nace con una misión clara: llevar formación de
-              seguridad y salud de alto nivel a las personas que deben actuar
-              cuando más importa.
+              AMPREH (Atención Médica Prehospitalaria y Reducción de Riesgos) es
+              una empresa especializada en servicios de atención médica
+              prehospitalaria, protección civil, seguridad industrial y
+              prevención y control de accidentes.
             </p>
             <p>
-              Acompañamos a empresas, instituciones y comunidades con una
-              metodología práctica, rigurosa y humana.
+              Destacamos por integrar en nuestros programas las acreditaciones
+              oficiales de OSHA, los cursos avanzados de ECSI en primeros auxilios
+              y la certificación especializada en técnicas críticas de control
+              de hemorragias de Stop the Bleed.
             </p>
           </div>
           <div className="mt-8 flex items-center gap-4 border-l-2 border-accent pl-5">
             <span className="text-4xl font-black text-primary">+20</span>
             <span className="max-w-xs font-semibold text-primary">
-              años formando equipos preparados
+              años salvaguardando la operación de empresas
             </span>
           </div>
         </div>
@@ -46,7 +50,7 @@ export default function AboutSection() {
         <div className="relative min-h-[380px] overflow-hidden rounded-[2rem] bg-secondary">
           <img
             src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=85"
-            alt="Equipo de profesionales reunido durante una capacitación"
+            alt="Equipo de profesionales AMPREH durante una capacitación"
             className="absolute inset-0 size-full object-cover"
             loading="lazy"
           />
@@ -62,24 +66,28 @@ export default function AboutSection() {
           Principios que guían cada entrenamiento.
         </h3>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {/* Misión */}
           <article className="rounded-2xl border border-border bg-card p-7">
             <Target className="size-8 text-accent" />
             <h4 className="mt-6 text-2xl font-black text-primary">Misión</h4>
             <p className="mt-3 leading-7 text-muted-foreground">
-              Preparar personas y organizaciones para prevenir, responder y
-              recuperarse ante emergencias con confianza.
+              Transformar la cultura de la seguridad y la respuesta ante crisis
+              mediante servicios de élite. Convertimos la preparación en tu
+              ventaja para blindar operaciones y salvar vidas.
             </p>
           </article>
 
+          {/* Visión */}
           <article className="rounded-2xl border border-border bg-card p-7">
             <Landmark className="size-8 text-accent" />
             <h4 className="mt-6 text-2xl font-black text-primary">Visión al 2030</h4>
             <p className="mt-3 leading-7 text-muted-foreground">
-              Ser el aliado de referencia en seguridad y salud para
-              comunidades y empresas más resilientes.
+              Consolidarnos como la empresa líder en resiliencia operativa y
+              emergencias en México, redefiniendo los estándares de la seguridad humana.
             </p>
           </article>
 
+          {/* Valores */}
           <article className="rounded-2xl border border-border bg-card p-7">
             <ShieldCheck className="size-8 text-accent" />
             <h4 className="mt-6 text-2xl font-black text-primary">Valores</h4>
