@@ -43,7 +43,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-[#0a1727]">Correo electrónico</h4>
-                  <p className="text-base font-semibold text-[#004a99] mt-1">edgar_diazcovarrubias@ampreh.com.mx</p>
+                  <p className="text-base font-semibold text-[#004a99] mt-1">servicios@ampre.com.mx</p>
                   <p className="text-xs text-slate-500 mt-1">Respondemos en menos de 24 horas</p>
                 </div>
               </div>

@@ -32,7 +32,7 @@ export function AboutPreview() {
                 <h3 className="text-2xl font-black uppercase text-white">Capacitación y<br/>Normatividad</h3>
                 <p className="mt-3 text-sm font-medium text-slate-300">Programas autorizados por UTA OSHA y STPS para blindar a tu personal</p>
                 <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
-                  <Link to="/programas" className="group flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220] transition-colors hover:text-[#e67515]">
+                  <Link to="/cursos#cursos" className="group flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220] transition-colors hover:text-[#e67515]">
                     VER PROGRAMAS <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-2" />
                   </Link>
                 </div>
@@ -51,9 +51,12 @@ export function AboutPreview() {
                 <h3 className="text-2xl font-black uppercase text-white">Atención<br/>Prehospitalaria</h3>
                 <p className="mt-3 text-sm font-medium text-slate-300">Cobertura especializada con paramédicos y unidades en sitio para tu planta.</p>
                 <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
-                  <span className="group flex items-center cursor-pointer transition-colors hover:text-[#e67515]">
+                  <Link 
+                    to="/servicios" 
+                    className="group flex items-center cursor-pointer transition-colors hover:text-[#e67515]"
+                  >
                     Ver servicios <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-2" />
-                  </span>
+                  </Link>
                 </div>
               </div>
              </div>
@@ -84,9 +87,9 @@ export function AboutPreview() {
               Con más de 20 años de trayectoria, brindamos soluciones integrales en atención médica prehospitalaria, protección civil y reducción de riesgos. Nos rigen los más altos estándares globales para blindar tus operaciones cuando cada segundo cuenta.
             </p>
             
-            <a href="#contacto" className="mt-10 inline-flex items-center bg-[#004a99] px-8 py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-[#F58220] shadow-lg">
+            <Link to="/nosotros" className="mt-10 inline-flex items-center bg-[#004a99] px-8 py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-[#F58220] shadow-lg">
               Conoce nuestra historia <ArrowRight className="ml-3 h-4 w-4" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
 
           <div className="self-end bg-slate-50 p-8 lg:p-10 border-t-8 border-[#004a99] shadow-xl lg:mt-16">

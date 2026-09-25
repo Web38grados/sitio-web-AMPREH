@@ -1,26 +1,55 @@
-import { ArrowRight, ShieldCheck, ShieldAlert, Users, Clock3, Award } from 'lucide-react';
+import { ArrowRight, ShieldCheck, ShieldAlert, Users, Award, Clock3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // IMAGEN PRINCIPAL DE FONDO
 import bgBombero from '../assets/bgBombero.png';
 
 // IMÁGENES PARA EL INTERIOR DE LAS TARJETAS
-import imgOsha from '../assets/cursos/hero.png';
-import imgBleed from '../assets/cursos/hero.png';
-import imgEcsi from '../assets/cursos/hero.png';
-import { Reveal } from '../components/Reveal';
 
-const courses = [
-  { icon: ShieldCheck, code: 'OSHA 10', title: 'OSHA 10', detail: 'Seguridad industrial básica en el trabajo.', hours: '10 HORAS', img: imgOsha },
-  { icon: ShieldAlert, code: 'STOP THE BLEED', title: 'STOP THE BLEED', detail: 'Control de hemorragias y primeros auxilios.', hours: '4 HORAS', img: imgBleed },
-  { icon: ShieldCheck, code: 'ECSI', title: 'ECSI FIRST AID', detail: 'Primeros auxilios y atención médica básica.', hours: '8 HORAS', img: imgEcsi }, 
-];
+import { Reveal } from '../components/Reveal';
+import osha3015 from '../assets/cursos/3015.jpg';
+import hm242 from '../assets/cursos/hazwoper-annual-refresher.jpg';
+import atp8const from '../assets/cursos/8-hour-construction-industry.jpg';
+
+// const courses = [
+//   { icon: ShieldCheck, code: 'OSHA 10', title: 'OSHA 10', detail: 'Seguridad industrial básica en el trabajo.',  img: imgOsha },
+//   { icon: ShieldAlert, code: 'STOP THE BLEED', title: 'STOP THE BLEED', detail: 'Control de hemorragias y primeros auxilios.', img: imgBleed },
+//   { icon: ShieldCheck, code: 'ECSI', title: 'ECSI FIRST AID', detail: 'Primeros auxilios y atención médica básica.',  img: imgEcsi }, 
+// ];
 
 const benefits = [
   ['SEGURIDAD', 'Normas y prácticas actualizadas.', ShieldCheck],
   ['PREVENCIÓN', 'Identifica, actúa y controla.', ShieldAlert],
   ['FORMACIÓN', 'Estándares internacionales.', Users],
 ] as const;
+
+// 2. DATOS DE LOS CURSOS DESTACADOS
+const featuredCourses = [
+  {
+    id: 'osha-3015',
+    code: 'OSHA #3015',
+    title: 'Excavation, Trenching and Soil Mechanics',
+    detail: 'Normativa práctica sobre mecánica de suelos y estabilidad de taludes apuntalados.',
+    image: osha3015,
+    hours: '24 hrs',
+  },
+  {
+    id: 'hm-242',
+    code: 'HM 242',
+    title: 'HAZWOPER Annual Refresher',
+    detail: 'Actualización sobre tendencias, control, contención y confinamiento de residuos peligrosos.',
+    image: hm242,
+    hours: '8 hrs',
+  },
+  {
+    id: 'atp-191-8const',
+    code: 'ATP 191',
+    title: '8-Hour Construction Industry',
+    detail: 'Programa introductorio enfocado en los peligros más comunes en el sector construcción.',
+    image: atp8const,
+    hours: '8 hrs',
+  }
+];
 
 export function CursosPreview() {
   return (
@@ -96,78 +125,82 @@ export function CursosPreview() {
         </div>
       </div>
 
-      {/* =========================================================
-          CARTAS DE CURSOS (Inferiores)
-      ========================================================= */}
+{/* 3. NUEVO DISEÑO DE TARJETAS */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-20 pb-10 bottom-20">
         <Reveal delay={200}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {courses.map((course) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredCourses.map((course) => (
               <div 
-                key={course.code} 
-                className="group flex flex-col  overflow-hidden shadow-[0_10px_30px_rgba(0,43,94,0.15)] transition-all duration-300 hover:-translate-y-2 bg-[#002b5e] relative"
+                key={course.id} 
+                className="group bg-white rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,43,94,0.12)] transition-all duration-500 hover:-translate-y-2 border border-slate-100 flex flex-col"
               >
                 
-                {/* 1. Imagen Superior */}
-                <div className="relative w-full h-[180px] shrink-0 bg-[#040b16]">
+                {/* Imagen Superior con Overlay */}
+                <div className="relative h-[220px] w-full overflow-hidden bg-[#0a1727]">
                   <img 
-                    src={course.img} 
+                    src={course.image} 
                     alt={course.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" 
                   />
-                  {/* Badge Naranja sobre la imagen */}
-                  <div className="absolute bottom-4 left-4 bg-[#ff7414] px-3 py-1.5 rounded flex items-center gap-2 shadow-md">
-                    <course.icon size={12} className="text-white" strokeWidth={2.5} />
-                    <span className="text-[9px] font-black text-white tracking-widest uppercase">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1727]/80 via-transparent to-transparent"></div>
+                  
+                  {/* Badge Naranja */}
+                  <div className="absolute top-5 left-5 bg-[#ff7414] px-3 py-1.5 rounded-[4px] shadow-lg">
+                    <span className="text-[10px] font-black text-white tracking-widest uppercase">
                       {course.code}
                     </span>
                   </div>
-                  {/* Corte diagonal inferior */}
-                  <div className="absolute -bottom-1 left-0 right-0 h-8 bg-[#002b5e] [clip-path:polygon(0_100%,100%_100%,100%_0)]"></div>
                 </div>
 
-                {/* 2. Textos del Curso */}
-                <div className="p-6 flex flex-col flex-grow relative bg-[#002b5e]">
-                  <h5 className="font-black text-white text-xl uppercase leading-tight mb-2 group-hover:text-[#ff7414] transition-colors">
+                {/* Textos del Curso */}
+                <div className="p-8 flex flex-col flex-grow relative bg-white">
+                  
+                  {/* Icono flotante (Detalle premium) */}
+                  <div className="absolute right-6 -top-6 w-12 h-12 bg-[#0a1727] rounded-full flex items-center justify-center shadow-lg border-4 border-white group-hover:bg-[#ff7414] transition-colors duration-300">
+                    <ShieldCheck size={20} className="text-white" />
+                  </div>
+
+                  <h5 className="font-bold text-[#0a1727] text-[20px] leading-[1.2] mb-3 group-hover:text-[#ff7414] transition-colors pr-8">
                     {course.title}
                   </h5>
-                  <p className="text-[11px] text-blue-100/70 leading-relaxed">
+                  <p className="text-[13px] text-slate-500 leading-relaxed mb-6">
                     {course.detail}
                   </p>
-                </div>
 
-                {/* 3. Footer con Metadatos y Botón */}
-                <div className="mt-auto bg-[#002046] p-4 flex items-center justify-between border-t border-white/5">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5 text-[9px] font-bold text-white tracking-wider">
-                      <Clock3 size={12} className="text-[#ff7414]" />
-                      {course.hours}
+                  {/* Footer de la tarjeta */}
+                  <div className="mt-auto pt-5 flex items-center justify-between border-t border-slate-100">
+                    <div className="flex gap-4">
+                      <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
+                        <Clock3 size={14} className="text-[#ff7414]" />
+                        {course.hours}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
+                        <Award size={14} className="text-[#ff7414]" />
+                        CERTIFICADO
+                      </span>
                     </div>
-                    <div className="w-px h-4 bg-white/10"></div>
-                    <div className="flex items-center gap-1.5 text-[9px] font-bold text-white tracking-wider">
-                      <Award size={12} className="text-[#ff7414]" />
-                      <span className="opacity-80 leading-tight text-[8px]">CERTIFICACIÓN<br/>INTERNACIONAL</span>
-                    </div>
+                    
+                    {/* El link ahora apunta exactamente al ID del curso en la otra página */}
+                    <Link 
+                      to={`/cursos?search=${encodeURIComponent(course.title)}#cursos`}
+                      className="w-9 h-9 rounded-full bg-slate-100 text-[#0a1727] hover:bg-[#ff7414] hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm"
+                    >
+                      <ArrowRight size={16} strokeWidth={2.5} />
+                    </Link>
                   </div>
-                  
-                  <Link 
-                    to="/cursos"
-                    className="w-8 h-8 bg-[#ff7414] hover:bg-[#e66a0c] rounded flex items-center justify-center transition-colors shadow-md group-hover:translate-x-1"
-                  >
-                    <ArrowRight size={14} className="text-white" strokeWidth={2.5} />
-                  </Link>
-                </div>
 
+                </div>
               </div>
             ))}
           </div>
         </Reveal>
 
-        {/* Enlace Inferior (Ver todos) */}
+        {/* Enlace Inferior con línea animada */}
         <Reveal delay={400}>
-          <div className="flex items-center gap-4 mt-12">
-            <Link to="/cursos" className="text-[10px] font-black text-[#002b5e] uppercase tracking-widest hover:text-[#ff7414] transition-colors">
-              VER TODOS LOS CURSOS <ArrowRight className="inline-block w-3 h-3 ml-1 -mt-0.5" />
+          <div className="flex items-center justify-center lg:justify-start gap-4 mt-12">
+            <Link to="/cursos#cursos" className="inline-flex items-center gap-3 text-[11px] font-black text-[#0a1727] uppercase tracking-widest hover:text-[#ff7414] transition-colors group">
+              VER TODOS LOS PROGRAMAS
+              <span className="w-8 h-[2px] bg-[#ff7414] transition-all duration-300 group-hover:w-16"></span>
             </Link>
           </div>
         </Reveal>
