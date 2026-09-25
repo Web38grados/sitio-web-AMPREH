@@ -1,11 +1,20 @@
 import { useState, useEffect } from 'react'
-import { ArrowLeft, ArrowRight,  ShieldCheck,  Target, FileCheck2, Users, HeartPulse } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ShieldCheck, Target, FileCheck2, Users, HeartPulse, Droplet, ShieldAlert } from 'lucide-react'
 
+// Imágenes Originales
 import imgOsha from '../assets/certificaciones/osha.png'
 import imgStopBleed from '../assets/certificaciones/stop-bleed.jpg'
 import imgEcsi from '../assets/certificaciones/ecsi.jpg'
 import imgChso from '../assets/certificaciones/CHSO_page-0001.jpg'
 
+// Nuevas Imágenes (Asegúrate de que los nombres coincidan con tus archivos)
+import imgUtaTrainer from '../assets/certificaciones/osha_1.png'
+import imgOshaDisaster from '../assets/certificaciones/osha_2.jpg'
+import imgOshaGeneral from '../assets/certificaciones/osha_3.jpg'
+import imgNaui from '../assets/certificaciones/TARJETA_1.jpg'
+import imgPadi from '../assets/certificaciones/TARJETA_3.jpg'
+
+// Imágenes de Contexto (Fondos de las tarjetas)
 import img1 from '../assets/certificaciones/img1_osha.png'
 import img2 from '../assets/certificaciones/img2_osha.png'
 import img3 from '../assets/certificaciones/img3_blood.png'
@@ -19,6 +28,22 @@ const certifications = [
     icon: ShieldCheck,
     image: imgOsha,
     contextImage: img2
+  },
+  { 
+    category: 'SEGURIDAD INDUSTRIAL', 
+    title: 'OSHA General Industry Trainer', 
+    description: 'Acreditación oficial como instructor de OSHA para impartir cursos de 10 y 30 horas en Industria General, bajo los lineamientos del programa Outreach.', 
+    icon: ShieldCheck,
+    image: imgOshaGeneral,
+    contextImage: img1
+  },
+  { 
+    category: 'PREVENCIÓN Y RESPUESTA', 
+    title: 'OSHA Disaster Site Worker Trainer', 
+    description: 'Autorización oficial de OSHA para capacitar a trabajadores y equipos de respuesta rápida en zonas de desastre y emergencias mayores.', 
+    icon: ShieldAlert,
+    image: imgOshaDisaster,
+    contextImage: img3
   },
   { 
     category: 'SALUD Y PRIMEROS AUXILIOS', 
@@ -44,8 +69,31 @@ const certifications = [
     image: imgChso,
     contextImage: img1
   },
+  { 
+    category: 'SEGURIDAD INSTITUCIONAL', 
+    title: 'Authorized Trainer - UTA', 
+    description: 'Credencial oficial de The University of Texas at Arlington que avala las competencias como instructor autorizado de alto nivel.', 
+    icon: Target,
+    image: imgUtaTrainer,
+    contextImage: img2
+  },
+  { 
+    category: 'RESCATE ACUÁTICO', 
+    title: 'NAUI Advanced Scuba Diver', 
+    description: 'Certificación internacional de NAUI Worldwide en buceo avanzado y cumplimiento de estándares en aguas abiertas.', 
+    icon: Droplet,
+    image: imgNaui,
+    contextImage: img4
+  },
+  { 
+    category: 'BUCEO PROFESIONAL', 
+    title: 'PADI Certified Diver', 
+    description: 'Acreditación internacional de PADI, cumpliendo con los rigurosos estándares globales para operaciones y seguridad en buceo.', 
+    icon: Droplet,
+    image: imgPadi,
+    contextImage: img1
+  },
 ]
-
 const benefits = [
   ['Seguridad', 'Normas y prácticas.', FileCheck2],
   ['Prevención', 'Identificación y control.', ShieldCheck],

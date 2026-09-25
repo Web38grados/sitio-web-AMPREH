@@ -1,18 +1,24 @@
 import { useState, useEffect } from 'react'
-import { ArrowLeft, ArrowRight, Download, ShieldCheck, Award, Target, FileCheck2, Users, HeartPulse } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ShieldCheck, Target, FileCheck2, Users, HeartPulse, Droplet, ShieldAlert } from 'lucide-react'
 
+// Imágenes Originales
 import imgOsha from '../assets/certificaciones/osha.png'
 import imgStopBleed from '../assets/certificaciones/stop-bleed.jpg'
 import imgEcsi from '../assets/certificaciones/ecsi.jpg'
 import imgChso from '../assets/certificaciones/CHSO_page-0001.jpg'
 
+// Nuevas Imágenes (Asegúrate de que los nombres coincidan con tus archivos)
+import imgUtaTrainer from '../assets/certificaciones/osha_1.png'
+import imgOshaDisaster from '../assets/certificaciones/osha_2.jpg'
+import imgOshaGeneral from '../assets/certificaciones/osha_3.jpg'
+import imgNaui from '../assets/certificaciones/TARJETA_1.jpg'
+import imgPadi from '../assets/certificaciones/TARJETA_3.jpg'
+
+// Imágenes de Contexto (Fondos de las tarjetas)
 import img1 from '../assets/certificaciones/img1_osha.png'
 import img2 from '../assets/certificaciones/img2_osha.png'
 import img3 from '../assets/certificaciones/img3_blood.png'
 import img4 from '../assets/certificaciones/img4_ecsi.png'
-
-//const contextImg1 = 'https://images.unsplash.com/photo-1587370560942-124b610c144e?q=80&w=800&auto=format&fit=crop' 
-//const contextImg2 = 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop' 
 
 const certifications = [
   { 
@@ -22,6 +28,22 @@ const certifications = [
     icon: ShieldCheck,
     image: imgOsha,
     contextImage: img2
+  },
+  { 
+    category: 'SEGURIDAD INDUSTRIAL', 
+    title: 'OSHA General Industry Trainer', 
+    description: 'Acreditación oficial como instructor de OSHA para impartir cursos de 10 y 30 horas en Industria General, bajo los lineamientos del programa Outreach.', 
+    icon: ShieldCheck,
+    image: imgOshaGeneral,
+    contextImage: img1
+  },
+  { 
+    category: 'PREVENCIÓN Y RESPUESTA', 
+    title: 'OSHA Disaster Site Worker Trainer', 
+    description: 'Autorización oficial de OSHA para capacitar a trabajadores y equipos de respuesta rápida en zonas de desastre y emergencias mayores.', 
+    icon: ShieldAlert,
+    image: imgOshaDisaster,
+    contextImage: img3
   },
   { 
     category: 'SALUD Y PRIMEROS AUXILIOS', 
@@ -47,178 +69,211 @@ const certifications = [
     image: imgChso,
     contextImage: img1
   },
+  { 
+    category: 'SEGURIDAD INSTITUCIONAL', 
+    title: 'Authorized Trainer - UTA', 
+    description: 'Credencial oficial de The University of Texas at Arlington que avala las competencias como instructor autorizado de alto nivel.', 
+    icon: Target,
+    image: imgUtaTrainer,
+    contextImage: img2
+  },
+  { 
+    category: 'RESCATE ACUÁTICO', 
+    title: 'NAUI Advanced Scuba Diver', 
+    description: 'Certificación internacional de NAUI Worldwide en buceo avanzado y cumplimiento de estándares en aguas abiertas.', 
+    icon: Droplet,
+    image: imgNaui,
+    contextImage: img4
+  },
+  { 
+    category: 'BUCEO PROFESIONAL', 
+    title: 'PADI Certified Diver', 
+    description: 'Acreditación internacional de PADI, cumpliendo con los rigurosos estándares globales para operaciones y seguridad en buceo.', 
+    icon: Droplet,
+    image: imgPadi,
+    contextImage: img1
+  },
 ]
-
 const benefits = [
-  ['Seguridad en el trabajo', 'Normas y buenas prácticas.', FileCheck2],
-  ['Prevención de riesgos', 'Identificación y control.', ShieldCheck],
-  ['Formación continua', 'Estándares internacionales.', Users],
+  ['Seguridad', 'Normas y prácticas.', FileCheck2],
+  ['Prevención', 'Identificación y control.', ShieldCheck],
+  ['FORMACIÓN', 'Estándares internacionales.', Users],
 ] as const
 
 export function CertificationsShowcase() {
   const [active, setActive] = useState(0)
-  const [lastInteraction, setLastInteraction] = useState("")
+  const [displayIndex, setDisplayIndex] = useState(0)
+  const [isFading, setIsFading] = useState(false)
   
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((current) => (current + 1) % certifications.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [lastInteraction])
-
-  const handleManualChange = (newIndex: number) => {
-    setActive(newIndex)
-    setLastInteraction("fecha")
+  // eslint-disable-next-line react-hooks/purity
+  const [lastInteraction, setLastInteraction] = useState(Date.now())
+  
+  const triggerChange = (newIndex: number) => {
+    if (isFading || newIndex === active) return
+    setIsFading(true)
+    setActive(newIndex) 
+    setLastInteraction(Date.now())
+    
+    setTimeout(() => {
+      setDisplayIndex(newIndex)
+      setIsFading(false)
+    }, 300)
   }
 
   const changeSlide = (step: number) => {
     const newIndex = (active + step + certifications.length) % certifications.length
-    handleManualChange(newIndex)
+    triggerChange(newIndex)
   }
 
-  const item = certifications[active]
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const newIndex = (active + 1) % certifications.length
+      triggerChange(newIndex)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [active, isFading, lastInteraction])
+
+  const item = certifications[displayIndex]
 
   return (
-    <section className="bg-white text-[#0A0F3D] py-16 font-sans">
+
+    <section className="flex flex-col lg:flex-row w-full bg-[#F58220] border-t-8 border-[#F58220] font-sans text-white overflow-hidden">
       
       <style>{`
-        @keyframes fadeSlide {
-          0% { opacity: 0; transform: translateX(20px); }
-          100% { opacity: 1; transform: translateX(0); }
+        .smooth-fade {
+          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
-        @keyframes fadeScale {
-          0% { opacity: 0.5; transform: scale(1.05); }
-          100% { opacity: 1; transform: scale(1); }
+        .fade-out {
+          opacity: 0;
+          transform: translateY(8px);
         }
-        .animate-fade-slide {
-          animation: fadeSlide 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .fade-in {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .animate-fade-scale {
-          animation: fadeScale 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .bg-fade {
+          transition: opacity 0.3s ease-in-out;
         }
       `}</style>
 
-      {/* Contenedor maestro amplio para que el slider ocupe todo el espacio */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        
-
-        <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-end mb-12">
-          <div className="max-w-[500px]">
-            <span className="mb-4 block h-1 w-14 bg-[#D32F2F]" />
-            <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D32F2F]">
-              Nuestra experiencia
-            </p>
-            <h2 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.05] tracking-tight text-brand-blue">
-              Certificaciones y<br />acreditaciones
-            </h2>
-            <p className="mt-5 text-[14px] leading-relaxed text-slate-600">
-              Contamos con certificaciones y acreditaciones que respaldan nuestro compromiso con la calidad, la seguridad y la formación continua de nuestro equipo.
-            </p>
-          </div>
-          
-          <div className="grid gap-5 sm:grid-cols-3 sm:divide-x sm:divide-slate-200">
-            {[
-              [ShieldCheck, 'Profesionales capacitados', 'Formación especializada y certificada.'],
-              [Award, 'Estándares internacionales', 'Normativas reconocidas a nivel global.'],
-              [Target, 'Compromiso con la calidad', 'Mejora continua organizacional.'],
-            ].map(([FeatureIcon, title, text]) => (
-              <div key={title as string} className="sm:px-5 first:sm:pl-0">
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                <FeatureIcon className="mb-3 h-7 w-7 text-[#D32F2F]" />
-                <h3 className="text-[13.5px] font-bold leading-snug text-[#0A0F3D]">{title as string}</h3>
-                <p className="mt-1.5 text-[12px] leading-relaxed text-slate-500">{text as string}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* =========================================================
-            SLIDER PRINCIPAL: Vuelve a ser ancho (ocupa todo el max-w-7xl)
-        ========================================================= */}
-        <div className="relative overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-xl">
-          
-          <div className="grid min-h-[400px] lg:grid-cols-[0.8fr_1fr_1.1fr]">
+      {/* =========================================================
+          MITAD IZQUIERDA: ESTÁTICA Y SÓLIDA
+      ========================================================= */}
+      <div className="w-full lg:w-1/2 flex justify-end relative z-20 self-start">
+        {/* Usamos h-full en escritorio para igualar alturas y p-4/p-8 para responsive */}
+        <div className="w-full bg-[#004a99] h-full pb-12 lg:pb-16 flex flex-col justify-between">
+          <div className="w-full max-w-[640px] ml-auto p-6 sm:p-8 lg:pt-16 lg:pl-8 lg:pr-12 flex flex-col">
             
-            {/* COLUMNA 1: Imagen de Contexto */}
-            <div className="relative min-h-[220px] overflow-hidden lg:min-h-0">
-              <img 
-                key={`bg-${active}`} 
-                src={item.contextImage} 
-                alt="Capacitación" 
-                className="absolute inset-0 h-full w-full object-cover object-center animate-fade-scale" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/90 lg:to-white" />
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-4 w-4 bg-[#F58220] shrink-0"></div> 
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F58220]">
+                  Expediente Institucional
+                </p>
+              </div>
+              
+              {/* ARREGLO DEL TÍTULO: break-words e hyphens-auto evitan que se salga */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-black uppercase leading-[0.9] tracking-tighter mb-8 break-words hyphens-auto">
+                Nuestras<br/>
+                <span className="text-[#F58220]">Certificaciones</span>
+              </h2>
+              
+              <p className="text-sm sm:text-base leading-relaxed text-blue-200 max-w-sm border-l-2 border-[#F58220] pl-4">
+                Documentación oficial que respalda nuestra capacidad operativa y cumplimiento normativo bajo los más altos estándares globales.
+              </p>
+            </div>
+
+            {/* Ajuste de grilla para pantallas muy chicas */}
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 border-t border-blue-400/30 pt-8">
+              {benefits.map(([name, text, BenefitIcon]) => (
+                <div key={name} className="flex flex-col items-start sm:items-start">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  <BenefitIcon className="mb-2 h-6 w-6 text-[#F58220]" />
+                  <p className="text-[11px] font-bold uppercase text-white tracking-wider">{name}</p>
+                  <p className="text-[9px] text-blue-300 mt-1 leading-tight">{text}</p>
+                </div>
+              ))}
             </div>
             
-            {/* COLUMNA 2: El Certificado Flotante */}
-            <div className="flex items-center justify-center bg-[#F8F9FB]/50 p-6 lg:p-8 relative z-10 -ml-10 lg:ml-0">
+            <div className="mt-12 lg:mt-16 flex flex-col sm:flex-row sm:items-center gap-6">
+                <div className="flex gap-2">
+                    <button onClick={() => changeSlide(-1)} disabled={isFading} className="p-3 bg-white text-[#004a99] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
+                        <ArrowLeft className="h-5 w-5" />
+                    </button>
+                    <button onClick={() => changeSlide(1)} disabled={isFading} className="p-3 bg-white text-[#004a99] hover:bg-[#F58220] hover:text-white transition-colors disabled:opacity-50">
+                        <ArrowRight className="h-5 w-5" />
+                    </button>
+                </div>
+                <div className="flex gap-2">
+                    {certifications.map((_, index) => (
+                        <button 
+                            key={index} 
+                            onClick={() => triggerChange(index)} 
+                            disabled={isFading}
+                            className={`h-1.5 transition-all duration-300 ${index === active ? 'w-8 bg-[#F58220]' : 'w-4 bg-blue-800'} rounded-none`} 
+                        />
+                    ))}
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================
+          MITAD DERECHA: DINÁMICA (Esta sí conserva la animación)
+      ========================================================= */}
+      {/* Ajustado min-h para que no baile */}
+{/* =========================================================
+          MITAD DERECHA: DINÁMICA (Esta sí conserva la animación)
+      ========================================================= */}
+      {/* 1. Quitamos el bg-slate-950 de este wrapper padre */}
+      <div className="w-full lg:w-1/2 relative flex flex-col justify-end min-h-[500px] lg:min-h-[85vh]">
+          
+          {/* 2. El bg-slate-950 se queda ÚNICAMENTE aquí, encerrado con la foto */}
+          <div className="absolute inset-0 h-full w-full z-0 bg-slate-950 overflow-hidden">
+             <img 
+                 src={item.contextImage} 
+                 alt="Contexto operativo" 
+                 className={`h-full w-full object-cover object-center mix-blend-luminosity bg-fade ${isFading ? 'opacity-0' : 'opacity-40'}`} 
+             />
+          </div>
+          
+          {/* Ajustado el padding y posición del certificado */}
+          <div className="relative w-full max-w-[340px] sm:max-w-[400px] sm:left-30 sm:bottom-23 md:left-50 lg:left-5 lg:top-20  md:max-w-[500px] md: lg:max-w-[640px] mr-auto flex-grow flex items-center justify-center lg:justify-start p-6 sm:p-8 lg:p-12 lg:pl-10  z-10 pb-48 lg:pb-40">
               <div 
-                key={`cert-box-${active}`} 
-                className="relative w-full max-w-[340px] bg-white p-2.5 shadow-xl rounded-lg animate-fade-slide"
+                  className={`w-full max-w-xl bg-white p-2 shadow-2xl smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}
               >
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full object-contain bg-slate-50 p-1.5 border border-slate-100" 
-                />
+                   <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full h-[250px] sm:h-[300px] lg:h-[350px] object-contain border border-slate-200" 
+                  />
               </div>
-            </div>
-            
-            {/* COLUMNA 3: Detalles y Botón */}
-            <div key={`info-${active}`} className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 bg-white animate-fade-slide relative z-10">
-              <p className="mb-3 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-[#D32F2F]">
-                <span className="h-[2px] w-5 bg-[#D32F2F]" />
-                {item.category}
-              </p>
-              <h3 className="text-2xl lg:text-[28px] font-black leading-[1.1] text-[#0A0F3D]">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-[13px] leading-relaxed text-slate-600">
-                {item.description}
-              </p>
-              
-              <div className="mt-6 grid grid-cols-3 divide-x divide-slate-200">
-                {benefits.map(([name,, BenefitIcon]) => (
-                  <div key={name} className="px-3 first:pl-0">
-                    <BenefitIcon className="mb-2 h-5 w-5 text-[#D32F2F]" />
-                    <p className="text-[10px] font-bold leading-tight text-[#0A0F3D]">{name}</p>
-                  </div>
-                ))}
-              </div>
-              
-              <button className="mt-8 flex w-fit items-center gap-2 bg-[#0A0F3D] px-5 py-3 text-[12px] font-bold text-white rounded-md transition-colors hover:bg-[#D32F2F]">
-                <Download className="h-4 w-4" /> Descargar Certificado
-              </button>
-            </div>
-            
           </div>
 
-          <button 
-            aria-label="Certificación anterior" 
-            onClick={() => changeSlide(-1)} 
-            className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0A0F3D] shadow-md transition-transform hover:scale-110 z-20 border border-slate-100"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          
-          <button 
-            aria-label="Siguiente certificación" 
-            onClick={() => changeSlide(1)} 
-            className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0A0F3D] shadow-md transition-transform hover:scale-110 z-20 border border-slate-100"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
 
-        <div className="mt-8 flex justify-center gap-2.5">
-          {certifications.map((_, index) => (
-            <button 
-              key={index} 
-              aria-label={`Mostrar slide ${index + 1}`} 
-              onClick={() => handleManualChange(index)} 
-              className={`h-2 rounded-full transition-all duration-300 ${index === active ? 'w-6 bg-[#0A0F3D]' : 'w-2 bg-slate-300 hover:bg-slate-400'}`} 
-            />
-          ))}
+        <div className="absolute lg:relative bottom-0 left-0 w-full z-20 bg-[#F58220] shadow-[0_-15px_30px_rgba(0,0,0,0.2)]  before:absolute before:inset-y-0 before:-left-[2px] before:w-[4px] before:bg-[#F58220] before:-z-10">
+                      
+            <div className={`w-full max-w-[640px] mr-auto p-6 sm:p-8 lg:p-12 lg:pl-16 flex flex-col sm:flex-row sm:items-center xl:items-end justify-between gap-6 min-h-[220px] sm:min-h-[180px] smooth-fade ${isFading ? 'fade-out' : 'fade-in'}`}>
+                <div className="flex-1">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#004a99] mb-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-[#004a99] inline-block shrink-0"></span>
+                        {item.category}
+                    </p>
+                    <h3 className="text-xl sm:text-xl lg:text-2xl xl:text-3xl font-black leading-tight text-white uppercase tracking-tight">
+                        {item.title}
+                    </h3>
+                    <p className="mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-white/90 max-w-md min-h-[40px]">
+                        {item.description}
+                    </p>
+                </div>
+                
+                {/* <button className="shrink-0 self-start sm:self-auto flex items-center justify-center gap-2 bg-[#004a99] px-4 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-[12px] font-black uppercase tracking-wider text-white hover:bg-slate-900 transition-colors shadow-lg border border-[#004a99]/50">
+                    <Download className="h-4 w-4" /> 
+                    Obtener PDF
+                </button> */}
+            </div>
         </div>
 
       </div>
