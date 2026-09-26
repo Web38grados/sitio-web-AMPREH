@@ -16,9 +16,9 @@ export default function Inicio() {
     <div className="flex flex-col">
       <HeroSection />
       <ClientProof />
+      <CertificationsShowcase></CertificationsShowcase>
       <ImpactSection></ImpactSection>
       <AboutPreview></AboutPreview>
-      <CertificationsShowcase></CertificationsShowcase>
       <CursosPreview></CursosPreview>
       {/* <ScrollytellingCertifications></ScrollytellingCertifications> */}
       {/* <PilaresValor></PilaresValor> */}

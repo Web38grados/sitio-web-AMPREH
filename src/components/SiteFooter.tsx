@@ -30,7 +30,7 @@ export default function SiteFooter() {
             </p>
             
             {/* Redes Sociales (SVGs puros) */}
-            <div className="flex items-center gap-4 text-[#004a99]">
+            {/* <div className="flex items-center gap-4 text-[#004a99]">
               <a href="#" className="hover:text-[#F58220] transition-colors" aria-label="Facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -56,7 +56,7 @@ export default function SiteFooter() {
                   <circle cx="4" cy="4" r="2"></circle>
                 </svg>
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* COLUMNA 2: Navegación (Ocupa 2/12) */}
@@ -72,16 +72,16 @@ export default function SiteFooter() {
             </ul>
           </div>
 
-          {/* COLUMNA 3: Servicios (Ocupa 3/12) */}
+      {/* COLUMNA 3: Servicios (Ocupa 3/12) */}
           <div className="lg:col-span-3 lg:border-l lg:border-slate-200 lg:px-8">
             <h4 className="text-[10px] font-black uppercase text-[#0a1727] tracking-widest mb-2">Servicios</h4>
             <div className="w-6 h-[2px] bg-[#F58220] mb-5"></div>
             <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500">
-              <li><Link to="/servicios" className="hover:text-[#F58220] transition-colors">Capacitación Empresarial</Link></li>
-              <li><Link to="/servicios" className="hover:text-[#F58220] transition-colors">Consultoría en Seguridad</Link></li>
-              <li><Link to="/servicios" className="hover:text-[#F58220] transition-colors">Simulacros y Evacuación</Link></li>
-              <li><Link to="/servicios" className="hover:text-[#F58220] transition-colors">Asesoría en SST</Link></li>
-              <li><Link to="/servicios" className="hover:text-[#F58220] transition-colors">Atención Prehospitalaria</Link></li>
+              <li><Link to="/servicios#capacitacion" className="hover:text-[#F58220] transition-colors">Capacitación Empresarial</Link></li>
+              <li><Link to="/servicios#proteccion" className="hover:text-[#F58220] transition-colors">Consultoría en Seguridad</Link></li>
+              <li><Link to="/servicios#proteccion" className="hover:text-[#F58220] transition-colors">Simulacros y Evacuación</Link></li>
+              <li><Link to="/servicios#operaciones" className="hover:text-[#F58220] transition-colors">Asesoría en SST</Link></li>
+              <li><Link to="/servicios#atencion" className="hover:text-[#F58220] transition-colors">Atención Prehospitalaria</Link></li>
             </ul>
           </div>
 
@@ -104,7 +104,7 @@ export default function SiteFooter() {
                 <Mail size={16} className="text-[#ff7414] shrink-0 mt-0.5" strokeWidth={2.5} />
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase mb-0.5">Correo electrónico</p>
-                  <a href="edgar_diazcovarrubias@ampreh.com.mx" className="text-xs font-bold text-[#0a1727] hover:text-[#F58220] transition-colors">edgar_diazcovarrubias@ampreh.com.mx</a>
+                  <a href="servicios@ampre.com.mx" className="text-xs font-bold text-[#0a1727] hover:text-[#F58220] transition-colors">servicios@ampre.com.mx</a>
                   <p className="text-[9px] text-slate-400 mt-0.5">Respuesta en menos de 24 horas.</p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function SiteFooter() {
           <div className="flex items-center gap-4 text-[10px] text-slate-600 font-medium">
             <Link to="/privacidad" className="hover:text-[#004a99] transition-colors">Política de Privacidad</Link>
             <span className="w-px h-3 bg-slate-300"></span>
-            <Link to="/terminos" className="hover:text-[#004a99] transition-colors">Términos y condiciones</Link>
+            {/* <Link to="/terminos" className="hover:text-[#004a99] transition-colors">Términos y condiciones</Link> */}
           </div>
         </div>
       </div>

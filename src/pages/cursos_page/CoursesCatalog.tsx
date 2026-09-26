@@ -1,20 +1,58 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { ArrowRight, Award,  Clock3, FileText, Search, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft } from 'lucide-react'
-import imgHero from '../../assets/cursos/hero.png'
+import { useEffect, useMemo, useState } from 'react'
+import { ArrowRight, Award,  Clock3, FileText, Search, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft, MessageCircle, CheckCircle2 } from 'lucide-react'
 import CtaSection from '../../components/CtaSection'
+
+// IMÁGENES BASE (Intactas)
+import imgHero from '../../assets/cursos/hero.png'
+import img4 from '../../assets/nosotros/rescate-cta.png'
+
+// IMPORTS ORIGINALES (Sin espacios, conservaron su nombre exacto)
 import recordkeep from '../../assets/cursos/RecordkeepingRuleSeminar.png'
 import osha521 from '../../assets/cursos/OSHA-521-osha.international.jpg'
 import osha3015 from '../../assets/cursos/3015.jpg'
 import atp191update from '../../assets/cursos/UpdateforSafety.jpg'
 import csho1t from '../../assets/cursos/salud-2-construccion.jpg'
 import sindustrial from '../../assets/cursos/seguridad-industria.jpg'
+import atpsilica from '../../assets/cursos/Silica.jpg'
+import atpladders from '../../assets/cursos/Ladders.jpg'
+import atploto from '../../assets/cursos/LockoutTagout.jpg'
+import atpelec from '../../assets/cursos/Electrical.jpg'
+import atp191rec from '../../assets/cursos/Recordkeeping.jpg'
 
+// NUEVOS IMPORTS CORREGIDOS PARA GOOGLE CLOUD RUN (kebab-case)
+import sshFire from '../../assets/cursos/specialist-in-safety-and-health-fire-safety.jpg'
+import sshDisaster from '../../assets/cursos/specialist-in-safety-and-health-disaster-response.jpg'
+import sshConst from '../../assets/cursos/specialist-in-safety-and-health-construction.jpg'
+
+import atp8gen from '../../assets/cursos/8-hour-general-industry.jpg'
+import atp8const from '../../assets/cursos/8-hour-construction-industry.jpg'
+import atp24gen from '../../assets/cursos/24-hour-general-industry-2.jpg'
+import atp24const from '../../assets/cursos/24-hour-construction-industry.jpg'
+import atpweld from '../../assets/cursos/welding-and-cutting.jpg'
+import atptool from '../../assets/cursos/tool-safety.jpg'
+import atpppe from '../../assets/cursos/personal-protective-equipment-ppe.jpg'
+import atpjha from '../../assets/cursos/job-hazard-analysis.jpg'
+import atpmach from '../../assets/cursos/machine-operation.jpg'
+import atpghs from '../../assets/cursos/hazard-communication.jpg'
+import atpequip from '../../assets/cursos/equipment-inspections.jpg'
+import atpinvest from '../../assets/cursos/accidentincident-investigation.jpg'
+
+import hm242 from '../../assets/cursos/hazwoper-annual-refresher.jpg'
+import atpfire from '../../assets/cursos/fire-and-safety.jpg'
+import atpdisaster from '../../assets/cursos/disaster-response.jpg'
+import atpeap from '../../assets/cursos/emergency-action-and-fire-prevention.jpg'
+
+import atpfallinsp from '../../assets/cursos/fall-protection-equipment.jpg'
+import atpfall from '../../assets/cursos/fall-protection.jpg'
+import atpconfined from '../../assets/cursos/confined-space.jpg'
+
+import atpblood from '../../assets/cursos/bloodborne-pathogens.jpg'
+import { useLocation } from 'react-router-dom'
 
 // =========================================================
-// DATOS
-
+// DATOS DE CURSOS
 // =========================================================
 type Course = { 
   id: string; 
@@ -24,10 +62,12 @@ type Course = {
   hours: string; 
   level: string; 
   badge: string; 
-  image: string;
+  image: any; 
   topics?: string[]; 
 }
-import img4 from '../../assets/nosotros/rescate-cta.png'
+
+
+
 const courses: Course[] = [
   // ==========================================
   // OSHA, CSHO, SSH Y NORMATIVA
@@ -36,71 +76,81 @@ const courses: Course[] = [
     id: 'osha-7845', 
     title: 'Recordkeeping Rule Seminar', 
     category: 'OSHA y seguridad', 
-    description: 'Seminario oficial sobre reglas de mantenimiento de registros e informes de incidentes.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'OSHA #7845', image: recordkeep
+    description: 'Seminario oficial sobre reglas de mantenimiento de registros e informes de incidentes de acuerdo al estándar 29 CFR 1904.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'OSHA #7845', image: recordkeep,
+    topics: ['Requisitos de mantenimiento de registros OSHA', 'Instrucciones de los formularios 300, 300A y 301', 'Reporte de fatalidades y hospitalizaciones', 'Reglas de privacidad y casos especiales']
   },
   { 
     id: 'osha-521', 
     title: 'OSHA Guide to Industrial Hygiene', 
     category: 'OSHA y seguridad', 
-    description: 'Guía oficial de OSHA para prácticas de higiene industrial y evaluación de riesgos en el trabajo.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'OSHA #521', image: osha521
+    description: 'Guía oficial para el reconocimiento, evaluación y control de riesgos químicos, físicos y biológicos en el trabajo.', 
+    hours: '16 horas', level: 'Nivel Avanzado', badge: 'OSHA #521', image: osha521,
+    topics: ['Límites de exposición permisibles (PEL)', 'Protocolos y estrategias de muestreo', 'Controles de ingeniería y ventilación', 'Desarrollo de programas de salud laboral']
   },
   { 
     id: 'osha-3015', 
     title: 'Excavation, Trenching and Soil Mechanics', 
     category: 'OSHA y seguridad', 
-    description: 'Normativa para trabajos de excavación, zanjas y análisis de mecánica de suelos.', 
-    hours: '24 horas', level: 'Nivel Avanzado', badge: 'OSHA #3015', image: osha3015
+    description: 'Normativa práctica sobre mecánica de suelos y estabilidad de taludes apuntalados y no apuntalados.', 
+    hours: '24 horas', level: 'Nivel Avanzado', badge: 'OSHA #3015', image: osha3015,
+    topics: ['Clasificación y análisis de mecánica de suelos', 'Tipos de apuntalamiento (madera e hidráulico)', 'Uso de penetrómetros y medidores de corte', 'Sistemas de protección para zanjas']
   },
   { 
     id: 'atp-190', 
-    title: 'Update for Safety and Health Authorized Trainers', 
+    title: 'Update for Authorized Trainers', 
     category: 'OSHA y seguridad', 
-    description: 'Actualización oficial para entrenadores autorizados en seguridad y salud.', 
-    hours: '16 horas', level: 'Instructor', badge: 'ATP 190', image: atp191update
+    description: 'Actualización oficial de normativas e interpretaciones para entrenadores autorizados en seguridad y salud.', 
+    hours: '16 horas', level: 'Instructor', badge: 'ATP 190', image: atp191update,
+    topics: ['Actualización de estándares OSHA', 'Requisitos del programa Outreach Trainer', 'Técnicas efectivas de instrucción', 'Nuevas políticas de cumplimiento']
   },
   { 
     id: 'csho-const', 
     title: 'Certified Safety & Health Official (Construction)', 
     category: 'OSHA y seguridad', 
-    description: 'Certificación oficial de seguridad y salud enfocada en la industria de la construcción.', 
-    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: csho1t 
+    description: 'Certificación profesional integral diseñada para elevar la experiencia en riesgos de la industria constructora.', 
+    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: csho1t,
+    topics: ['Normas generales OSHA de construcción', 'Prevención de atropellos y equipos pesados', 'Auditorías en sitios de construcción', 'Responsabilidades del contratista general']
   },
   { 
     id: 'csho-gen', 
-    title: 'Certified Safety & Health Official (General Industry)', 
+    title: 'Certified Safety & Health Official (General)', 
     category: 'OSHA y seguridad', 
-    description: 'Certificación oficial de seguridad y salud para la industria general.', 
-    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: sindustrial 
+    description: 'Certificación profesional orientada a prevenir enfermedades o lesiones causadas por factores ergonómicos y físicos.', 
+    hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: sindustrial,
+    topics: ['Normativas de la industria general', 'Investigación de incidentes ocupacionales', 'Auditorías de cumplimiento', 'Desarrollo de planes de corrección']
   },
   { 
     id: 'ssh-fire', 
     title: 'Specialist in Safety & Health: Fire Safety', 
     category: 'OSHA y seguridad', 
-    description: 'Especialización en normativas de seguridad contra incendios.', 
-    hours: '24 horas', level: 'Especialista', badge: 'SSH', image: 'https://images.unsplash.com/photo-1605814511210-917eb572cc85?auto=format&fit=crop&q=80&w=800' 
+    description: 'Especialización en evaluación y normativas de seguridad contra incendios.', 
+    hours: '24 horas', level: 'Especialista', badge: 'SSH', image: sshFire,
+    topics: ['Inspección de equipos de prevención', 'Evaluación de rutas de evacuación', 'Sistemas de alarma y extinción', 'Normativas NFPA aplicadas']
   },
   { 
     id: 'ssh-disaster', 
     title: 'Specialist in Safety & Health: Disaster Response', 
     category: 'OSHA y seguridad', 
-    description: 'Especialización en normativas de respuesta ante desastres.', 
-    hours: '24 horas', level: 'Especialista', badge: 'SSH', image: 'https://images.unsplash.com/photo-1541888087525-071de60f8113?auto=format&fit=crop&q=80&w=800' 
+    description: 'Especialización en preparación y coordinación táctica de respuesta ante desastres.', 
+    hours: '24 horas', level: 'Especialista', badge: 'SSH', image: sshDisaster,
+    topics: ['Mantenimiento de planes de respuesta', 'Simulacros de evacuación complejos', 'Coordinación con servicios médicos', 'Sistemas de comando de incidentes']
   },
   { 
     id: 'ssh-const', 
     title: 'Specialist in Safety & Health: Construction', 
     category: 'OSHA y seguridad', 
-    description: 'Especialización en seguridad y salud para la industria constructora.', 
-    hours: '24 horas', level: 'Especialista', badge: 'SSH', image: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800' 
+    description: 'Especialización inicial orientada a comprender los principios básicos de seguridad en construcción.', 
+    hours: '24 horas', level: 'Especialista', badge: 'SSH', image: sshConst,
+    topics: ['Fundamentos de seguridad en obra', 'Inspección de herramientas de potencia', 'Análisis de tareas críticas (AST)', 'Control de contratistas']
   },
   { 
     id: 'atp-191-rec', 
-    title: 'Recordkeeping', 
+    title: 'Recordkeeping Fundamentals', 
     category: 'OSHA y seguridad', 
-    description: 'Fundamentos de mantenimiento de registros de seguridad.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800' 
+    description: 'Fundamentos básicos de mantenimiento de registros de seguridad y salud en el lugar de trabajo.', 
+    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atp191rec,
+    topics: ['Identificación de lesiones registrables', 'Llenado de bitácoras básicas', 'Diferencia entre primeros auxilios y tratamiento', 'Conservación de documentos']
   },
 
   // ==========================================
@@ -110,113 +160,129 @@ const courses: Course[] = [
     id: 'atp-191-8gen', 
     title: '8-Hour General Industry', 
     category: 'Seguridad industrial', 
-    description: 'Programa de 8 horas sobre fundamentos de seguridad para la industria general.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800' 
+    description: 'Programa introductorio de 8 horas sobre fundamentos de seguridad para trabajadores de la industria general.', 
+    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atp8gen,
+    topics: ['Derechos de los trabajadores', 'Riesgos eléctricos y de incendios', 'Uso básico de EPP', 'Prevención de resbalones y caídas']
   },
   { 
     id: 'atp-191-8const', 
     title: '8-Hour Construction Industry', 
     category: 'Seguridad industrial', 
-    description: 'Programa de 8 horas sobre seguridad básica en construcción.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800' 
+    description: 'Programa introductorio de 8 horas enfocado en los peligros más comunes en el sector construcción.', 
+    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atp8const,
+    topics: ['Los cuatro grandes peligros (Focus Four)', 'Conciencia sobre andamios', 'Riesgos de excavaciones simples', 'Equipo de protección personal en obra']
   },
   { 
     id: 'atp-191-24gen', 
     title: '24-Hour General Industry', 
     category: 'Seguridad industrial', 
-    description: 'Capacitación exhaustiva de 24 horas en seguridad para la industria general.', 
-    hours: '24 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?auto=format&fit=crop&q=80&w=800' 
+    description: 'Capacitación exhaustiva en estándares de seguridad operativa para supervisores de la industria general.', 
+    hours: '24 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atp24gen,
+    topics: ['Guarda de maquinarias', 'Manejo de materiales peligrosos', 'Ergonomía industrial', 'Programas de seguridad integrales']
   },
   { 
     id: 'atp-191-24const', 
     title: '24-Hour Construction Industry', 
     category: 'Seguridad industrial', 
-    description: 'Capacitación integral de 24 horas para seguridad en el sector construcción.', 
-    hours: '24 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1541888087525-071de60f8113?auto=format&fit=crop&q=80&w=800' 
+    description: 'Capacitación integral para supervisores y encargados de seguridad en el sector construcción.', 
+    hours: '24 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atp24const,
+    topics: ['Grúas y aparejos básicos', 'Peligros de herramientas eléctricas', 'Señalización y barricadas', 'Inspección de sitios de trabajo']
   },
   { 
     id: 'atp-191-weld', 
     title: 'Welding & Cutting', 
     category: 'Seguridad industrial', 
-    description: 'Protocolos de seguridad para trabajos en caliente, soldadura y corte.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800' 
+    description: 'Protocolos de seguridad para trabajos en caliente, soldadura, corte y prevención de incendios.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpweld,
+    topics: ['Permisos de trabajo en caliente', 'Peligros de humos metálicos', 'Cilindros de gas comprimido', 'Vigilancia de incendios (Fire Watch)']
   },
   { 
     id: 'atp-191-tool', 
     title: 'Tool Safety', 
     category: 'Seguridad industrial', 
-    description: 'Manejo seguro e inspección de herramientas manuales y de potencia.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800' 
+    description: 'Manejo seguro e inspección de herramientas manuales, neumáticas y de potencia.', 
+    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atptool,
+    topics: ['Inspección previa al uso', 'Peligros de herramientas defectuosas', 'Interruptores y guardas de seguridad', 'Manejo de herramientas de impacto']
   },
   { 
     id: 'atp-191-silica', 
-    title: 'Silica', 
+    title: 'Silica Exposure Control', 
     category: 'Seguridad industrial', 
-    description: 'Prevención y control de exposición a sílice cristalina respirable.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800' 
+    description: 'Prevención y control de exposición a sílice cristalina respirable en construcción e industria.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpsilica,
+    topics: ['Reconocimiento de materiales con sílice', 'Sistemas de supresión por agua', 'Uso de aspiradoras HEPA', 'Planes de control de exposición']
   },
   { 
     id: 'atp-191-ppe', 
-    title: 'Personal Protective Equipment (PPE)', 
+    title: 'Personal Protective Equipment', 
     category: 'Seguridad industrial', 
-    description: 'Selección, uso y mantenimiento del Equipo de Protección Personal.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?auto=format&fit=crop&q=80&w=800' 
+    description: 'Evaluación, selección, uso y mantenimiento adecuado del Equipo de Protección Personal.', 
+    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpppe,
+    topics: ['Evaluación de peligros para EPP', 'Ajuste de protección respiratoria', 'Protección ocular y facial', 'Limitaciones del equipo']
   },
   { 
     id: 'atp-191-jha', 
-    title: 'Job Hazard Analysis', 
+    title: 'Job Hazard Analysis (JHA)', 
     category: 'Seguridad industrial', 
-    description: 'Metodología para identificar peligros y establecer controles por tarea (AST/JHA).', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800' 
+    description: 'Metodología paso a paso para identificar peligros y establecer controles en tareas específicas.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpjha,
+    topics: ['Desglose de tareas paso a paso', 'Identificación de peligros latentes', 'Jerarquía de controles', 'Redacción de procedimientos seguros']
   },
   { 
     id: 'atp-191-ladders', 
-    title: 'Ladders', 
+    title: 'Ladder Safety', 
     category: 'Seguridad industrial', 
     description: 'Uso seguro, inspección y normatividad para el trabajo con escaleras portátiles y fijas.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800' 
+    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpladders,
+    topics: ['Regla de los 3 puntos de contacto', 'Ángulo correcto de colocación', 'Escaleras articuladas y de tijera', 'Identificación de daños estructurales']
   },
   { 
     id: 'atp-191-loto', 
-    title: 'Lockout/Tagout', 
+    title: 'Lockout/Tagout (LOTO)', 
     category: 'Seguridad industrial', 
-    description: 'Procedimientos de bloqueo y etiquetado para el control de energías peligrosas.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800' 
+    description: 'Procedimientos de bloqueo y etiquetado para el control efectivo de energías peligrosas.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atploto,
+    topics: ['Aislamiento de energía térmica y mecánica', 'Tipos de candados y dispositivos', 'Procedimientos de liberación de energía', 'Roles de empleados afectados y autorizados']
   },
   { 
     id: 'atp-191-mach', 
-    title: 'Machine Operation', 
+    title: 'Machine Guarding', 
     category: 'Seguridad industrial', 
-    description: 'Operación segura de maquinaria y protección de puntos de operación (Machine Guarding).', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?auto=format&fit=crop&q=80&w=800' 
+    description: 'Operación segura de maquinaria y métodos de protección de puntos de operación mecánicos.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpmach,
+    topics: ['Prevención de amputaciones', 'Guardas fijas y enclavadas', 'Cortinas de luz y sensores', 'Peligros de partes rotativas']
   },
   { 
     id: 'atp-191-ghs', 
     title: 'Hazard Communication (GHS)', 
     category: 'Seguridad industrial', 
-    description: 'Sistema Globalmente Armonizado (GHS) para la comunicación de riesgos químicos.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800' 
+    description: 'Sistema Globalmente Armonizado (GHS) para la comunicación y comprensión de riesgos químicos.', 
+    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpghs,
+    topics: ['Lectura de hojas de datos de seguridad (SDS)', 'Nuevos pictogramas de peligro', 'Etiquetado secundario', 'Vías de exposición a químicos']
   },
   { 
     id: 'atp-191-elec', 
-    title: 'Electrical', 
+    title: 'Electrical Safety', 
     category: 'Seguridad industrial', 
-    description: 'Reconocimiento y prevención de riesgos eléctricos en el lugar de trabajo.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800' 
+    description: 'Reconocimiento y prevención de riesgos eléctricos, relámpagos de arco y descargas en el lugar de trabajo.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpelec,
+    topics: ['Peligros de arco eléctrico (Arc Flash)', 'Distancias de aproximación seguras', 'Uso de interruptores GFCI', 'Calificación para trabajos eléctricos']
   },
   { 
     id: 'atp-191-equip', 
-    title: 'Equipment Inspections', 
+    title: 'Heavy Equipment Inspections', 
     category: 'Seguridad industrial', 
-    description: 'Protocolos sistemáticos para la inspección de equipos y maquinaria.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800' 
+    description: 'Protocolos sistemáticos para la inspección y operación segura de equipos pesados y montacargas.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpequip,
+    topics: ['Listas de verificación diarias', 'Puntos ciegos de maquinaria', 'Peligros de vuelco', 'Comunicación con señalizadores']
   },
   { 
     id: 'atp-191-invest', 
-    title: 'Accident/Incident Investigation', 
+    title: 'Accident Investigation', 
     category: 'Seguridad industrial', 
-    description: 'Técnicas de investigación, análisis de causa raíz y prevención de recurrencia.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800' 
+    description: 'Técnicas de investigación de incidentes, análisis de causa raíz y prevención de recurrencia.', 
+    hours: '16 horas', level: 'Nivel Avanzado', badge: 'ATP 191', image: atpinvest,
+    topics: ['Protección de la escena del incidente', 'Técnicas de entrevista a testigos', 'Metodología de los 5 porqués', 'Redacción de informes finales']
   },
 
   // ==========================================
@@ -226,29 +292,33 @@ const courses: Course[] = [
     id: 'hm-242', 
     title: 'HAZWOPER Annual Refresher', 
     category: 'Emergencias', 
-    description: 'Actualización anual para operaciones con residuos peligrosos y respuesta a emergencias.', 
-    hours: '8 horas', level: 'Nivel Avanzado', badge: 'HM 242', image: 'https://images.unsplash.com/photo-1605814511210-917eb572cc85?auto=format&fit=crop&q=80&w=800' 
+    description: 'Actualización sobre tendencias, control, contención y confinamiento de residuos peligrosos (HAZWOPER).', 
+    hours: '8 horas', level: 'Nivel Avanzado', badge: 'HM 242', image: hm242,
+    topics: ['Sistema de Comando de Incidentes', 'Procedimientos de descontaminación', 'Líquidos inflamables y combustibles', 'Planificación de emergencias']
   },
   { 
     id: 'atp-191-fire', 
-    title: 'Fire & Safety', 
+    title: 'Fire Prevention & Safety', 
     category: 'Emergencias', 
-    description: 'Prevención de incendios, uso de extintores y evacuación segura.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1605814511210-917eb572cc85?auto=format&fit=crop&q=80&w=800' 
+    description: 'Capacitación en uso práctico de extintores, clases de fuego y comportamiento durante evacuaciones.', 
+    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpfire,
+    topics: ['Uso del método PASS (Tirar, Apuntar, Apretar, Barrer)', 'El tetraedro del fuego', 'Riesgos de inhalación de humo', 'Almacenamiento de combustibles']
   },
   { 
     id: 'atp-191-disaster', 
-    title: 'Disaster Response', 
+    title: 'Disaster Response Tactics', 
     category: 'Emergencias', 
-    description: 'Preparación y respuesta táctica ante desastres naturales e industriales.', 
-    hours: '16 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1541888087525-071de60f8113?auto=format&fit=crop&q=80&w=800' 
+    description: 'Preparación operativa y respuesta táctica ante desastres naturales, derrames industriales y crisis.', 
+    hours: '16 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpdisaster,
+    topics: ['Evaluación rápida de daños', 'Operaciones de triaje básico', 'Búsqueda y rescate ligero', 'Psicología de emergencias']
   },
   { 
     id: 'atp-191-eap', 
-    title: 'Emergency Action & Fire Prevention Plans', 
+    title: 'Emergency Action Plans', 
     category: 'Emergencias', 
-    description: 'Desarrollo e implementación de planes de acción de emergencia y prevención.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1605814511210-917eb572cc85?auto=format&fit=crop&q=80&w=800' 
+    description: 'Diseño e implementación de rutas de escape, puntos de reunión y planes de acción de emergencia (EAP).', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpeap,
+    topics: ['Vías de salida y señalización', 'Sistemas de notificación a empleados', 'Asignación de coordinadores de piso', 'Procedimientos de refugio en el lugar']
   },
 
   // ==========================================
@@ -256,24 +326,27 @@ const courses: Course[] = [
   // ==========================================
   { 
     id: 'atp-191-fall-insp', 
-    title: 'Fall Protection Equipment Inspection', 
+    title: 'Fall Equipment Inspection', 
     category: 'Rescate y alturas', 
-    description: 'Inspección detallada y mantenimiento de arneses, líneas de vida y conectores.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800' 
+    description: 'Inspección detallada para detectar desgaste, abrasión química o impacto en equipos de protección contra caídas.', 
+    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpfallinsp,
+    topics: ['Costuras e indicadores de impacto', 'Corrosión en conectores y ganchos', 'Pruebas de bloqueo de líneas retráctiles', 'Registro de mantenimiento']
   },
   { 
     id: 'atp-191-fall', 
-    title: 'Fall Protection', 
+    title: 'Fall Protection Systems', 
     category: 'Rescate y alturas', 
-    description: 'Sistemas de protección contra caídas, cálculo de claridad y técnicas de anclaje.', 
-    hours: '16 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1541888087525-071de60f8113?auto=format&fit=crop&q=80&w=800' 
+    description: 'Uso de sistemas personales de detención y restricción, cálculo de espacio libre y selección de anclajes.', 
+    hours: '16 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpfall,
+    topics: ['Componentes de sistemas de detención (PFAS)', 'Sistemas pasivos (barandillas y redes)', 'Cálculo de distancia de caída libre', 'Planes de rescate en altura']
   },
   { 
     id: 'atp-191-confined', 
-    title: 'Confined Space', 
+    title: 'Confined Space Entry', 
     category: 'Rescate y alturas', 
-    description: 'Identificación de riesgos, monitoreo atmosférico y protocolos de rescate en espacios confinados.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?auto=format&fit=crop&q=80&w=800' 
+    description: 'Identificación de riesgos con permiso requerido, monitoreo atmosférico y protocolos de extracción.', 
+    hours: '16 horas', level: 'Nivel Avanzado', badge: 'ATP 191', image: atpconfined,
+    topics: ['Monitoreo de gases y oxígeno', 'Uso de trípodes y winches', 'Funciones del entrante, asistente y supervisor', 'Ventilación mecánica y purga']
   },
 
   // ==========================================
@@ -283,74 +356,100 @@ const courses: Course[] = [
     id: 'atp-191-blood', 
     title: 'Bloodborne Pathogens', 
     category: 'Médico', 
-    description: 'Control de exposición y prevención de transmisión de patógenos de transmisión sanguínea.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: 'https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&q=80&w=800' 
+    description: 'Estándar OSHA para prevención de transmisión de patógenos sanguíneos, VIH y Hepatitis en el trabajo.', 
+    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpblood,
+    topics: ['Precauciones universales', 'Prácticas de ingeniería y limpieza', 'Planes de control de exposición', 'Eliminación de objetos punzocortantes']
   },
 ]
-
-function CourseCard({ course, featured }: { course: typeof courses[0], featured?: boolean }) {
+function CourseCard({ course, featured }: { course: Course, featured?: boolean }) {
   const isOrange = !course.badge.includes('OSHA');
+
+  // Función para armar el mensaje de WhatsApp y redirigir
+  const handleConsultar = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Evita que se haga clic en la tarjeta completa
+    const phone = "51999999999"; // ¡CAMBIA ESTO POR TU NÚMERO REAL DE WHATSAPP!
+    const message = `Hola, estoy muy interesado en obtener información y consultar disponibilidad sobre el curso: *${course.title}* (${course.badge}). ¡Gracias!`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
+
 
   return (
     <article 
-      className={`group relative cursor-pointer overflow-hidden rounded-[4px] border border-[#d9e2e8] bg-white/75 shadow-[0_7px_17px_rgba(25,52,69,.04)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(25,52,69,.1)] ${
-        featured ? 'min-h-[405px] border-0 bg-[#071522] text-white' : ''
+      className={`group relative cursor-pointer overflow-hidden rounded-[4px] border border-[#d9e2e8] bg-white/75 shadow-[0_7px_17px_rgba(25,52,69,.04)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(25,52,69,.1)] flex flex-col ${
+        featured ? 'min-h-[580px] border-0 bg-[#071522] text-white' : 'h-full'
       }`}
     >
       {/* Contenedor de la Imagen */}
       <div 
-        className={`relative h-[84px] bg-cover bg-center ${
-          featured ? 'h-full min-h-[405px] bg-[position:43%_center]' : ''
+        className={`relative h-[120px] bg-cover bg-center shrink-0 ${
+          featured ? 'absolute inset-0 h-full bg-[position:center_30%]' : ''
         }`} 
         style={{ backgroundImage: `url(${course.image})` }}
       >
-        {/* Badge (Etiqueta superior izquierda) */}
         <span 
-          className={`absolute left-2.5 top-2.5 z-20 rounded-[3px] px-2 py-1 text-[8px] font-bold text-white ${
+          className={`absolute left-3 top-3 z-20 rounded-[3px] px-2 py-1 text-[9px] font-bold tracking-wider text-white ${
             isOrange ? 'bg-[#ff7414]' : 'bg-[#0c3856]'
           }`}
         >
           {course.badge}
         </span>
         
-        {/* ======================================================
-            GRADIENTE PARA LA TARJETA DESTACADA (Más oscuro abajo)
-        ====================================================== */}
         {featured && (
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#05121d] via-[#05121d]/80 to-transparent" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#071522] via-[#071522]/80 to-transparent" />
         )}
       </div>
-      
-      {/* Contenido Tarjeta Normal */}
-      {!featured && (
-        <div className="p-[11px_10px_10px]">
-          <p className="text-[9px] tracking-[.2px] text-[#60778a]">{course.category}</p>
-          <h2 className="my-[5px] text-[11px] font-bold leading-[1.22] text-[#102235] line-clamp-2">{course.title}</h2>
-          <p className="min-h-[27px] text-[8.5px] leading-[1.35] text-[#587084] line-clamp-2">{course.description}</p>
-          <div className="mt-3.5 flex items-center gap-3.5 border-t border-[#e4eaed] pt-[9px] text-[8px] text-[#59788e]">
-            <span className="flex items-center gap-1 whitespace-nowrap"><Clock3 size={14} />{course.hours}</span>
-            <span className="flex items-center gap-1 whitespace-nowrap"><BookOpen size={14} />{course.level.replace('Nivel ', '')}</span>
-            <ArrowRight size={16} className="ml-auto text-[#2d536a]" />
+
+      {/* Contenido */}
+      <div className={`flex flex-col flex-grow p-4 ${featured ? 'relative z-20 mt-auto p-6' : ''}`}>
+        <p className={`text-[10px] uppercase tracking-wider mb-1 font-semibold ${featured ? 'text-[#ff7414]' : 'text-[#ff7414]'}`}>
+          {course.category}
+        </p>
+        <h2 className={`mb-2 font-bold leading-[1.1] ${featured ? 'text-[28px] text-white' : 'text-[16px] text-[#0a1727]'}`}>
+          {course.title}
+        </h2>
+        <p className={`mb-4 text-[12px] leading-[1.4] line-clamp-2 ${featured ? 'text-[#e0e8eb] max-w-[400px]' : 'text-[#5e7488]'}`}>
+          {course.description}
+        </p>
+
+        {/* Sección de Temario Previo */}
+        {course.topics && (
+          <div className={`mb-4 flex-grow ${featured ? 'max-w-[400px]' : ''}`}>
+            <p className={`text-[11px] font-bold mb-2 ${featured ? 'text-white' : 'text-[#0a1727]'}`}>Lo que aprenderás:</p>
+            <ul className="flex flex-col gap-1.5">
+              {course.topics.slice(0, 3).map((topic, idx) => (
+                <li key={idx} className={`flex items-start gap-2 text-[11px] leading-[1.3] ${featured ? 'text-[#cbd5e1]' : 'text-[#475569]'}`}>
+                  <CheckCircle2 size={12} className="shrink-0 mt-[1px] text-[#22c55e]" />
+                  <span>{topic}</span>
+                </li>
+              ))}
+              {course.topics.length > 3 && (
+                <li className={`text-[10px] italic mt-1 ${featured ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
+                  + otros temas específicos...
+                </li>
+              )}
+            </ul>
           </div>
+        )}
+
+        <div className={`mt-auto flex flex-wrap gap-x-4 gap-y-2 border-t py-3 text-[10px] font-medium ${featured ? 'border-white/10 text-[#cbd5e1]' : 'border-[#e2e8f0] text-[#64748b]'}`}>
+          <span className="flex items-center gap-1.5"><Clock3 size={13} className={featured ? 'text-[#ff7414]' : 'text-[#ff7414]'} />{course.hours}</span>
+          <span className="flex items-center gap-1.5"><BookOpen size={13} className={featured ? 'text-[#ff7414]' : 'text-[#ff7414]'} />{course.level}</span>
         </div>
-      )}
-      
-      {/* Contenido Tarjeta Destacada (Flotando sobre el gradiente oscuro) */}
-      {featured && (
-        <div className="absolute bottom-[22px] left-[23px] right-[23px] z-20">
-          <p className="text-[9px] text-[#eaf0f3]">{course.category}</p>
-          <h2 className="my-[9px] max-w-[250px] text-[23px] font-bold leading-[.98] text-white">{course.title}</h2>
-          <p className="mb-4 max-w-[290px] text-[10px] leading-[1.4] text-[#e0e8eb] line-clamp-2">{course.description}</p>
-          <div className="flex gap-3 border-t border-white/20 py-3 text-[8px] text-[#e6ebed]">
-            <span className="flex items-center gap-1"><Clock3 size={14} className="text-[#ff7414]" />{course.hours}</span>
-            <span className="flex items-center gap-1"><BookOpen size={14} className="text-[#ff7414]" />{course.level.replace('Nivel ', '')}</span>
-            <span className="flex items-center gap-1"><Award size={14} className="text-[#ff7414]" />Certificación incluida</span>
-          </div>
-          <button className="flex items-center gap-3 rounded-[4px] border-0 bg-[#ff7414] hover:bg-[#e66a0c] transition-colors px-3.5 py-[9px] text-[9px] font-bold text-white">
-            VER DETALLES <ArrowRight size={15} />
-          </button>
-        </div>
-      )}
+
+        {/* Botón Consultar WhatsApp */}
+        <button 
+          onClick={handleConsultar}
+          className={`w-full flex items-center justify-center gap-2 rounded-[4px] border-0 transition-colors py-[10px] text-[11px] font-bold tracking-wide mt-2 ${
+            featured 
+              ? 'bg-[#ff7414] hover:bg-[#e66a0c] text-white shadow-lg shadow-[#ff7414]/20' 
+              : 'bg-[#0a1727] hover:bg-[#112338] text-white'
+          }`}
+        >
+          CONSULTAR CURSO <MessageCircle size={14} />
+        </button>
+      </div>
     </article>
   )
 }
@@ -361,10 +460,30 @@ export default function Page() {
   
   // 1. Estados básicos
   const [activeCategory, setActiveCategory] = useState('Todos');
-  const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+   
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', ''); 
+      const element = document.getElementById(id);
+      
+      if (element) {
+        
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  // 1. Extraemos lo que venga en la URL después de "?search="
+  const searchParams = new URLSearchParams(location.search);
+  const initialSearch = searchParams.get('search') || '';
+
+  // 2. Se lo pasamos al estado inicial del buscador
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   
-  // 2. Estado para el curso seleccionado (Tarjeta Gigante)
-  const [selected, setSelected] = useState<typeof courses[0]>(courses[0]); 
   
   // 3. Estados para la Paginación
   const [page, setPage] = useState(1);
@@ -415,12 +534,16 @@ export default function Page() {
               Cursos especializados en seguridad industrial, protección civil y atención prehospitalaria, diseñados para fortalecer la prevención, reducir riesgos y salvar vidas en el entorno laboral.
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10 lg:mb-12">
-              <button className="bg-[#F58220] hover:bg-[#e67515] text-white px-6 py-4 lg:py-3.5 rounded text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#F58220]/20">
+              <button className="bg-[#F58220] hover:bg-[#e67515] text-white px-6 py-4 lg:py-3.5 rounded text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#F58220]/20"
+              onClick={()=>{
+                document.getElementById('cursos')?.scrollIntoView()
+              }}
+              >
                 VER NUESTROS CURSOS <ArrowRight size={16} />
               </button>
-              <button className="bg-white border border-slate-300 hover:border-[#004a99] text-[#004a99] px-6 py-4 lg:py-3.5 rounded text-xs font-bold uppercase tracking-widest transition-colors text-center">
+              {/* <button className="bg-white border border-slate-300 hover:border-[#004a99] text-[#004a99] px-6 py-4 lg:py-3.5 rounded text-xs font-bold uppercase tracking-widest transition-colors text-center">
                 HABLAR CON UN ASESOR
-              </button>
+              </button> */}
             </div>
             
             <div className="grid grid-cols-2 lg:flex lg:flex-wrap items-start lg:items-center gap-6 lg:gap-12">
@@ -527,62 +650,109 @@ export default function Page() {
           </div>
         </header>
 
-        {/* ¡FIX 4! Nuevamente, minmax(0,1fr) evita que las tarjetas rompan su contenedor */}
-        <div className="grid grid-cols-1 lg:grid-cols-[400px_minmax(0,1fr)] xl:grid-cols-[500px_minmax(0,1fr)] gap-[23px] items-start">
+{/* ========================================== */}
+        {/* CONTENEDOR PRINCIPAL: PANEL + CURSOS       */}
+        {/* ========================================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[360px_minmax(0,1fr)] gap-8 items-start">
           
-          <div 
-            className="min-w-0 rounded-[4px] outline-none focus-visible:shadow-[0_0_0_3px_rgba(255,126,24,.45)] cursor-pointer h-full min-h-[580px] [&>article]:h-full" 
-            role="button" 
-            tabIndex={0} 
-            onClick={() => setSelected(selected)} 
-          >
-            <CourseCard course={selected} featured={true} />
+          {/* 1. PANEL DE CONFIANZA (Izquierda - Sticky) */}
+         <div className={`sticky top-24 rounded-xl bg-[#071522] p-8 text-white shadow-xl shadow-[#071522]/10 flex flex-col border border-white/10 ${pageCount > 1 ? 'mt-[56px]' : ''}`}>
+            
+            <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#ff7414]/20 text-[#ff7414]">
+              <ShieldCheck size={28} />
+            </div>
+            
+            {/* TÍTULO CORREGIDO: Le agregué text-white explícitamente */}
+            <h3 className="mb-4 text-[26px] font-bold leading-tight text-white">
+              Impulsa tu carrera con <span className="text-[#ff7414]">expertos</span>
+            </h3>
+            
+            {/* PÁRRAFO CORREGIDO: Lo puse un poco más clarito (text-[#e2e8f0]) */}
+            <p className="mb-8 text-[13px] leading-relaxed text-[#e2e8f0]">
+              No solo dictamos cursos, formamos líderes en prevención. Beneficios de certificarte con nosotros:
+            </p>
+
+            {/* Viñetas / Bullet points */}
+            <ul className="mb-8 flex flex-col gap-5">
+              <li className="flex items-start gap-3 text-[13px] text-[#e2e8f0]">
+                <Award size={18} className="shrink-0 text-[#ff7414]" />
+                <span><strong className="text-white block">Instructores ATP</strong> Entrenadores autorizados por OSHA.</span>
+              </li>
+              <li className="flex items-start gap-3 text-[13px] text-[#e2e8f0]">
+                <BookOpen size={18} className="shrink-0 text-[#ff7414]" />
+                <span><strong className="text-white block">Material Oficial</strong> Contenido 100% actualizado a normativas internacionales.</span>
+              </li>
+              <li className="flex items-start gap-3 text-[13px] text-[#e2e8f0]">
+                <Users size={18} className="shrink-0 text-[#ff7414]" />
+                <span><strong className="text-white block">Networking</strong> Únete a una red de miles de profesionales de seguridad.</span>
+              </li>
+            </ul>
+
+            {/* Botón Asesor General */}
+            <button 
+              onClick={() => {
+                const url = `https://wa.me/51999999999?text=${encodeURIComponent('Hola AMPREH, deseo asesoría general para elegir el curso ideal para mi perfil profesional.')}`;
+                window.open(url, '_blank');
+              }}
+              className="mt-auto w-full flex items-center justify-center gap-2 rounded bg-[#ff7414] hover:bg-[#e66a0c] transition-colors py-4 text-[12px] font-bold uppercase tracking-wider text-white"
+            >
+              SOLICITAR MAS INFORMACION
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-[18px]">
-            {visibleCourses.map((course) => (
-              <div key={course.id} onClick={() => setSelected(course)}>
-                <CourseCard course={course} featured={false} />
-              </div>
-            ))}
+{/* 2. CONTENEDOR DE CURSOS Y PAGINACIÓN (Derecha) */}
+          <div className="flex flex-col min-w-0">
+            
+            {/* Paginación Arriba */}
+            {pageCount > 1 && (
+              <nav aria-label="Paginación de cursos" className="mb-6 flex items-center justify-end gap-2">
+                <button 
+                  disabled={page === 1} 
+                  onClick={() => setPage((current) => Math.max(1, current - 1))} 
+                  className="flex h-8 w-8 items-center justify-center rounded border border-[#d6e0e5] bg-white text-[#294157] transition hover:border-[#ff7414] disabled:cursor-not-allowed disabled:opacity-40" 
+                >
+                  <ArrowLeft size={14} />
+                </button>
+                
+                {Array.from({ length: pageCount }, (_, index) => index + 1).map((pageNumber) => (
+                  <button 
+                    key={pageNumber} 
+                    onClick={() => setPage(pageNumber)} 
+                    aria-current={page === pageNumber ? 'page' : undefined} 
+                    className={`h-8 min-w-[32px] rounded px-2 text-[11px] font-semibold transition-colors ${
+                      page === pageNumber 
+                        ? 'bg-[#071522] text-white' 
+                        : 'border border-[#d6e0e5] bg-white text-[#294157] hover:border-[#ff7414]'
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                ))}
+
+                <button 
+                  disabled={page === pageCount} 
+                  onClick={() => setPage((current) => Math.min(pageCount, current + 1))} 
+                  className="flex h-8 w-8 items-center justify-center rounded border border-[#d6e0e5] bg-white text-[#294157] transition hover:border-[#ff7414] disabled:cursor-not-allowed disabled:opacity-40" 
+                >
+                  <ArrowRight size={14} />
+                </button>
+              </nav>
+            )}
+
+            {/* Grilla de Tarjetas de Cursos */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-6">
+              {visibleCourses.map((course) => (
+                <div key={course.id}>
+                  <CourseCard course={course} featured={false} />
+                </div>
+              ))}
+            </div>
+
           </div>
 
         </div>
 
-        {pageCount > 1 && (
-          <nav aria-label="Paginación de cursos" className="mt-8 flex items-center justify-end gap-2">
-            <button 
-              disabled={page === 1} 
-              onClick={() => setPage((current) => Math.max(1, current - 1))} 
-              className="flex h-8 w-8 items-center justify-center rounded border border-[#d6e0e5] bg-white text-[#294157] transition hover:border-[#ff7414] disabled:cursor-not-allowed disabled:opacity-40" 
-            >
-              <ArrowLeft size={14} />
-            </button>
-            
-            {Array.from({ length: pageCount }, (_, index) => index + 1).map((pageNumber) => (
-              <button 
-                key={pageNumber} 
-                onClick={() => setPage(pageNumber)} 
-                aria-current={page === pageNumber ? 'page' : undefined} 
-                className={`h-8 min-w-[32px] rounded px-2 text-[11px] font-semibold transition-colors ${
-                  page === pageNumber 
-                    ? 'bg-[#071522] text-white' 
-                    : 'border border-[#d6e0e5] bg-white text-[#294157] hover:border-[#ff7414]'
-                }`}
-              >
-                {pageNumber}
-              </button>
-            ))}
 
-            <button 
-              disabled={page === pageCount} 
-              onClick={() => setPage((current) => Math.min(pageCount, current + 1))} 
-              className="flex h-8 w-8 items-center justify-center rounded border border-[#d6e0e5] bg-white text-[#294157] transition hover:border-[#ff7414] disabled:cursor-not-allowed disabled:opacity-40" 
-            >
-              <ArrowRight size={14} />
-            </button>
-          </nav>
-        )}
 
       </section>   
 

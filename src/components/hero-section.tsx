@@ -7,15 +7,17 @@ import heroImg from '../assets/inicio/hero.png'
 import oshaLogo from '../assets/inicio/OSHA_LOGO.png'
 import ecsiLogo from '../assets/inicio/ECSI_LOGO.png'
 import stbLogo from '../assets/inicio/STOPBLEED_LOGO.png'
+import proteclogo from '../assets/inicio/PROTEC_LOGO.png'
 
 const credentials = [
-  { 
+{ 
     bg: 'white', 
-    logo: oshaLogo, 
-    desc: 'Cumplimos con los estándares de seguridad y salud ocupacional más rigurosos.', 
+    logo: proteclogo, 
+    desc: 'Registros y programas internos alineados a la normativa del Sistema Nacional de Protección Civil.', 
     linkText: 'VER CERTIFICACIÓN', 
     to: '/servicios' 
   },
+
   { 
     bg: 'blue', 
     logo: ecsiLogo, 
@@ -23,6 +25,15 @@ const credentials = [
     linkText: 'VER CERTIFICACIÓN', 
     to: '/servicios' 
   },
+
+  { 
+    bg: 'white', 
+    logo: oshaLogo, 
+    desc: 'Cumplimos con los estándares de seguridad y salud ocupacional más rigurosos.', 
+    linkText: 'VER CERTIFICACIÓN', 
+    to: '/servicios' 
+  },
+
   { 
     bg: 'white', 
     logo: stbLogo, 
@@ -122,7 +133,7 @@ export function HeroSection() {
           
           {/* Bloque Izquierdo: Las 3 Certificaciones */}
           <div className="flex flex-col sm:flex-row w-full lg:w-[70%] items-center justify-between border-y lg:border-y-0 lg:border-t border-slate-700/50 py-8 lg:py-10">
-            {credentials.slice(0, 3).map((item, index) => (
+            {credentials.slice(0, 4).map((item, index) => (
               <div 
                 key={index} 
                 className={`flex flex-col w-full sm:w-1/3 px-4 ${
@@ -157,7 +168,7 @@ export function HeroSection() {
           {/* Bloque Derecho: Tarjeta de Contacto (El Call to Action) */}
           <div className="w-full lg:w-[28%] flex items-center lg:justify-end">
             <a 
-              href={credentials[3].href} 
+              href={credentials[4].href} 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full bg-[#051124]/80 backdrop-blur-md border border-slate-700/50 p-6 rounded-lg lg:rounded-tl-none lg:rounded-bl-none transition-all hover:bg-[#071836] group"
@@ -177,12 +188,12 @@ export function HeroSection() {
                     ¿NECESITAS ORIENTACIÓN?
                   </h4>
                   <p className="text-[11px] text-slate-400 leading-relaxed mb-6">
-                    {credentials[3].desc}
+                    {credentials[4].desc}
                   </p>
                   
                   <div className="flex items-center text-[10px] font-bold uppercase tracking-[0.1em] text-[#ff7414]">
                     <ArrowRight className="mr-2 h-3 w-3 transition-transform group-hover:translate-x-1" strokeWidth={2.5} /> 
-                    {credentials[3].linkText}
+                    {credentials[4].linkText}
                   </div>
                 </div>
 

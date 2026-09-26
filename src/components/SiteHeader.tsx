@@ -50,9 +50,9 @@ export default function SiteHeader() {
             
             {/* Esto se oculta en celular para no amontonar, se ve en tablet/PC */}
             {/* <div className="hidden md:flex items-center gap-8">
-              <a href="mailto:edgar_diazcovarrubias@ampreh.com.mx" className="flex items-center gap-2.5 transition-colors hover:text-[#F58220]">
+              <a href="mailto:servicios@ampre.com.mx" className="flex items-center gap-2.5 transition-colors hover:text-[#F58220]">
                 <Mail className="size-3.5" />
-                edgar_diazcovarrubias@ampreh.com.mx
+                servicios@ampre.com.mx
               </a>
               <span className="flex items-center gap-2.5 text-blue-200">
                 <MapPin className="size-3.5" />
