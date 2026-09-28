@@ -77,11 +77,10 @@ export default function SiteFooter() {
             <h4 className="text-[10px] font-black uppercase text-[#0a1727] tracking-widest mb-2">Servicios</h4>
             <div className="w-6 h-[2px] bg-[#F58220] mb-5"></div>
             <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500">
-              <li><Link to="/servicios#capacitacion" className="hover:text-[#F58220] transition-colors">Capacitación Empresarial</Link></li>
-              <li><Link to="/servicios#proteccion" className="hover:text-[#F58220] transition-colors">Consultoría en Seguridad</Link></li>
-              <li><Link to="/servicios#proteccion" className="hover:text-[#F58220] transition-colors">Simulacros y Evacuación</Link></li>
-              <li><Link to="/servicios#operaciones" className="hover:text-[#F58220] transition-colors">Asesoría en SST</Link></li>
-              <li><Link to="/servicios#atencion" className="hover:text-[#F58220] transition-colors">Atención Prehospitalaria</Link></li>
+              <li><Link to="/servicios#operaciones" className="hover:text-[#F58220] transition-colors">Respuesta a Emergencias</Link></li>
+              <li><Link to="/servicios#proteccion" className="hover:text-[#F58220] transition-colors">Planes de Evacuación</Link></li>
+              <li><Link to="/servicios#atencion" className="hover:text-[#F58220] transition-colors">Atención Médica Prehospitalaria</Link></li>
+              <li><Link to="/servicios#capacitacion" className="hover:text-[#F58220] transition-colors">Formación y Certificación</Link></li>
             </ul>
           </div>
 
