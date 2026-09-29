@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
-
 import impactImg from '../assets/inicio/impacto.png'
 
 // 1. CONTADOR ULTRA-OPTIMIZADO (Mutación directa al DOM, cero re-renders)
@@ -42,10 +41,8 @@ const AnimatedCounter = ({
   return <span ref={nodeRef}>0</span>
 }
 
-
 // 2. SECCIÓN PRINCIPAL
 export function ImpactSection() {
-  // Este estado cambia una sola vez. No impacta el rendimiento.
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -90,7 +87,6 @@ export function ImpactSection() {
 
       <div className="relative z-10 mx-auto mt-40 w-full max-w-7xl px-6 lg:px-8">
         <div 
-          // Agregamos transform-gpu para aceleración por hardware
           className={`max-w-2xl transition-all duration-1000 ease-out delay-1000 transform-gpu will-change-[opacity,transform] ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24'
           }`}
@@ -117,8 +113,9 @@ export function ImpactSection() {
       <div className="flex-grow"></div>
 
       <div className="relative z-10 mx-auto my-auto w-full max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-3 lg:gap-12">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
           
+        {/* COLUMNA IZQUIERDA */}
           <div
             className={`flex flex-col gap-10 transition-all duration-1000 ease-out delay-300 transform-gpu will-change-[opacity,transform] ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'
@@ -134,15 +131,26 @@ export function ImpactSection() {
 
             <div className="border-l-4 border-[#004a99] pl-4">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
-                <AnimatedCounter end={3} isVisible={isVisible} />
+                <AnimatedCounter end={4} isVisible={isVisible} />
               </div>
               <p className="mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Estándares Globales</p>
               <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">OSHA, ECSI y Stop the Bleed</p>
             </div>
+            
+            {/* NUEVO CONTADOR DE CURSOS (Alineado a la izquierda, número en blanco) */}
+            <div className="border-l-4 border-[#ff7414] pl-4">
+              <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
+                +<AnimatedCounter end={34} isVisible={isVisible} />
+              </div>
+              <p className="mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Programas de Formación</p>
+              <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Protección Civil y Seguridad</p>
+            </div>
           </div>
 
-          <div className="hidden min-h-[350px] lg:block"></div>
+    
 
+
+          {/* COLUMNA DERECHA */}
           <div
             className={`flex flex-col gap-10 transition-all duration-1000 ease-out delay-500 transform-gpu will-change-[opacity,transform] ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-16'
@@ -158,7 +166,7 @@ export function ImpactSection() {
 
             <div className="border-r-4 border-[#D32F2F] pr-4 text-right ">
               <div className="text-4xl font-black text-white lg:text-5xl [text-shadow:_0_4px_24px_rgb(0_0_0_/_100%)]">
-                +<AnimatedCounter end={500} isVisible={isVisible} />
+                +<AnimatedCounter end={5000} isVisible={isVisible} />
               </div>
               <p className="flex justify-end ml-auto mt-2 text-xs font-bold uppercase tracking-widest w-fit text-white bg-blue-700 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Brigadistas</p>
               <p className="mt-1 text-xs font-semibold text-slate-100 [text-shadow:_0_2px_10px_rgb(0_0_0_/_100%)]">Formados y certificados en campo</p>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowRight, Award,  Clock3, FileText, Search, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft, MessageCircle, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Award,  Clock3, FileText, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft, MessageCircle, CheckCircle2 } from 'lucide-react'
 import CtaSection from '../../components/CtaSection'
 
 // IMÁGENES BASE (Intactas)
@@ -66,301 +66,444 @@ type Course = {
   topics?: string[]; 
 }
 
-
-
 const courses: Course[] = [
   // ==========================================
-  // OSHA, CSHO, SSH Y NORMATIVA
+  // 1. PROTECCIÓN CIVIL (Brigadas STPS DC-3)
   // ==========================================
   { 
-    id: 'osha-7845', 
-    title: 'Recordkeeping Rule Seminar', 
-    category: 'OSHA y seguridad', 
-    description: 'Seminario oficial sobre reglas de mantenimiento de registros e informes de incidentes de acuerdo al estándar 29 CFR 1904.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'OSHA #7845', image: recordkeep,
-    topics: ['Requisitos de mantenimiento de registros OSHA', 'Instrucciones de los formularios 300, 300A y 301', 'Reporte de fatalidades y hospitalizaciones', 'Reglas de privacidad y casos especiales']
+    id: 'pc-evacuacion', 
+    title: 'Evacuación, Búsqueda y Rescate (Brigada Multifuncional)', 
+    category: 'Protección Civil', 
+    description: 'Capacitación para brigadas en diseño de rutas de evacuación, sistemas de alerta y técnicas de rescate.', 
+    hours: '8 horas', level: 'Brigadista', badge: 'STPS DC-3', image: atpconfined,
+    topics: ['Sistemas de Alerta y Comunicación', 'Diseño y Manejo de Rutas de Evacuación', 'Procedimientos de Búsqueda y Localización', 'Técnicas Básicas de Rescate y Transporte']
   },
   { 
-    id: 'osha-521', 
-    title: 'OSHA Guide to Industrial Hygiene', 
-    category: 'OSHA y seguridad', 
-    description: 'Guía oficial para el reconocimiento, evaluación y control de riesgos químicos, físicos y biológicos en el trabajo.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'OSHA #521', image: osha521,
-    topics: ['Límites de exposición permisibles (PEL)', 'Protocolos y estrategias de muestreo', 'Controles de ingeniería y ventilación', 'Desarrollo de programas de salud laboral']
+    id: 'pc-incendios', 
+    title: 'Combate de Incendios (Brigada contra Incendios)', 
+    category: 'Protección Civil', 
+    description: 'Formación teórico-práctica para brigadas en el manejo de extintores, sistemas fijos y respuesta a conatos de incendio.', 
+    hours: '8 horas', level: 'Brigadista', badge: 'STPS DC-3', image: atpfire,
+    topics: ['Teoría del Fuego y Clasificación', 'Uso y Manejo de Extintores Portátiles (PASS)', 'Sistemas Fijos y Redes Contra Incendios', 'Tácticas de Respuesta Inicial y Prevención']
+  },
+  { 
+    id: 'pc-escolar', 
+    title: 'Seguridad y Prevención Escolar', 
+    category: 'Protección Civil', 
+    description: 'Curso diseñado para dotar de conocimientos de prevención y primer respondiente a personal de guarderías y educación.', 
+    hours: '6 horas', level: 'Básico', badge: 'SEP / PC', image: atpeap,
+    topics: ['Prevención de riesgos infantiles', 'Formación de brigadistas escolares', 'Cumplimiento de la Ley de Educación', 'Atención de emergencias']
+  },
+  { 
+    id: 'pc-stps', 
+    title: 'Comisión de Seguridad e Higiene (STPS)', 
+    category: 'Protección Civil', 
+    description: 'Curso teórico-práctico para la integración y funcionamiento de la Comisión de Seguridad e Higiene.', 
+    hours: '8 horas', level: 'Intermedio', badge: 'STPS DC-3', image: recordkeep,
+    topics: ['Marco legal estipulado por la ley', 'Responsabilidades legales de la comisión', 'Documentación y actas', 'Recorridos de verificación']
+  },
+
+  // ==========================================
+  // 2. OSHA (10 y 30 Horas + Disaster Site)
+  // ==========================================
+  { 
+    id: 'osha-30const', 
+    title: '30-Hour Construction Industry Outreach Training', 
+    category: 'OSHA', 
+    description: 'Programa exhaustivo sobre normativas de construcción, los "Focus Four" y gestión integral de la seguridad.', 
+    hours: '30 horas', level: 'Avanzado', badge: 'OSHA 30', image: sshConst,
+    topics: ['Gestión de la Seguridad', 'Los Cuatro Peligros Principales (Focus Four)', 'Riesgos para la Salud en Construcción', 'Excavaciones y andamios']
+  },
+  { 
+    id: 'osha-30gen', 
+    title: '30-Hour General Industry Outreach Training', 
+    category: 'OSHA', 
+    description: 'Formación profunda en normativas de la industria general (29 CFR 1910) para supervisores.', 
+    hours: '30 horas', level: 'Avanzado', badge: 'OSHA 30', image: sindustrial,
+    topics: ['Normas de Superficies de Trabajo', 'Materiales Peligrosos y GHS', 'Espacios Confinados (LOTO)', 'Ergonomía']
+  },
+  { 
+    id: 'osha-15disaster', 
+    title: '15-Hour Outreach Training for Disaster Site Workers', 
+    category: 'OSHA', 
+    description: 'Preparación avanzada para trabajadores de respuesta en escenarios de catástrofe y recuperación.', 
+    hours: '15 horas', level: 'Avanzado', badge: 'OSHA', image: hm242,
+    topics: ['Marco Normativo y Gestión de Incidentes (ICS)', 'Peligros Físicos Avanzados', 'Materiales Peligrosos', 'Seguridad en Operaciones de Rescate']
+  },
+  { 
+    id: 'osha-10const', 
+    title: '10-Hour Construction Industry Outreach Training', 
+    category: 'OSHA', 
+    description: 'Introducción normativa a la prevención de riesgos y obligaciones patronales en construcción.', 
+    hours: '10 horas', level: 'Intermedio', badge: 'OSHA 10', image: atp8const,
+    topics: ['Normativa (29 CFR 1926)', 'Prevención de caídas', 'Riesgos por sílice y plomo', 'Uso de herramientas']
+  },
+  { 
+    id: 'osha-10gen', 
+    title: '10-Hour General Industry Outreach Training', 
+    category: 'OSHA', 
+    description: 'Conocimientos fundamentales sobre los derechos de los trabajadores y prevención de lesiones.', 
+    hours: '10 horas', level: 'Intermedio', badge: 'OSHA 10', image: atp8gen,
+    topics: ['Derechos de los trabajadores', 'Protección contra caídas', 'Seguridad Eléctrica', 'Equipo de Protección Personal']
+  },
+  { 
+    id: 'osha-75disaster', 
+    title: '7.5-Hour Outreach Training for Disaster Site Workers', 
+    category: 'OSHA', 
+    description: 'Criterios esenciales para evaluación de riesgos en escenarios de desastre y protocolos iniciales.', 
+    hours: '7.5 horas', level: 'Intermedio', badge: 'OSHA', image: atpdisaster,
+    topics: ['Criterios de OSHA en respuesta', 'Identificación de riesgos', 'EPP Específico', 'Manejo seguro de escombros']
+  },
+
+  // ==========================================
+  // 3. PRIMEROS AUXILIOS (Programas ECSI)
+  // ==========================================
+  { 
+    id: 'fa-emr', 
+    title: 'Emergency Medical Responder', 
+    category: 'Primeros Auxilios', 
+    description: 'Capacitación del más alto nivel para primeros intervinientes médicos en situaciones críticas.', 
+    hours: '40 horas', level: 'Especialista', badge: 'ECSI', image: csho1t,
+    topics: ['Evaluación del paciente', 'Soporte vital avanzado', 'Manejo de trauma complejo', 'Operaciones de rescate']
+  },
+  { 
+    id: 'fa-wild', 
+    title: 'Wilderness First Aid (Lugares Remotos)', 
+    category: 'Primeros Auxilios', 
+    description: 'Atención prehospitalaria avanzada para escenarios alejados de centros médicos.', 
+    hours: '16 horas', level: 'Avanzado', badge: 'ECSI', image: sshDisaster,
+    topics: ['Estabilización prolongada', 'Traumas en entornos hostiles', 'Urgencias ambientales', 'Evacuación improvisada']
+  },
+  { 
+    id: 'fa-adv', 
+    title: 'Advanced First Aid, CPR, and AED', 
+    category: 'Primeros Auxilios', 
+    description: 'Programa completo de primeros auxilios avanzados, reanimación cardiopulmonar y uso de desfibrilador.', 
+    hours: '16 horas', level: 'Avanzado', badge: 'ECSI', image: atpblood,
+    topics: ['Control de Hemorragias', 'Lesiones Musculoesqueléticas', 'Uso de DEA', 'Urgencias Médicas']
+  },
+  { 
+    id: 'fa-firstaid', 
+    title: 'Standard First Aid', 
+    category: 'Primeros Auxilios', 
+    description: 'Primeros auxilios estándar para el lugar de trabajo.', 
+    hours: '8 horas', level: 'Básico', badge: 'ECSI', image: atpppe,
+    topics: ['Bioseguridad', 'Heridas y Hemorragias', 'Quemaduras', 'Manejo de trauma leve']
+  },
+  { 
+    id: 'fa-bls', 
+    title: 'Basic Life Support (BLS) for Health Care Providers', 
+    category: 'Primeros Auxilios', 
+    description: 'Soporte vital básico diseñado específicamente para profesionales y proveedores de la salud.', 
+    hours: '6 horas', level: 'Intermedio', badge: 'ECSI', image: atp191rec,
+    topics: ['RCP de alta calidad', 'Ventilaciones asistidas', 'Dinámica de equipos', 'Uso de DEA']
+  },
+  { 
+    id: 'fa-pet', 
+    title: 'Pet First Aid and Disaster Response', 
+    category: 'Primeros Auxilios', 
+    description: 'Atención primaria de emergencia y respuesta a desastres aplicable a mascotas y animales de servicio.', 
+    hours: '6 horas', level: 'Básico', badge: 'ECSI', image: atpblood,
+    topics: ['RCP en mascotas', 'Signos vitales', 'Control de sangrado', 'Evacuación animal']
+  },
+  { 
+    id: 'fa-cpr', 
+    title: 'CPR and AED (Adult, Child, and Infant)', 
+    category: 'Primeros Auxilios', 
+    description: 'Técnicas de reanimación cardiopulmonar y desfibrilación para todas las edades.', 
+    hours: '4 horas', level: 'Básico', badge: 'ECSI', image: atpfire,
+    topics: ['RCP en todas las edades', 'Desobstrucción de vías (Heimlich)', 'Reconocimiento de paro', 'Aplicación del DEA']
+  },
+  { 
+    id: 'fa-bloodborne', 
+    title: 'Bloodborne and Airborne Pathogens', 
+    category: 'Primeros Auxilios', 
+    description: 'Prevención de transmisión de patógenos sanguíneos y aéreos.', 
+    hours: '2 horas', level: 'Básico', badge: 'OSHA / ECSI', image: atpblood,
+    topics: ['Precauciones universales', 'Prácticas de bioseguridad', 'Planes de control de exposición', 'Punzocortantes']
+  },
+
+  // ==========================================
+  // 4. SEGURIDAD INDUSTRIAL (El grueso del catálogo)
+  // ==========================================
+  { 
+    id: 'ind-24const', 
+    title: '24-Hour Construction Industry Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Capacitación exhaustiva en estándares de seguridad operativa para la construcción.', 
+    hours: '24 horas', level: 'Intermedio', badge: 'OSHA', image: atp24const,
+    topics: ['Grúas y aparejos', 'Herramientas eléctricas', 'Señalización y barricadas', 'Inspección de obra']
+  },
+  { 
+    id: 'ind-24gen', 
+    title: '24-Hour General Industry Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Capacitación integral en estándares operativos para supervisores de la industria general.', 
+    hours: '24 horas', level: 'Intermedio', badge: 'OSHA', image: atp24gen,
+    topics: ['Guarda de maquinarias', 'Materiales peligrosos', 'Ergonomía industrial', 'Programas de seguridad']
   },
   { 
     id: 'osha-3015', 
     title: 'Excavation, Trenching and Soil Mechanics', 
-    category: 'OSHA y seguridad', 
+    category: 'Seguridad Industrial', 
     description: 'Normativa práctica sobre mecánica de suelos y estabilidad de taludes apuntalados y no apuntalados.', 
-    hours: '24 horas', level: 'Nivel Avanzado', badge: 'OSHA #3015', image: osha3015,
-    topics: ['Clasificación y análisis de mecánica de suelos', 'Tipos de apuntalamiento (madera e hidráulico)', 'Uso de penetrómetros y medidores de corte', 'Sistemas de protección para zanjas']
+    hours: '24 horas', level: 'Avanzado', badge: 'OSHA #3015', image: osha3015,
+    topics: ['Clasificación y análisis de mecánica de suelos', 'Tipos de apuntalamiento', 'Uso de penetrómetros y medidores', 'Sistemas de protección para zanjas']
   },
   { 
-    id: 'atp-190', 
-    title: 'Update for Authorized Trainers', 
-    category: 'OSHA y seguridad', 
-    description: 'Actualización oficial de normativas e interpretaciones para entrenadores autorizados en seguridad y salud.', 
-    hours: '16 horas', level: 'Instructor', badge: 'ATP 190', image: atp191update,
-    topics: ['Actualización de estándares OSHA', 'Requisitos del programa Outreach Trainer', 'Técnicas efectivas de instrucción', 'Nuevas políticas de cumplimiento']
+    id: 'ind-scaffold', 
+    title: 'Scaffolding Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Normativas y procedimientos seguros para el armado, inspección y uso de andamios.', 
+    hours: '16 horas', level: 'Avanzado', badge: 'STPS / OSHA', image: atpladders,
+    topics: ['Tipos de andamios', 'Inspección estructural previa', 'Puntos de anclaje', 'Prevención de colapsos']
   },
   { 
-    id: 'csho-const', 
+    id: 'ind-8const', 
+    title: '8-Hour Construction Industry Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Programa de seguridad intensiva para trabajadores de construcción.', 
+    hours: '8 horas', level: 'Básico', badge: 'OSHA', image: atp8const,
+    topics: ['Focus Four', 'Andamios', 'Riesgos de excavaciones', 'EPP en obra']
+  },
+  { 
+    id: 'ind-8gen', 
+    title: '8-Hour General Industry Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Programa introductorio de fundamentos de seguridad para trabajadores generales.', 
+    hours: '8 horas', level: 'Básico', badge: 'OSHA', image: atp8gen,
+    topics: ['Riesgos eléctricos', 'EPP Básico', 'Resbalones y caídas', 'Salida de emergencias']
+  },
+  { 
+    id: 'ind-disaster-4h', 
+    title: 'Disaster Response Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Preparación básica y respuesta operativa táctica ante emergencias y desastres.', 
+    hours: '4 horas', level: 'Básico', badge: 'STPS / OSHA', image: atpdisaster,
+    topics: ['Evaluación rápida de daños', 'Operaciones de triaje básico', 'Búsqueda y rescate ligero', 'Control de riesgos en la escena']
+  },
+  { 
+    id: 'ind-confined', 
+    title: 'Confined Space Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Identificación y control de riesgos en trabajos dentro de espacios confinados.', 
+    hours: '4 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpconfined,
+    topics: ['Monitoreo atmosférico', 'Permisos de entrada', 'Entrante, asistente y supervisor', 'Extracción']
+  },
+  { 
+    id: 'ind-fall', 
+    title: 'Fall Protection Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Sistemas y métodos para prevenir accidentes por trabajos en alturas.', 
+    hours: '4 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpfall,
+    topics: ['Sistemas de detención (PFAS)', 'Distancia de caída', 'Inspección de arneses', 'Anclajes']
+  },
+  { 
+    id: 'ind-elec', 
+    title: 'Electrical Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Prevención de riesgos eléctricos, relámpagos de arco y descargas.', 
+    hours: '4 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpelec,
+    topics: ['Arco eléctrico (Arc Flash)', 'Distancias de aproximación', 'Interruptores GFCI', 'Calificación']
+  },
+  { 
+    id: 'ind-material', 
+    title: 'Material Handling Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Técnicas seguras para el manejo, levantamiento y transporte de materiales.', 
+    hours: '4 horas', level: 'Básico', badge: 'STPS / OSHA', image: atpjha,
+    topics: ['Ergonomía de levantamiento', 'Uso de carretillas', 'Eslingas', 'Límites de carga']
+  },
+  { 
+    id: 'ind-fire', 
+    title: 'Fire Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Capacitación en uso práctico de extintores y comportamiento durante evacuaciones.', 
+    hours: '4 horas', level: 'Básico', badge: 'STPS / OSHA', image: atpfire,
+    topics: ['Uso del método PASS', 'Clases de fuego', 'Riesgos de humo', 'Almacenamiento seguro']
+  },
+  { 
+    id: 'ind-ppe', 
+    title: 'Personal Protective Equipment Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Selección, uso y mantenimiento adecuado del Equipo de Protección Personal.', 
+    hours: '4 horas', level: 'Básico', badge: 'STPS / OSHA', image: atpppe,
+    topics: ['Evaluación de peligros para EPP', 'Ajuste respiratorio', 'Protección ocular', 'Limitaciones']
+  },
+  { 
+    id: 'ind-silica', 
+    title: 'Silica Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Control de exposición a sílice cristalina respirable.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpsilica,
+    topics: ['Reconocimiento de sílice', 'Supresión por agua', 'Aspiradoras HEPA', 'Planes de control']
+  },
+  { 
+    id: 'ind-loto', 
+    title: 'Lock-Out Tag-Out (LOTO) Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Procedimientos de bloqueo y etiquetado para control de energías peligrosas.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atploto,
+    topics: ['Aislamiento de energía', 'Tipos de candados', 'Liberación', 'Empleados autorizados']
+  },
+  { 
+    id: 'ind-mach', 
+    title: 'Machine Operation Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Operación segura de maquinaria y métodos de protección de puntos mecánicos.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpmach,
+    topics: ['Prevención de amputaciones', 'Guardas fijas', 'Cortinas de luz', 'Partes rotativas']
+  },
+  { 
+    id: 'ind-jha', 
+    title: 'Job Hazard Analysis Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Metodología para identificar peligros y establecer controles en tareas.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpjha,
+    topics: ['Desglose de tareas', 'Peligros latentes', 'Jerarquía de controles', 'Procedimientos']
+  },
+  { 
+    id: 'ind-invest', 
+    title: 'Accident Investigation Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Técnicas de investigación de incidentes y análisis de causa raíz.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpinvest,
+    topics: ['Protección de la escena', 'Entrevistas', 'Los 5 porqués', 'Informes']
+  },
+  { 
+    id: 'ind-ladder', 
+    title: 'Ladder Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Uso seguro y normatividad para trabajo con escaleras.', 
+    hours: '2 horas', level: 'Básico', badge: 'STPS / OSHA', image: atpladders,
+    topics: ['3 puntos de contacto', 'Ángulo correcto', 'Escaleras articuladas', 'Daños']
+  },
+  { 
+    id: 'ind-tool', 
+    title: 'Tool Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Manejo e inspección de herramientas manuales, neumáticas y de potencia.', 
+    hours: '2 horas', level: 'Básico', badge: 'STPS / OSHA', image: atptool,
+    topics: ['Inspección previa', 'Interruptores de seguridad', 'Herramientas de impacto', 'Riesgos']
+  },
+  { 
+    id: 'ind-occhealth', 
+    title: 'Occupational Health Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Fundamentos de higiene industrial y salud ocupacional.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: osha521,
+    topics: ['Límites de exposición (PEL)', 'Riesgos químicos', 'Ruido', 'Ergonomía']
+  },
+  { 
+    id: 'ind-ladderinsp', 
+    title: 'Ladder Inspection Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Evaluación técnica y estructural de escaleras de uso industrial.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpladders,
+    topics: ['Grietas y fisuras', 'Corrosión', 'Sistemas de bloqueo', 'Etiquetado de fuera de servicio']
+  },
+  { 
+    id: 'ind-equip', 
+    title: 'Equipment Inspections', 
+    category: 'Seguridad Industrial', 
+    description: 'Protocolos sistemáticos para la inspección de equipos pesados y montacargas.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpequip,
+    topics: ['Listas de verificación', 'Puntos ciegos', 'Sistemas hidráulicos', 'Señalizadores']
+  },
+  { 
+    id: 'ind-record', 
+    title: 'Recordkeeping Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Fundamentos de mantenimiento de registros de seguridad y reportes.', 
+    hours: '2 horas', level: 'Básico', badge: 'STPS / OSHA', image: recordkeep,
+    topics: ['Formularios 300, 300A', 'Lesiones registrables', 'Reporte de fatalidades', 'Conservación']
+  },
+  { 
+    id: 'ind-eap', 
+    title: 'Emergency Action & Fire Prevention Planning', 
+    category: 'Seguridad Industrial', 
+    description: 'Implementación de planes de acción de emergencia (EAP).', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpeap,
+    topics: ['Vías de salida', 'Coordinadores de piso', 'Refugio en el lugar', 'Simulacros']
+  },
+  { 
+    id: 'ind-weld', 
+    title: 'Welding & Cutting Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Seguridad para trabajos en caliente, soldadura y corte.', 
+    hours: '2 horas', level: 'Intermedio', badge: 'STPS / OSHA', image: atpweld,
+    topics: ['Permisos de trabajo en caliente', 'Humos metálicos', 'Cilindros de gas', 'Fire Watch']
+  },
+  { 
+    id: 'ind-ghs', 
+    title: 'Hazard Communication / GHS Safety Training', 
+    category: 'Seguridad Industrial', 
+    description: 'Sistema Globalmente Armonizado para la comunicación de riesgos.', 
+    hours: '2 horas', level: 'Básico', badge: 'STPS / OSHA', image: atpghs,
+    topics: ['Lectura de SDS', 'Pictogramas', 'Etiquetado', 'Vías de exposición']
+  },
+  { 
+    id: 'ind-fallinsp', 
+    title: 'Fall Protection Equipment Inspection', 
+    category: 'Seguridad Industrial', 
+    description: 'Inspección para detectar desgaste en equipos de protección contra caídas.', 
+    hours: '1 hora', level: 'Intermedio', badge: 'STPS / OSHA', image: atpfallinsp,
+    topics: ['Costuras e indicadores de impacto', 'Corrosión en conectores', 'Pruebas de bloqueo', 'Registros']
+  },
+
+  // ==========================================
+  // 5. CERTIFICACIONES (Especializaciones Profesionales)
+  // ==========================================
+  { 
+    id: 'cert-csho-const', 
     title: 'Certified Safety & Health Official (Construction)', 
-    category: 'OSHA y seguridad', 
+    category: 'Certificaciones', 
     description: 'Certificación profesional integral diseñada para elevar la experiencia en riesgos de la industria constructora.', 
     hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: csho1t,
     topics: ['Normas generales OSHA de construcción', 'Prevención de atropellos y equipos pesados', 'Auditorías en sitios de construcción', 'Responsabilidades del contratista general']
   },
   { 
-    id: 'csho-gen', 
+    id: 'cert-csho-gen', 
     title: 'Certified Safety & Health Official (General)', 
-    category: 'OSHA y seguridad', 
+    category: 'Certificaciones', 
     description: 'Certificación profesional orientada a prevenir enfermedades o lesiones causadas por factores ergonómicos y físicos.', 
     hours: '40 horas', level: 'Especialista', badge: 'CSHO', image: sindustrial,
     topics: ['Normativas de la industria general', 'Investigación de incidentes ocupacionales', 'Auditorías de cumplimiento', 'Desarrollo de planes de corrección']
   },
   { 
-    id: 'ssh-fire', 
-    title: 'Specialist in Safety & Health: Fire Safety', 
-    category: 'OSHA y seguridad', 
+    id: 'cert-ssh-fire', 
+    title: 'Specialist in Safety & Health (Fire Safety)', 
+    category: 'Certificaciones', 
     description: 'Especialización en evaluación y normativas de seguridad contra incendios.', 
     hours: '24 horas', level: 'Especialista', badge: 'SSH', image: sshFire,
     topics: ['Inspección de equipos de prevención', 'Evaluación de rutas de evacuación', 'Sistemas de alarma y extinción', 'Normativas NFPA aplicadas']
   },
   { 
-    id: 'ssh-disaster', 
-    title: 'Specialist in Safety & Health: Disaster Response', 
-    category: 'OSHA y seguridad', 
+    id: 'cert-ssh-disaster', 
+    title: 'Specialist in Safety & Health (Disaster Response)', 
+    category: 'Certificaciones', 
     description: 'Especialización en preparación y coordinación táctica de respuesta ante desastres.', 
     hours: '24 horas', level: 'Especialista', badge: 'SSH', image: sshDisaster,
-    topics: ['Mantenimiento de planes de respuesta', 'Simulacros de evacuación complejos', 'Coordinación con servicios médicos', 'Sistemas de comando de incidentes']
+    topics: ['Mantenimiento de planes de respuesta', 'Simulacros de evacuación complejos', 'Coordinación con servicios médicos', 'Sistemas de comando']
   },
   { 
-    id: 'ssh-const', 
-    title: 'Specialist in Safety & Health: Construction', 
-    category: 'OSHA y seguridad', 
+    id: 'cert-ssh-const', 
+    title: 'Specialist in Safety & Health (Construction)', 
+    category: 'Certificaciones', 
     description: 'Especialización inicial orientada a comprender los principios básicos de seguridad en construcción.', 
     hours: '24 horas', level: 'Especialista', badge: 'SSH', image: sshConst,
     topics: ['Fundamentos de seguridad en obra', 'Inspección de herramientas de potencia', 'Análisis de tareas críticas (AST)', 'Control de contratistas']
   },
   { 
-    id: 'atp-191-rec', 
-    title: 'Recordkeeping Fundamentals', 
-    category: 'OSHA y seguridad', 
-    description: 'Fundamentos básicos de mantenimiento de registros de seguridad y salud en el lugar de trabajo.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atp191rec,
-    topics: ['Identificación de lesiones registrables', 'Llenado de bitácoras básicas', 'Diferencia entre primeros auxilios y tratamiento', 'Conservación de documentos']
-  },
-
-  // ==========================================
-  // SEGURIDAD INDUSTRIAL Y OPERATIVA
-  // ==========================================
-  { 
-    id: 'atp-191-8gen', 
-    title: '8-Hour General Industry', 
-    category: 'Seguridad industrial', 
-    description: 'Programa introductorio de 8 horas sobre fundamentos de seguridad para trabajadores de la industria general.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atp8gen,
-    topics: ['Derechos de los trabajadores', 'Riesgos eléctricos y de incendios', 'Uso básico de EPP', 'Prevención de resbalones y caídas']
-  },
-  { 
-    id: 'atp-191-8const', 
-    title: '8-Hour Construction Industry', 
-    category: 'Seguridad industrial', 
-    description: 'Programa introductorio de 8 horas enfocado en los peligros más comunes en el sector construcción.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atp8const,
-    topics: ['Los cuatro grandes peligros (Focus Four)', 'Conciencia sobre andamios', 'Riesgos de excavaciones simples', 'Equipo de protección personal en obra']
-  },
-  { 
-    id: 'atp-191-24gen', 
-    title: '24-Hour General Industry', 
-    category: 'Seguridad industrial', 
-    description: 'Capacitación exhaustiva en estándares de seguridad operativa para supervisores de la industria general.', 
-    hours: '24 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atp24gen,
-    topics: ['Guarda de maquinarias', 'Manejo de materiales peligrosos', 'Ergonomía industrial', 'Programas de seguridad integrales']
-  },
-  { 
-    id: 'atp-191-24const', 
-    title: '24-Hour Construction Industry', 
-    category: 'Seguridad industrial', 
-    description: 'Capacitación integral para supervisores y encargados de seguridad en el sector construcción.', 
-    hours: '24 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atp24const,
-    topics: ['Grúas y aparejos básicos', 'Peligros de herramientas eléctricas', 'Señalización y barricadas', 'Inspección de sitios de trabajo']
-  },
-  { 
-    id: 'atp-191-weld', 
-    title: 'Welding & Cutting', 
-    category: 'Seguridad industrial', 
-    description: 'Protocolos de seguridad para trabajos en caliente, soldadura, corte y prevención de incendios.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpweld,
-    topics: ['Permisos de trabajo en caliente', 'Peligros de humos metálicos', 'Cilindros de gas comprimido', 'Vigilancia de incendios (Fire Watch)']
-  },
-  { 
-    id: 'atp-191-tool', 
-    title: 'Tool Safety', 
-    category: 'Seguridad industrial', 
-    description: 'Manejo seguro e inspección de herramientas manuales, neumáticas y de potencia.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atptool,
-    topics: ['Inspección previa al uso', 'Peligros de herramientas defectuosas', 'Interruptores y guardas de seguridad', 'Manejo de herramientas de impacto']
-  },
-  { 
-    id: 'atp-191-silica', 
-    title: 'Silica Exposure Control', 
-    category: 'Seguridad industrial', 
-    description: 'Prevención y control de exposición a sílice cristalina respirable en construcción e industria.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpsilica,
-    topics: ['Reconocimiento de materiales con sílice', 'Sistemas de supresión por agua', 'Uso de aspiradoras HEPA', 'Planes de control de exposición']
-  },
-  { 
-    id: 'atp-191-ppe', 
-    title: 'Personal Protective Equipment', 
-    category: 'Seguridad industrial', 
-    description: 'Evaluación, selección, uso y mantenimiento adecuado del Equipo de Protección Personal.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpppe,
-    topics: ['Evaluación de peligros para EPP', 'Ajuste de protección respiratoria', 'Protección ocular y facial', 'Limitaciones del equipo']
-  },
-  { 
-    id: 'atp-191-jha', 
-    title: 'Job Hazard Analysis (JHA)', 
-    category: 'Seguridad industrial', 
-    description: 'Metodología paso a paso para identificar peligros y establecer controles en tareas específicas.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpjha,
-    topics: ['Desglose de tareas paso a paso', 'Identificación de peligros latentes', 'Jerarquía de controles', 'Redacción de procedimientos seguros']
-  },
-  { 
-    id: 'atp-191-ladders', 
-    title: 'Ladder Safety', 
-    category: 'Seguridad industrial', 
-    description: 'Uso seguro, inspección y normatividad para el trabajo con escaleras portátiles y fijas.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpladders,
-    topics: ['Regla de los 3 puntos de contacto', 'Ángulo correcto de colocación', 'Escaleras articuladas y de tijera', 'Identificación de daños estructurales']
-  },
-  { 
-    id: 'atp-191-loto', 
-    title: 'Lockout/Tagout (LOTO)', 
-    category: 'Seguridad industrial', 
-    description: 'Procedimientos de bloqueo y etiquetado para el control efectivo de energías peligrosas.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atploto,
-    topics: ['Aislamiento de energía térmica y mecánica', 'Tipos de candados y dispositivos', 'Procedimientos de liberación de energía', 'Roles de empleados afectados y autorizados']
-  },
-  { 
-    id: 'atp-191-mach', 
-    title: 'Machine Guarding', 
-    category: 'Seguridad industrial', 
-    description: 'Operación segura de maquinaria y métodos de protección de puntos de operación mecánicos.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpmach,
-    topics: ['Prevención de amputaciones', 'Guardas fijas y enclavadas', 'Cortinas de luz y sensores', 'Peligros de partes rotativas']
-  },
-  { 
-    id: 'atp-191-ghs', 
-    title: 'Hazard Communication (GHS)', 
-    category: 'Seguridad industrial', 
-    description: 'Sistema Globalmente Armonizado (GHS) para la comunicación y comprensión de riesgos químicos.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpghs,
-    topics: ['Lectura de hojas de datos de seguridad (SDS)', 'Nuevos pictogramas de peligro', 'Etiquetado secundario', 'Vías de exposición a químicos']
-  },
-  { 
-    id: 'atp-191-elec', 
-    title: 'Electrical Safety', 
-    category: 'Seguridad industrial', 
-    description: 'Reconocimiento y prevención de riesgos eléctricos, relámpagos de arco y descargas en el lugar de trabajo.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpelec,
-    topics: ['Peligros de arco eléctrico (Arc Flash)', 'Distancias de aproximación seguras', 'Uso de interruptores GFCI', 'Calificación para trabajos eléctricos']
-  },
-  { 
-    id: 'atp-191-equip', 
-    title: 'Heavy Equipment Inspections', 
-    category: 'Seguridad industrial', 
-    description: 'Protocolos sistemáticos para la inspección y operación segura de equipos pesados y montacargas.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpequip,
-    topics: ['Listas de verificación diarias', 'Puntos ciegos de maquinaria', 'Peligros de vuelco', 'Comunicación con señalizadores']
-  },
-  { 
-    id: 'atp-191-invest', 
-    title: 'Accident Investigation', 
-    category: 'Seguridad industrial', 
-    description: 'Técnicas de investigación de incidentes, análisis de causa raíz y prevención de recurrencia.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'ATP 191', image: atpinvest,
-    topics: ['Protección de la escena del incidente', 'Técnicas de entrevista a testigos', 'Metodología de los 5 porqués', 'Redacción de informes finales']
-  },
-
-  // ==========================================
-  // EMERGENCIAS Y MATERIALES PELIGROSOS
-  // ==========================================
-  { 
-    id: 'hm-242', 
-    title: 'HAZWOPER Annual Refresher', 
-    category: 'Emergencias', 
-    description: 'Actualización sobre tendencias, control, contención y confinamiento de residuos peligrosos (HAZWOPER).', 
-    hours: '8 horas', level: 'Nivel Avanzado', badge: 'HM 242', image: hm242,
-    topics: ['Sistema de Comando de Incidentes', 'Procedimientos de descontaminación', 'Líquidos inflamables y combustibles', 'Planificación de emergencias']
-  },
-  { 
-    id: 'atp-191-fire', 
-    title: 'Fire Prevention & Safety', 
-    category: 'Emergencias', 
-    description: 'Capacitación en uso práctico de extintores, clases de fuego y comportamiento durante evacuaciones.', 
-    hours: '8 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpfire,
-    topics: ['Uso del método PASS (Tirar, Apuntar, Apretar, Barrer)', 'El tetraedro del fuego', 'Riesgos de inhalación de humo', 'Almacenamiento de combustibles']
-  },
-  { 
-    id: 'atp-191-disaster', 
-    title: 'Disaster Response Tactics', 
-    category: 'Emergencias', 
-    description: 'Preparación operativa y respuesta táctica ante desastres naturales, derrames industriales y crisis.', 
-    hours: '16 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpdisaster,
-    topics: ['Evaluación rápida de daños', 'Operaciones de triaje básico', 'Búsqueda y rescate ligero', 'Psicología de emergencias']
-  },
-  { 
-    id: 'atp-191-eap', 
-    title: 'Emergency Action Plans', 
-    category: 'Emergencias', 
-    description: 'Diseño e implementación de rutas de escape, puntos de reunión y planes de acción de emergencia (EAP).', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpeap,
-    topics: ['Vías de salida y señalización', 'Sistemas de notificación a empleados', 'Asignación de coordinadores de piso', 'Procedimientos de refugio en el lugar']
-  },
-
-  // ==========================================
-  // RESCATE Y ALTURAS
-  // ==========================================
-  { 
-    id: 'atp-191-fall-insp', 
-    title: 'Fall Equipment Inspection', 
-    category: 'Rescate y alturas', 
-    description: 'Inspección detallada para detectar desgaste, abrasión química o impacto en equipos de protección contra caídas.', 
-    hours: '8 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpfallinsp,
-    topics: ['Costuras e indicadores de impacto', 'Corrosión en conectores y ganchos', 'Pruebas de bloqueo de líneas retráctiles', 'Registro de mantenimiento']
-  },
-  { 
-    id: 'atp-191-fall', 
-    title: 'Fall Protection Systems', 
-    category: 'Rescate y alturas', 
-    description: 'Uso de sistemas personales de detención y restricción, cálculo de espacio libre y selección de anclajes.', 
-    hours: '16 horas', level: 'Nivel Intermedio', badge: 'ATP 191', image: atpfall,
-    topics: ['Componentes de sistemas de detención (PFAS)', 'Sistemas pasivos (barandillas y redes)', 'Cálculo de distancia de caída libre', 'Planes de rescate en altura']
-  },
-  { 
-    id: 'atp-191-confined', 
-    title: 'Confined Space Entry', 
-    category: 'Rescate y alturas', 
-    description: 'Identificación de riesgos con permiso requerido, monitoreo atmosférico y protocolos de extracción.', 
-    hours: '16 horas', level: 'Nivel Avanzado', badge: 'ATP 191', image: atpconfined,
-    topics: ['Monitoreo de gases y oxígeno', 'Uso de trípodes y winches', 'Funciones del entrante, asistente y supervisor', 'Ventilación mecánica y purga']
-  },
-
-  // ==========================================
-  // MÉDICO Y SALUD OCUPACIONAL
-  // ==========================================
-  { 
-    id: 'atp-191-blood', 
-    title: 'Bloodborne Pathogens', 
-    category: 'Médico', 
-    description: 'Estándar OSHA para prevención de transmisión de patógenos sanguíneos, VIH y Hepatitis en el trabajo.', 
-    hours: '4 horas', level: 'Nivel Básico', badge: 'ATP 191', image: atpblood,
-    topics: ['Precauciones universales', 'Prácticas de ingeniería y limpieza', 'Planes de control de exposición', 'Eliminación de objetos punzocortantes']
-  },
+    id: 'cert-atp', 
+    title: 'Authorized Trainer Program (ATP)', 
+    category: 'Certificaciones', 
+    description: 'Acreditación oficial para entrenadores autorizados en seguridad y salud, permitiendo impartir cursos oficiales.', 
+    hours: '0 horas', level: 'Instructor', badge: 'ATP', image: atp191update,
+    topics: ['Actualización de estándares OSHA', 'Requisitos del programa Outreach Trainer', 'Técnicas efectivas de instrucción', 'Nuevas políticas de cumplimiento']
+  }
 ]
+
 function CourseCard({ course, featured }: { course: Course, featured?: boolean }) {
   const isOrange = !course.badge.includes('OSHA');
 
@@ -454,7 +597,7 @@ function CourseCard({ course, featured }: { course: Course, featured?: boolean }
   )
 }
 
-const categories = ['Todos', 'OSHA y seguridad', 'Seguridad industrial', 'Emergencias', 'Rescate y alturas', 'Médico']
+const categories = ['Todos', 'Protección Civil', 'OSHA', 'Primeros Auxilios', 'Seguridad Industrial', 'Certificaciones'];
 
 export default function Page() {
   
@@ -484,20 +627,44 @@ export default function Page() {
   // 2. Se lo pasamos al estado inicial del buscador
   const [searchQuery, setSearchQuery] = useState(initialSearch);
   
+  // NUEVO: Estado para el filtro de horas
+  const [activeDuration, setActiveDuration] = useState('Todas');
+  
+  // NUEVO: Extraemos automáticamente todas las horas únicas de tus cursos
+const durationOptions = [
+    { label: 'Todas las horas', value: 'Todas' },
+    { label: 'De 1 a 8 horas', value: 'cortos' },
+    { label: 'De 9 a 24 horas', value: 'medios' },
+    { label: 'Más de 24 horas', value: 'extensos' }
+  ];
   
   // 3. Estados para la Paginación
   const [page, setPage] = useState(1);
   const pageSize = 6;
 
-  // 4. Lógica de Filtrado (por categoría y texto)
+// 4. Lógica de Filtrado (por categoría, texto Y HORAS AGRUPADAS)
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {
+      // Filtro Categoría y Texto
       const matchCategory = activeCategory === 'Todos' || course.category.toLowerCase() === activeCategory.toLowerCase();
       const matchQuery = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || course.category.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchCategory && matchQuery;
-    });
-  }, [activeCategory, searchQuery]);
+      
+      // Filtro de Horas Agrupadas
+      let matchDuration = true;
+      if (activeDuration !== 'Todas') {
+        // Extraemos los números del texto (ej. de "16 a 20 horas" saca el 20)
+        const numbers = course.hours.match(/\d+(\.\d+)?/g);
+        const maxHour = numbers ? Math.max(...numbers.map(Number)) : 0;
 
+        if (activeDuration === 'cortos') matchDuration = maxHour <= 8;
+        else if (activeDuration === 'medios') matchDuration = maxHour > 8 && maxHour <= 24;
+        else if (activeDuration === 'extensos') matchDuration = maxHour > 24;
+      }
+      
+      return matchCategory && matchQuery && matchDuration;
+    });
+  }, [activeCategory, searchQuery, activeDuration]);
+  
   // 5. Cálculos de Paginación
   const pageCount = Math.max(1, Math.ceil(filteredCourses.length / pageSize));
   const visibleCourses = filteredCourses.slice((page - 1) * pageSize, page * pageSize);
@@ -613,10 +780,11 @@ export default function Page() {
             </p>
           </div>
 
-          {/* ¡FIX 2! min-w-0 aquí es OBLIGATORIO para que el Flex no rompa el Grid */}
-          <div className="flex items-center justify-between gap-[18px] max-[900px]:flex-col-reverse max-[900px]:items-stretch min-w-0">
-            {/* ¡FIX 3! min-w-0 a la etiqueta <nav> para permitir el scroll horizontal seguro */}
-            <nav className="flex flex-1 items-center gap-[3px] overflow-x-auto border-b border-[#dce3e5] min-w-0 pb-1">
+{/* ¡FIX ESPACIO! Cambiamos a flex-col-reverse xl:flex-row para que 
+              los filtros bajen solos si no hay espacio y no aplasten las pestañas */}
+          <div className="flex flex-col-reverse xl:flex-row xl:items-center justify-between gap-4 xl:gap-[18px] min-w-0">
+            
+            <nav className="flex flex-1 items-center gap-[3px] overflow-x-auto border-b border-[#dce3e5] min-w-0 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories.map((category) => (
                 <button 
                   key={category} 
@@ -634,19 +802,40 @@ export default function Page() {
                 </button>
               ))}
             </nav>
-            <label className="flex h-[36px] w-[242px] items-center gap-2 rounded-[6px] border border-[#d6e0e5] bg-[#fafbfb] px-[11px] text-[#5d778d] max-[900px]:w-full focus-within:border-[#ff7414] transition-colors shrink-0">
-              <Search size={15} />
-              <input 
-                value={searchQuery} 
-                onChange={(event) => {
-                  setSearchQuery(event.target.value);
-                  setPage(1); 
-                }} 
-                placeholder="Buscar por nombre o palabra..." 
-                aria-label="Buscar cursos" 
-                className="w-full min-w-0 border-0 bg-transparent text-[11px] text-[#102235] outline-none placeholder:text-[#7a8e9e]" 
-              />
-            </label>
+            
+            {/* Contenedor de Filtros (Baja automáticamente en pantallas medianas) */}
+            <div className="flex items-center gap-3 w-full xl:w-auto mt-2 xl:mt-0">
+              
+              <select 
+                value={activeDuration}
+                onChange={(e) => {
+                  setActiveDuration(e.target.value);
+                  setPage(1);
+                }}
+                className="h-[36px] w-[140px] shrink-0 px-3 text-[11px] font-medium border border-[#dce3e5] rounded-[4px] bg-white text-[#263d50] outline-none focus:border-[#ff7414] transition-colors cursor-pointer"
+              >
+                {durationOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+
+              <label className="flex h-[36px] w-full xl:w-[220px] items-center gap-2 rounded-[4px] border border-[#dce3e5] bg-white px-3 transition-colors focus-within:border-[#ff7414]">
+                {/* Asegúrate de tener tu icono aquí: <Search className="text-[#a0b0c0]" size={14} /> */}
+                <input 
+                  type="text" 
+                  placeholder="Buscar por nombre..." 
+                  className="w-full bg-transparent text-[11px] text-[#263d50] outline-none placeholder:text-[#a0b0c0]"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setPage(1);
+                  }}
+                />
+              </label>
+
+            </div>
           </div>
         </header>
 

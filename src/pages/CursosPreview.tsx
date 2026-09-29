@@ -7,10 +7,13 @@ import bgBombero from '../assets/bgBombero.png';
 // IMÁGENES PARA EL INTERIOR DE LAS TARJETAS
 
 import { Reveal } from '../components/Reveal';
-import osha3015 from '../assets/cursos/3015.jpg';
-import hm242 from '../assets/cursos/hazwoper-annual-refresher.jpg';
-import atp8const from '../assets/cursos/8-hour-construction-industry.jpg';
+// import osha3015 from '../assets/cursos/3015.jpg';
+// import hm242 from '../assets/cursos/hazwoper-annual-refresher.jpg';
+// import atp8const from '../assets/cursos/8-hour-construction-industry.jpg';
 
+import atpconfined from '../assets/cursos/confined-space.jpg';
+import atpfire from '../assets/cursos/fire-and-safety.jpg';
+import csho1t from '../assets/cursos/salud-2-construccion.jpg'
 // const courses = [
 //   { icon: ShieldCheck, code: 'OSHA 10', title: 'OSHA 10', detail: 'Seguridad industrial básica en el trabajo.',  img: imgOsha },
 //   { icon: ShieldAlert, code: 'STOP THE BLEED', title: 'STOP THE BLEED', detail: 'Control de hemorragias y primeros auxilios.', img: imgBleed },
@@ -26,28 +29,31 @@ const benefits = [
 // 2. DATOS DE LOS CURSOS DESTACADOS
 const featuredCourses = [
   {
-    id: 'osha-3015',
-    code: 'OSHA #3015',
-    title: 'Excavation, Trenching and Soil Mechanics',
-    detail: 'Normativa práctica sobre mecánica de suelos y estabilidad de taludes apuntalados.',
-    image: osha3015,
-    hours: '24 hrs',
-  },
-  {
-    id: 'hm-242',
-    code: 'HM 242',
-    title: 'HAZWOPER Annual Refresher',
-    detail: 'Actualización sobre tendencias, control, contención y confinamiento de residuos peligrosos.',
-    image: hm242,
+    id: 'pc-evacuacion', 
+    code: 'STPS DC-3',
+    category: 'Protección Civil', // <-- NUEVO
+    title: 'Evacuación, Búsqueda y Rescate',
+    detail: 'Capacitación para brigadas en diseño de rutas de evacuación, sistemas de alerta y técnicas de rescate.',
+    image: atpconfined, 
     hours: '8 hrs',
   },
   {
-    id: 'atp-191-8const',
-    code: 'ATP 191',
-    title: '8-Hour Construction Industry',
-    detail: 'Programa introductorio enfocado en los peligros más comunes en el sector construcción.',
-    image: atp8const,
+    id: 'pc-incendios',
+    code: 'STPS DC-3',
+    category: 'Protección Civil', // <-- NUEVO
+    title: 'Combate de Incendios',
+    detail: 'Formación teórico-práctica para brigadas en el manejo de extintores, sistemas fijos y respuesta a conatos de incendio.',
+    image: atpfire, 
     hours: '8 hrs',
+  },
+  {
+id: 'fa-emr',
+    code: 'ECSI',
+    category: 'Primeros Auxilios',
+    title: 'Emergency Medical Responder',
+    detail: 'Capacitación del más alto nivel para primeros intervinientes médicos en situaciones críticas.',
+    image: csho1t, // <-- Asegúrate de tener este import, o cámbialo por la imagen que prefieras
+    hours: '40 hrs',
   }
 ];
 
@@ -150,7 +156,7 @@ export function CursosPreview() {
                       {course.code}
                     </span>
                   </div>
-                </div>
+                </div> 
 
                 {/* Textos del Curso */}
                 <div className="p-8 flex flex-col flex-grow relative bg-white">
@@ -159,6 +165,11 @@ export function CursosPreview() {
                   <div className="absolute right-6 -top-6 w-12 h-12 bg-[#0a1727] rounded-full flex items-center justify-center shadow-lg border-4 border-white group-hover:bg-[#ff7414] transition-colors duration-300">
                     <ShieldCheck size={20} className="text-white" />
                   </div>
+
+                  {/* NUEVO: Etiqueta de Categoría */}
+                  <p className="text-[10px] font-bold text-[#ff7414] uppercase tracking-widest mb-1.5">
+                    {course.category}
+                  </p>
 
                   <h5 className="font-bold text-[#0a1727] text-[20px] leading-[1.2] mb-3 group-hover:text-[#ff7414] transition-colors pr-8">
                     {course.title}
