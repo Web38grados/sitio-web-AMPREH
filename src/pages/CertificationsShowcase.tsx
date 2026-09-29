@@ -3,16 +3,17 @@ import { ArrowLeft, ArrowRight, ShieldCheck, Target, FileCheck2, Users, HeartPul
 
 // Imágenes Originales
 import imgOsha from '../assets/certificaciones/osha.png'
-import imgStopBleed from '../assets/certificaciones/stop-bleed.jpg'
-import imgEcsi from '../assets/certificaciones/ecsi.jpg'
-import imgChso from '../assets/certificaciones/CHSO_page-0001.jpg'
+import imgStopBleed from '../assets/certificaciones/stop-bleed.png'
+import imgEcsi from '../assets/certificaciones/ecsi.png'
+import imgChso from '../assets/certificaciones/CHSO_page-0001.png'
 
 // Nuevas Imágenes (Asegúrate de que los nombres coincidan con tus archivos)
 import imgUtaTrainer from '../assets/certificaciones/osha_1.png'
-import imgOshaDisaster from '../assets/certificaciones/osha_2.jpg'
-import imgOshaGeneral from '../assets/certificaciones/osha_3.jpg'
-import imgNaui from '../assets/certificaciones/TARJETA_1.jpg'
-import imgPadi from '../assets/certificaciones/TARJETA_3.jpg'
+import imgOshaDisaster from '../assets/certificaciones/osha_2.png'
+import imgOshaGeneral from '../assets/certificaciones/osha_3.png'
+import imgNaui from '../assets/certificaciones/TARJETA_1.png'
+import imgPadi from '../assets/certificaciones/TARJETA_3.png'
+import ATP from '../assets/certificaciones/ATP_1.png'
 
 // Imágenes de Contexto (Fondos de las tarjetas)
 import img1 from '../assets/certificaciones/img1_osha.png'
@@ -92,6 +93,14 @@ const certifications = [
     icon: Droplet,
     image: imgPadi,
     contextImage: img1
+  },
+  { 
+    category: 'SEGURIDAD INDUSTRIAL', 
+    title: 'OSHA Authorized Trainer', 
+    description: 'Certificación oficial de OSHA que acredita la capacidad para impartir cursos de seguridad y salud en el trabajo en entornos industriales.', 
+    icon: ShieldCheck,
+    image: ATP, // <-- Aquí colocamos tu nueva variable importada
+    contextImage: img2 
   },
 ]
 const benefits = [
