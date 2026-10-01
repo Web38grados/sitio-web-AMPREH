@@ -716,7 +716,7 @@ const durationOptions = [
             <div className="grid grid-cols-2 lg:flex lg:flex-wrap items-start lg:items-center gap-6 lg:gap-12">
               <div>
                 <p className="font-bold text-[#004a99] text-lg flex items-center gap-2">
-                  <ShieldCheck size={18} className="text-[#F58220] lg:text-slate-300"/> 12+
+                  <ShieldCheck size={18} className="text-[#F58220] lg:text-slate-300"/> 30+
                 </p>
                 <p className="text-[11px] text-slate-500 mt-1">cursos disponibles</p>
               </div>
@@ -743,7 +743,7 @@ const durationOptions = [
       <div className="border-y border-slate-200 bg-slate-50">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-6 flex flex-wrap justify-between items-center gap-6">
           {[
-            { icon: BookOpen, title: '12+ cursos', sub: 'en diferentes áreas de seguridad' },
+            { icon: BookOpen, title: '30+ cursos', sub: 'en diferentes áreas de seguridad' },
             { icon: ShieldCheck, title: 'Certificación incluida', sub: 'en todos los cursos' },
             { icon: Clock3, title: 'Modalidad presencial', sub: 'y virtual' },
             { icon: Users, title: 'Instructores especializados', sub: 'con experiencia en campo' },
@@ -948,15 +948,17 @@ const durationOptions = [
       {/* =========================================================
           4. METODOLOGÍA / OPERACIONES REALES
       ========================================================= */}
-      <section className="bg-slate-50 border-t border-slate-200 py-16">
+      <section className="bg-[#004a99] border-t border-[#003875] py-16">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
           
           <div className="w-full lg:w-1/3">
-            <p className="text-[#F58220] text-[10px] font-bold uppercase tracking-widest mb-2">NUESTRA METODOLOGÍA</p>
-            <h2 className="text-3xl font-semibold text-[#0a1122] mb-4">
+            <p className="text-[#F58220] text-[10px] font-bold uppercase tracking-widest mb-2">
+              NUESTRA METODOLOGÍA
+            </p>
+            <h2 className="text-3xl font-semibold text-white mb-4">
               Capacitación diseñada <br/>para operaciones reales
             </h2>
-            <p className="text-slate-500 text-sm">
+            <p className="text-blue-100/90 text-sm">
               No solo impartimos teoría, formamos personas listas para actuar en entornos de alto riesgo.
             </p>
           </div>
@@ -971,8 +973,8 @@ const durationOptions = [
             ].map((item, i) => (
               <div key={i} className="flex flex-col">
                 <div className="text-[#F58220] mb-3"><item.icon size={28} strokeWidth={1.5} /></div>
-                <h3 className="font-semibold text-slate-900 text-sm mb-2">{item.title}</h3>
-                <p className="text-slate-500 text-xs font-['IBM_Plex_Sans'] leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-white text-sm mb-2">{item.title}</h3>
+                <p className="text-blue-100/80 text-xs font-['IBM_Plex_Sans'] leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -980,7 +982,7 @@ const durationOptions = [
         </div>
       </section>
 
-      <CtaSection
+      {/* <CtaSection
         badge="ÚNETE AL EQUIPO"
         titlePart1="Forma parte de un"
         highlightText="equipo preparado"
@@ -988,7 +990,7 @@ const durationOptions = [
         imageUrl={img4}
         primaryButtonText="VER NUESTROS CURSOS"
         secondaryButtonText="HABLAR CON UN ASESOR"
-      />
+      /> */}
       
     </main>
   )
