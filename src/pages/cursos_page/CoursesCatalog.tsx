@@ -2,11 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, Award,  Clock3, FileText, ShieldCheck, Stethoscope, Users, Briefcase, BookOpen, ArrowLeft, MessageCircle, CheckCircle2 } from 'lucide-react'
-import CtaSection from '../../components/CtaSection'
 
 // IMÁGENES BASE (Intactas)
 import imgHero from '../../assets/cursos/hero.png'
-import img4 from '../../assets/nosotros/rescate-cta.png'
 
 // IMPORTS ORIGINALES (Sin espacios, conservaron su nombre exacto)
 import recordkeep from '../../assets/cursos/RecordkeepingRuleSeminar.png'
