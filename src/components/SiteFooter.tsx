@@ -103,7 +103,7 @@ export default function SiteFooter() {
                 <Mail size={16} className="text-[#ff7414] shrink-0 mt-0.5" strokeWidth={2.5} />
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase mb-0.5">Correo electrónico</p>
-                  <a href="servicios@ampre.com.mx" className="text-xs font-bold text-[#0a1727] hover:text-[#F58220] transition-colors">servicios@ampre.com.mx</a>
+                  <a href="servicios@ampreh.com.mx" className="text-xs font-bold text-[#0a1727] hover:text-[#F58220] transition-colors">servicios@ampreh.com.mx</a>
                   <p className="text-[9px] text-slate-400 mt-0.5">Respuesta en menos de 24 horas.</p>
                 </div>
               </div>

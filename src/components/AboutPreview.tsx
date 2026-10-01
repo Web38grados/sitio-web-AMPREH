@@ -52,7 +52,7 @@ export function AboutPreview() {
                 <p className="mt-3 text-sm font-medium text-slate-300">Cobertura especializada con paramédicos y unidades en sitio para tu planta.</p>
                 <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-widest text-[#F58220]">
                   <Link 
-                    to="/servicios" 
+                    to="/servicios#atencion" 
                     className="group flex items-center cursor-pointer transition-colors hover:text-[#e67515]"
                   >
                     Ver servicios <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-2" />

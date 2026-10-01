@@ -49,7 +49,7 @@ const services = [
     id: 'atencion',
     number: '',
     eyebrow: 'ATENCIÓN PREHOSPITALARIA',
-    title: 'ATENCIÓN MÉDICA\nDE EMERGENCIAS',
+    title: 'ATENCIÓN \nPREHOSPITALARIA',
     description: 'Contamos con personal altamente capacitado y equipos de última generación para brindar atención prehospitalaria oportuna y de calidad en situaciones críticas, salvaguardando la vida del trabajador.',
     features: [
       'Unidades de ambulancia tipo I, II y III.',
