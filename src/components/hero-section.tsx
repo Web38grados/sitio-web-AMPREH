@@ -10,36 +10,37 @@ import stbLogo from '../assets/inicio/STOPBLEED_LOGO.png'
 import proteclogo from '../assets/inicio/PROTEC_LOGO.png'
 
 const credentials = [
-{ 
+  { 
     bg: 'white', 
     logo: proteclogo, 
-    desc: 'Registros y programas internos alineados a la normativa del Sistema Nacional de Protección Civil.', 
-    linkText: 'VER CERTIFICACIÓN', 
-    to: '/servicios' 
+    desc: 'Capacitación de brigadas / Elaboración de programas internos y específicos de protección civil, alineados a la normativa del Sistema Nacional de Protección Civil.', 
+    linkText: '', 
+    to: '#seccion-certificados', // <-- Cambiado a ancla local
+    targetCert: '' // Lo dejamos vacío porque no hay tarjeta STPS en el carrusel
   },
-
   { 
     bg: 'blue', 
     logo: ecsiLogo, 
-    desc: 'Capacitación en atención prehospitalaria y respuesta a emergencias.', 
+    desc: 'Certificaciones internacionales de vanguardia en atención médica prehospitalaria y protocolos avanzados de respuesta a emergencias.', 
     linkText: 'VER CERTIFICACIÓN', 
-    to: '/servicios' 
+    to: '#seccion-certificados', 
+    targetCert: 'ECSI Education Center' // <-- Título exacto del carrusel
   },
-
   { 
     bg: 'white', 
     logo: oshaLogo, 
-    desc: 'Cumplimos con los estándares de seguridad y salud ocupacional más rigurosos.', 
+    desc: 'Implementación y capacitación bajo los estándares internacionales de seguridad y salud ocupacional para entornos laborales seguros.', 
     linkText: 'VER CERTIFICACIÓN', 
-    to: '/servicios' 
+    to: '#seccion-certificados', 
+    targetCert: 'OSHA Authorized Trainer' // <-- Título exacto del carrusel
   },
-
   { 
     bg: 'white', 
     logo: stbLogo, 
-    desc: 'Formación en control de hemorragias y respuesta a tiradores masivos.', 
+    desc: 'Capacitación vital acreditada para la contención efectiva de hemorragias y protocolos de actuación ante situaciones críticas y respuesta a tiradores activos.', 
     linkText: 'VER CERTIFICACIÓN', 
-    to: '/cursos' 
+    to: '#seccion-certificados', 
+    targetCert: 'Stop The Bleed Instructor' // <-- Título exacto del carrusel
   },
   { 
     bg: 'blue', 
@@ -154,13 +155,34 @@ export function HeroSection() {
                   {item.desc}
                 </p>
                 
-                {/* Link Inferior */}
-                <Link to={item.to!} className="flex items-center gap-2 group mt-auto">
-                  <div className="w-4 h-[2px] bg-[#ff7414] transition-all group-hover:w-6"></div>
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    
+                    // 1. SCROLL DIRECTO Y SEGURO
+                    const section = document.getElementById('seccion-certificados');
+                    if (section) {
+                      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    
+                    // 2. DISPARAR EVENTO PARA CAMBIAR LA IMAGEN
+                    if (item.targetCert) {
+                      const event = new CustomEvent('changeCertificate', { 
+                        detail: item.targetCert 
+                      });
+                      window.dispatchEvent(event);
+                    }
+                  }}
+                  className="flex items-center gap-2 group mt-auto cursor-pointer bg-transparent border-none p-0 text-left w-fit"
+                >
+                  {item.linkText !== '' && (
+                    <div className="w-4 h-[2px] bg-[#ff7414] transition-all group-hover:w-6"></div>
+                  )}
                   <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-400 group-hover:text-white transition-colors">
                     {item.linkText}
                   </span>
-                </Link>
+                </button>
               </div>
             ))}
           </div>

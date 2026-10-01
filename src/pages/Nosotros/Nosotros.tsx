@@ -145,7 +145,7 @@ export default function Nosotros() {
               <div className="flex gap-4 items-start">
                 <Calendar className="w-6 h-6 text-[#ff7414] shrink-0 mt-1" strokeWidth={2} />
                 <div>
-                  <h3 className="text-3xl xl:text-4xl font-black text-[#004a99] mb-1 leading-none">+10</h3>
+                  <h3 className="text-3xl xl:text-4xl font-black text-[#004a99] mb-1 leading-none">+20</h3>
                   <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-[#0a1727] mb-1 mt-1">Años de experiencia</p>
                   <p className="text-[10px] text-slate-500 leading-relaxed">Un recorrido sólido en el sector para brindar un servicio de excelencia.</p>
                 </div>
@@ -156,7 +156,7 @@ export default function Nosotros() {
               <div className="flex gap-4 items-start">
                 <UsersRound className="w-6 h-6 text-[#ff7414] shrink-0 mt-1" strokeWidth={2} />
                 <div>
-                  <h3 className="text-3xl xl:text-4xl font-black text-[#004a99] mb-1 leading-none">+500</h3>
+                  <h3 className="text-3xl xl:text-4xl font-black text-[#004a99] mb-1 leading-none">+5000</h3>
                   <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-[#0a1727] mb-1 mt-1">Profesionales</p>
                   <p className="text-[10px] text-slate-500 leading-relaxed">Capacitados en todo el país con los más altos estándares.</p>
                 </div>

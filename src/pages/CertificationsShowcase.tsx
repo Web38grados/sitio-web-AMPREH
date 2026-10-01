@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ArrowLeft, ArrowRight, ShieldCheck, Target, FileCheck2, Users, HeartPulse, Droplet, ShieldAlert } from 'lucide-react'
 
 // Imágenes Originales
@@ -116,7 +116,7 @@ export function CertificationsShowcase() {
   
   // eslint-disable-next-line react-hooks/purity
   const [lastInteraction, setLastInteraction] = useState(Date.now())
-  
+  const sectionRef = useRef<HTMLElement>(null)
   const triggerChange = (newIndex: number) => {
     if (isFading || newIndex === active) return
     setIsFading(true)
@@ -142,11 +142,37 @@ export function CertificationsShowcase() {
     return () => clearInterval(timer)
   }, [active, isFading, lastInteraction])
 
+  
+  useEffect(() => {
+    const handleCertificateChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const targetTitle = customEvent.detail;
+
+      // Buscamos el índice de la tarjeta que coincida con el título
+      const foundIndex = certifications.findIndex(
+        cert => cert.title === targetTitle
+      );
+      
+      // Si la encuentra y no es la que ya está activa, la cambia
+      if (foundIndex !== -1 && foundIndex !== active) {
+        triggerChange(foundIndex);
+      }
+    };
+
+    window.addEventListener('changeCertificate', handleCertificateChange);
+
+    // Limpieza del evento
+    return () => {
+      window.removeEventListener('changeCertificate', handleCertificateChange);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, isFading]); // isFading es crucial para que no se trabe la animación
+
   const item = certifications[displayIndex]
 
   return (
 
-    <section className="flex flex-col lg:flex-row w-full bg-[#F58220] border-t-8 border-[#F58220] font-sans text-white overflow-hidden">
+    <section ref={sectionRef} id="seccion-certificados" className="flex flex-col lg:flex-row w-full bg-[#F58220] border-t-8 border-[#F58220] font-sans text-white overflow-hidden">
       
       <style>{`
         .smooth-fade {
