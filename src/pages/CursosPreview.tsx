@@ -105,8 +105,8 @@ export function CursosPreview() {
             
             <h2 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black uppercase leading-[1.05] tracking-tight mb-6 text-[#002b5e]">
               Domina la<br/>
-              Seguridad<br/>
-              <span className="text-[#ff7414]">Industrial</span>
+              PROTECCIÓN CIVIL<br/>
+              <span className="text-[#ff7414]">Y PRIMEROS AUXILIOS</span>
             </h2>
             
             <p className="text-slate-500 font-medium text-sm mb-12 max-w-[400px] leading-relaxed">
