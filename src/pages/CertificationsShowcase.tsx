@@ -94,12 +94,12 @@ const certifications = [
     image: imgPadi,
     contextImage: img1
   },
-  { 
-    category: 'SEGURIDAD INDUSTRIAL', 
-    title: 'OSHA Authorized Trainer', 
-    description: 'Certificación oficial de OSHA que acredita la capacidad para impartir cursos de seguridad y salud en el trabajo en entornos industriales.', 
+{ 
+    category: 'INSTRUCTOR AUTORIZADO', // Queda mejor y más preciso para esta credencial
+    title: 'Authorized Trainer - UTA', 
+    description: 'Credencial oficial expedida por The University of Texas at Arlington (UTA) que certifica las competencias de alto nivel como instructor autorizado.', 
     icon: ShieldCheck,
-    image: ATP, // <-- Aquí colocamos tu nueva variable importada
+    image: ATP, // Tu variable de imagen correcta
     contextImage: img2 
   },
 ]
