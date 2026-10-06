@@ -77,6 +77,7 @@ export default function SiteFooter() {
             <h4 className="text-[10px] font-black uppercase text-[#0a1727] tracking-widest mb-2">Servicios</h4>
             <div className="w-6 h-[2px] bg-[#F58220] mb-5"></div>
             <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500">
+              <li><Link to="/servicios#ProteccionCivil" className="hover:text-[#F58220] transition-colors">Protección Civil y Gestión de Riesgos</Link></li>
               <li><Link to="/servicios#operaciones" className="hover:text-[#F58220] transition-colors">Respuesta a Emergencias</Link></li>
               <li><Link to="/servicios#proteccion" className="hover:text-[#F58220] transition-colors">Planes de Evacuación</Link></li>
               <li><Link to="/servicios#atencion" className="hover:text-[#F58220] transition-colors">Atención Médica Prehospitalaria</Link></li>
