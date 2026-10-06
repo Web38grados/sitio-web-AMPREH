@@ -11,11 +11,13 @@ import { CursosPreview } from './CursosPreview';
 import CtaSection from '../components/CtaSection';
 import bgBomberosTeam from '../assets/bomberos-team.jpg'
 import { Flame, PlusSquare, ShieldCheck, Users } from 'lucide-react';
+import { ProteccionCivilPreview } from './ProteccionCivilPreview';
 export default function Inicio() {
   return (
     <div className="flex flex-col">
       <HeroSection />
       <ClientProof />
+      <ProteccionCivilPreview></ProteccionCivilPreview>
       <CertificationsShowcase></CertificationsShowcase>
       <ImpactSection></ImpactSection>
       <AboutPreview></AboutPreview>
