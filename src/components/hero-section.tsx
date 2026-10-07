@@ -14,8 +14,8 @@ const credentials = [
     bg: 'white', 
     logo: proteclogo, 
     desc: 'Capacitación de brigadas / Elaboración de programas internos y específicos de protección civil, alineados a la normativa del Sistema Nacional de Protección Civil.', 
-    linkText: '', 
-    to: '#seccion-certificados', // <-- Cambiado a ancla local
+    linkText: 'VER SERVICIO', 
+    to: '/servicios#ProteccionCivil', // <-- Cambiado a ancla local
     targetCert: '' // Lo dejamos vacío porque no hay tarjeta STPS en el carrusel
   },
   { 
@@ -23,7 +23,7 @@ const credentials = [
     logo: ecsiLogo, 
     desc: 'Certificaciones internacionales de vanguardia en atención médica prehospitalaria y protocolos avanzados de respuesta a emergencias.', 
     linkText: 'VER CERTIFICACIÓN', 
-    to: '#seccion-certificados', 
+    to: 'seccion-certificados', 
     targetCert: 'ECSI Education Center' // <-- Título exacto del carrusel
   },
   { 
@@ -31,7 +31,7 @@ const credentials = [
     logo: oshaLogo, 
     desc: 'Implementación y capacitación bajo los estándares internacionales de seguridad y salud ocupacional para entornos laborales seguros.', 
     linkText: 'VER CERTIFICACIÓN', 
-    to: '#seccion-certificados', 
+    to: 'seccion-certificados', 
     targetCert: 'OSHA Authorized Trainer' // <-- Título exacto del carrusel
   },
   { 
@@ -39,7 +39,7 @@ const credentials = [
     logo: stbLogo, 
     desc: 'Capacitación vital acreditada para la contención efectiva de hemorragias y protocolos de actuación ante situaciones críticas y respuesta a tiradores activos.', 
     linkText: 'VER CERTIFICACIÓN', 
-    to: '#seccion-certificados', 
+    to: 'seccion-certificados', 
     targetCert: 'Stop The Bleed Instructor' // <-- Título exacto del carrusel
   },
   { 
@@ -161,10 +161,15 @@ export function HeroSection() {
                     e.preventDefault();
                     
                     // 1. SCROLL DIRECTO Y SEGURO
-                    const section = document.getElementById('seccion-certificados');
+                    if(item.to?.includes('/')){
+                      window.location.href= item.to
+                    }else{
+                       const section = document.getElementById(item.to!);
                     if (section) {
                       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
+                    }
+
                     
                     // 2. DISPARAR EVENTO PARA CAMBIAR LA IMAGEN
                     if (item.targetCert) {
