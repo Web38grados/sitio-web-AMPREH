@@ -49,7 +49,7 @@ const credentials = [
     title: 'CONTACTO', 
     desc: 'Hablar con un asesor para más información de nuestros servicios.', 
     linkText: 'VER CONTACTO', 
-    href: 'https://wa.me/14692158327' 
+    href: '/contacto' 
   },
 ]
 
@@ -188,13 +188,14 @@ export function HeroSection() {
           </div>
 
           {/* Bloque Derecho: Tarjeta de Contacto (El Call to Action) */}
-          <div className="w-full lg:w-[28%] flex items-center lg:justify-end">
+            <div className="w-full lg:w-[28%] flex items-center lg:justify-end">
             <a 
               href={credentials[4].href} 
-              target="_blank" 
-              rel="noopener noreferrer"
+              // Condicionamos: si empieza con 'http' abre en nueva pestaña, si no, en la misma ('_self')
+              target={credentials[4].href!.startsWith('http') ? "_blank" : "_self"} 
+              // Solo agregamos rel="noopener noreferrer" si es externo por seguridad
+              rel={credentials[4].href!.startsWith('http') ? "noopener noreferrer" : undefined}
               className="w-full bg-[#051124]/80 backdrop-blur-md border border-slate-700/50 p-6 rounded-lg lg:rounded-tl-none lg:rounded-bl-none transition-all hover:bg-[#071836] group"
-              // Opcional: clip-path para darle ese ligero corte diagonal en la esquina superior derecha que se ve en tu imagen
               style={{ clipPath: 'polygon(0 0, 95% 0, 100% 15%, 100% 100%, 0 100%)' }}
             >
               <div className="flex items-start gap-4">
@@ -221,7 +222,7 @@ export function HeroSection() {
 
               </div>
             </a>
-          </div>
+        </div>
 
         </div>
       </div>

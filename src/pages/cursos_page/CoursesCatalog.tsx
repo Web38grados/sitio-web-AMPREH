@@ -508,7 +508,7 @@ function CourseCard({ course, featured }: { course: Course, featured?: boolean }
   // Función para armar el mensaje de WhatsApp y redirigir
   const handleConsultar = (e: React.MouseEvent) => {
     e.stopPropagation(); // Evita que se haga clic en la tarjeta completa
-    const phone = "51999999999"; // ¡CAMBIA ESTO POR TU NÚMERO REAL DE WHATSAPP!
+    const phone = "14692158327"; // ¡CAMBIA ESTO POR TU NÚMERO REAL DE WHATSAPP!
     const message = `Hola, estoy muy interesado en obtener información y consultar disponibilidad sobre el curso: *${course.title}* (${course.badge}). ¡Gracias!`;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -878,7 +878,7 @@ const durationOptions = [
             {/* Botón Asesor General */}
             <button 
               onClick={() => {
-                const url = `https://wa.me/51999999999?text=${encodeURIComponent('Hola AMPREH, deseo asesoría general para elegir el curso ideal para mi perfil profesional.')}`;
+                const url = `https://wa.me/14692158327?text=${encodeURIComponent('Hola AMPREH, deseo asesoría general para elegir el curso ideal para mi perfil profesional.')}`;
                 window.open(url, '_blank');
               }}
               className="mt-auto w-full flex items-center justify-center gap-2 rounded bg-[#ff7414] hover:bg-[#e66a0c] transition-colors py-4 text-[12px] font-bold uppercase tracking-wider text-white"

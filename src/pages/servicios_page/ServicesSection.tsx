@@ -10,6 +10,7 @@ import service3 from '../../assets/servicios/service3.png'
 import service4 from '../../assets/servicios/service4.png'
 import hero from '../../assets/servicios/hero.png'
 import { PageHero } from '../../components/PageHero'
+import { ProteccionCivilServicios } from './ProteccionCivilDetalle'
 
 // =========================================================
 // DATOS Y CONFIGURACIÓN (Con más información añadida)
@@ -77,6 +78,44 @@ const services = [
   },
 ]
 
+
+function SeparadorAnimado() {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (ref.current) observer.unobserve(ref.current);
+        }
+      },
+      { threshold: 0.5 } 
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={ref}
+      className={`w-full bg-white py-16 lg:py-20 flex flex-col items-center justify-center text-center px-6 relative z-20 transition-all duration-[1200ms] ease-out transform-gpu
+        ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}
+      `}
+    >
+      <span className="text-[#ff7414] text-[11px] font-bold tracking-[0.2em] uppercase mb-4 block">
+        CATÁLOGO OPERATIVO
+      </span>
+      <h2 className="text-3xl lg:text-[40px] font-black text-[#071522] tracking-tight leading-tight max-w-2xl">
+        Explora nuestras áreas de especialidad
+      </h2>
+      <div className="w-16 h-1.5 bg-[#ff7414] mx-auto mt-6 rounded-full"></div>
+    </div>
+  );
+}
+
 // =========================================================
 // SUB-COMPONENTE: Fila de Servicio 
 // =========================================================
@@ -89,7 +128,7 @@ function ServiceRow({ service }: { service: any, index: number }) {
   // Configuración de WhatsApp
   const handleWhatsApp = (e: React.MouseEvent) => {
     e.preventDefault();
-    const phone = "51999999999"; // ¡CAMBIA ESTO POR TU NÚMERO!
+    const phone = "14692158327"; // ¡CAMBIA ESTO POR TU NÚMERO!
     const cleanTitle = service.title.replace('\n', ' '); // Quitamos el salto de línea para el mensaje
     const message = `Hola AMPREH, estoy muy interesado en adquirir su servicio de: *${cleanTitle}*. ¿Podrían brindarme más información, por favor?`;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
@@ -104,7 +143,7 @@ function ServiceRow({ service }: { service: any, index: number }) {
           if (rowRef.current) observer.unobserve(rowRef.current);
         }
       },
-      { threshold: 0.2 } 
+      { threshold: 0.35 } 
     );
 
     if (rowRef.current) observer.observe(rowRef.current);
@@ -210,9 +249,10 @@ export default function ServicesSection() {
     }
   }, [location]);
 
-  return (
+return (
     <main className="w-full font-['Plus_Jakarta_Sans'] relative">
       
+      {/* 1. HERO PRINCIPAL DE LA PÁGINA */}
       <PageHero
         breadcrumbs="INICIO / SERVICIOS"
         eyebrow="SERVICIOS"
@@ -227,6 +267,15 @@ export default function ServicesSection() {
         ]}
       />
 
+      {/* 2. SERVICIO ESTRELLA: PROTECCIÓN CIVIL (Hero + Acordeón) */}
+      <ProteccionCivilServicios />
+
+      {/* =========================================================
+          3. SEPARADOR ELEGANTE (Transición hacia las filas)
+      ========================================================= */}
+      <SeparadorAnimado />
+
+      {/* 4. RESTO DE SERVICIOS (Filas Diagonales: Operaciones, Capacitación, etc.) */}
       <section className="w-full flex flex-col relative z-20">
         {services.map((service, index) => (
           <ServiceRow key={service.id || index} service={service} index={index} />
