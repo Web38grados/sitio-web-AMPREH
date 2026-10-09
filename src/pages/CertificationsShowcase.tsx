@@ -70,10 +70,10 @@ const certifications = [
     image: imgChso,
     contextImage: img1
   },
-  { 
+{ 
     category: 'SEGURIDAD INSTITUCIONAL', 
-    title: 'Authorized Trainer - UTA', 
-    description: 'Credencial oficial de The University of Texas at Arlington que avala las competencias como instructor autorizado de alto nivel.', 
+    title: 'Authorized Trainer - OSHA', 
+    description: 'Credencial oficial de la Occupational Safety and Health Administration (OSHA) que avala las competencias como instructor autorizado para impartir cursos de Disaster Site Worker.', 
     icon: Target,
     image: imgUtaTrainer,
     contextImage: img2
