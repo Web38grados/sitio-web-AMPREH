@@ -23,7 +23,7 @@ export default function ContactSection() {
     setStatus('loading');
 
     try {
-      const response = await fetch('https://email-service-605558562484.us-central1.run.app/contact', {
+      const response = await fetch('https://email-service-clientes-1071897241490.us-central1.run.app/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
