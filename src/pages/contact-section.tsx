@@ -18,7 +18,7 @@ export default function ContactSection() {
     if (status !== '') setStatus(''); 
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
 
@@ -26,15 +26,35 @@ export default function ContactSection() {
       const response = await fetch('https://email-service-clientes-1071897241490.us-central1.run.app/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-API-Key': 'clave-ampreh-2026' 
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          site_id: 'ampreh-contacto', 
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          empresa: formData.empresa,
+          mensaje: formData.mensaje
+        })
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        setStatus('success');
-        setFormData({ nombre: '', email: '', telefono: '', empresa: '', mensaje: '' });
+        console.log("¡Éxito! Correo enviado:", data);
+        setStatus('success'); // <-- ¡Esta es la línea clave que te faltaba!
+        
+        // Opcional: Limpiar el formulario después de enviarlo
+        setFormData({
+          nombre: '',
+          email: '',
+          telefono: '',
+          empresa: '',
+          mensaje: ''
+        });
       } else {
+        console.error("Error del servidor:", data);
         setStatus('error');
       }
     } catch (error) {
