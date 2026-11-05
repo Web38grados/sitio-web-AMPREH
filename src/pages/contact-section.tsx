@@ -43,8 +43,18 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       if (response.ok) {
         console.log("¡Éxito! Correo enviado:", data);
-        setStatus('success'); // <-- ¡Esta es la línea clave que te faltaba!
+        setStatus('success'); 
         
+        // --- INICIO: CÓDIGO DE CONVERSIÓN DE GOOGLE ADS ---
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-821612236/xp5LCIrOuZ4dEMyd44cD',
+              'value': 1.0,
+              'currency': 'MXN'
+          });
+        }
+        // --- FIN: CÓDIGO DE CONVERSIÓN DE GOOGLE ADS ---
+
         // Opcional: Limpiar el formulario después de enviarlo
         setFormData({
           nombre: '',
