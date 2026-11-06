@@ -18,7 +18,7 @@ export default function ContactSection() {
     if (status !== '') setStatus(''); 
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
 
@@ -26,15 +26,45 @@ export default function ContactSection() {
       const response = await fetch('https://email-service-clientes-1071897241490.us-central1.run.app/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-API-Key': 'clave-ampreh-2026' 
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          site_id: 'ampreh-contacto', 
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          empresa: formData.empresa,
+          mensaje: formData.mensaje
+        })
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        setStatus('success');
-        setFormData({ nombre: '', email: '', telefono: '', empresa: '', mensaje: '' });
+        console.log("¡Éxito! Correo enviado:", data);
+        setStatus('success'); 
+        
+        // --- INICIO: CÓDIGO DE CONVERSIÓN DE GOOGLE ADS ---
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-821612236/xp5LCIrOuZ4dEMyd44cD',
+              'value': 1.0,
+              'currency': 'MXN'
+          });
+        }
+        // --- FIN: CÓDIGO DE CONVERSIÓN DE GOOGLE ADS ---
+
+        // Opcional: Limpiar el formulario después de enviarlo
+        setFormData({
+          nombre: '',
+          email: '',
+          telefono: '',
+          empresa: '',
+          mensaje: ''
+        });
       } else {
+        console.error("Error del servidor:", data);
         setStatus('error');
       }
     } catch (error) {
